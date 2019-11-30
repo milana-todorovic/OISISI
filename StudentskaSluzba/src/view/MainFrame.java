@@ -10,6 +10,8 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JTable;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  * @author Milana Todorovic ra3-2017
@@ -22,6 +24,7 @@ public class MainFrame extends JFrame {
 	private static MainFrame instance;
 	private String title = "Studentska slu\u017Eba";
 	private Tabs tabs;
+	private Toolbar toolbar;
 
 	/**
 	 * @return the instance
@@ -67,8 +70,8 @@ public class MainFrame extends JFrame {
 	 * Dodaje toolbar na glavni prozor aplikacije.
 	 */
 	private void addToolbar() {
-		// TODO Dodati tijelo kada funkcionalnost #toolbar bude zavrsena.
-
+		this.toolbar = new Toolbar(Tabs.TabNames.STUDENTI);
+		this.add(toolbar, BorderLayout.NORTH);
 	}
 
 	/**
@@ -81,6 +84,16 @@ public class MainFrame extends JFrame {
 		 */
 		tabs = new Tabs(new JTable(), new JTable(), new JTable());
 		this.add(tabs, BorderLayout.CENTER);
+
+		tabs.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				toolbar.stateChanged(tabs.getSelectedTab());
+
+			}
+
+		});
 	}
 
 	/**
