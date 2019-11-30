@@ -9,7 +9,9 @@ import java.awt.HeadlessException;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -47,8 +49,7 @@ public class MainFrame extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		this.setTitle(title);
-		// TODO Postaviti ikonicu?
+		this.setAesthetic();
 
 		this.addMenu();
 		this.addTabs();
@@ -58,16 +59,27 @@ public class MainFrame extends JFrame {
 		this.setVisible(true);
 	}
 
+	private void setAesthetic() {
+		this.setTitle(title);
+		// TODO Postaviti ikonicu?
+
+		// Postavljanje teksta za dijaloge
+		UIManager.put("OptionPane.yesButtonText", "Da");
+		UIManager.put("OptionPane.noButtonText", "Ne");
+		UIManager.put("OptionPane.cancelButtonText", "Otka\u017Ei");
+		UIManager.put("OptionPane.okButtonText", "OK");
+	}
+
 	/**
-	 * Dodaje meni na glavni prozor aplikacije.
+	 * Dodaje traku sa menijima na glavni prozor aplikacije.
 	 */
 	private void addMenu() {
-		// TODO Dodati tijelo kada funkcionalnost #menu_bar bude zavrsena.
+		// TODO Dodati tijelo kada funkcionalnost #menu_bar bude zavrsena
 
 	}
 
 	/**
-	 * Dodaje toolbar na glavni prozor aplikacije.
+	 * Dodaje traku sa alatima na glavni prozor aplikacije.
 	 */
 	private void addToolbar() {
 		this.toolbar = new Toolbar(Tabs.TabNames.STUDENTI);
@@ -80,7 +92,7 @@ public class MainFrame extends JFrame {
 	private void addTabs() {
 		/*
 		 * TODO Zamjeniti pozive konstruktora JTable() tacnim pozivima kada budu
-		 * zavrsene funkcionalnosti #student, #profesor, #predmet.
+		 * zavrsene funkcionalnosti #student, #profesor, #predmet
 		 */
 		tabs = new Tabs(new JTable(), new JTable(), new JTable());
 		this.add(tabs, BorderLayout.CENTER);
@@ -100,7 +112,7 @@ public class MainFrame extends JFrame {
 	 * Dodaje statusnu traku na glavni prozor aplikacije.
 	 */
 	private void addStatusBar() {
-		// TODO Dodati tijelo kada funkcionalnost #status_bar bude zavrsena.
+		// TODO Dodati tijelo kada funkcionalnost #status_bar bude zavrsena
 
 	}
 
@@ -116,6 +128,106 @@ public class MainFrame extends JFrame {
 	 */
 	public int getSelectedRow() {
 		return tabs.getSelectedRow();
+	}
+
+	/**
+	 * U zavisnosti od trenutno selektovanog taba otvara dijalog za dodavanje
+	 * studenta, predmeta, ili profesora.
+	 */
+	public void addNew() {
+		switch (tabs.getSelectedTab()) {
+		case STUDENTI:
+			// TODO dodati kada bude implementirana funkcionalnost #dodavanje_studenta
+			break;
+		case PROFESORI:
+			// TODO dodati kada bude implementirana funkcionalnost #dodavanje_profesora
+			break;
+		case PREDMETI:
+			// TODO dodati kada bude implementirana funkcionalnost #dodavanje_predmeta
+			break;
+		}
+	}
+
+	/**
+	 * U zavisnosti od trenutno selektovanog taba otvara dijalog za izmjenu
+	 * selektovanog studenta, predmeta, ili profesora.
+	 */
+	public void edit() {
+		if (tabs.getSelectedRow() == -1) {
+			JOptionPane.showMessageDialog(this, "Nije izabrana stavka za izmenu!", title, JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		switch (tabs.getSelectedTab()) {
+		case STUDENTI:
+			// TODO dodati kada bude implementirana funkcionalnost izmena_studenta
+			break;
+		case PROFESORI:
+			// TODO dodati kada bude implementirana funkcionalnost izmena_profesora
+			break;
+		case PREDMETI:
+			// TODO dodati kada bude implementirana funkcionalnost izmena_predmeta
+			break;
+		}
+	}
+
+	/**
+	 * U zavisnosti od trenutno selektovanog taba poziva metodu za brisanje
+	 * selektovanog studenta, predmeta, ili profesora.
+	 */
+	public void delete() {
+		if (tabs.getSelectedRow() == -1) {
+			JOptionPane.showMessageDialog(this, "Nije izabrana stavka za brisanje!", title, JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		int choice = JOptionPane.showConfirmDialog(this,
+				"Da li ste sigurni da \u017Elite da obri\u0161ete izabranu stavku?", title, JOptionPane.YES_NO_OPTION);
+		if (choice == JOptionPane.YES_OPTION) {
+			switch (tabs.getSelectedTab()) {
+			case STUDENTI:
+				// TODO dodati kada bude implementirana funkcionalnost brisanje_studenta
+				break;
+			case PROFESORI:
+				// TODO dodati kada bude implementirana funkcionalnost brisanje_profesora
+				break;
+			case PREDMETI:
+				// TODO dodati kada bude implementirana funkcionalnost brisanje_predmeta
+				break;
+			}
+		}
+	}
+
+	/**
+	 * Otvara dijalog za dodavanje studenta na predmet.
+	 */
+	public void addStudentToSubject() {
+		if (tabs.getSelectedRow() == -1) {
+			JOptionPane.showMessageDialog(this, "Nije izabran predmet na koji treba dodati studenta!", title,
+					JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		/*
+		 * TODO dodati tijelo kada bude implementirana funkcionalnost
+		 * #dodavanje_studenta_na_predmet
+		 */
+	}
+
+	/**
+	 * Otvara dijalog za dodavanje profesora na predmet.
+	 */
+	public void addProfessorToSubject() {
+		if (tabs.getSelectedRow() == -1) {
+			JOptionPane.showMessageDialog(this, "Nije izabran predmet na koji treba dodati profesora!", title,
+					JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		/*
+		 * TODO dodati tijelo kada bude implementirana funkcionalnost
+		 * #dodavanje_profesora_na_predmet
+		 */
 	}
 
 }
