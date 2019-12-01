@@ -92,9 +92,9 @@ public class MainFrame extends JFrame {
 	private void addTabs() {
 		/*
 		 * TODO Zamjeniti pozive konstruktora JTable() tacnim pozivima kada budu
-		 * zavrsene funkcionalnosti #student, #profesor, #predmet
+		 * zavrsene funkcionalnosti #student, #profesor
 		 */
-		tabs = new Tabs(new JTable(), new JTable(), new JTable());
+		tabs = new Tabs(new JTable(), new JTable(), new PredmetiTable());
 		this.add(tabs, BorderLayout.CENTER);
 
 		tabs.addChangeListener(new ChangeListener() {
