@@ -3,6 +3,8 @@
  */
 package view;
 
+import java.util.ArrayList;
+
 import javax.swing.JTable;
 
 /**
@@ -16,6 +18,9 @@ public class PredmetiTable extends JTable {
 	public PredmetiTable() {
 		super();
 		this.setModel(new PredmetiTableModel());
+		ListRenderer renderer = new ListRenderer(this, "Spisak studenata");
+		this.setDefaultRenderer(ArrayList.class, renderer);
+		this.setDefaultEditor(ArrayList.class, renderer);
 	}
 
 }

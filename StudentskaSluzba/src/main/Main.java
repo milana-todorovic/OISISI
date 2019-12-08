@@ -3,6 +3,8 @@
  */
 package main;
 
+import controller.MainController;
+import model.Database;
 import view.MainFrame;
 
 /**
@@ -15,8 +17,8 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO incijalizacija modela
-		// TODO inicijalizacija kontrolera
+		Database.getInstance();
+		MainController.getInstance();
 		MainFrame.getInstance();
 	}
 

@@ -28,6 +28,8 @@ public class MainFrame extends JFrame {
 	private Tabs tabs;
 	private Toolbar toolbar;
 
+	private DialogHandler dialogHandler;
+
 	/**
 	 * @return the instance
 	 */
@@ -55,6 +57,8 @@ public class MainFrame extends JFrame {
 		this.addTabs();
 		this.addToolbar();
 		this.addStatusBar();
+
+		this.dialogHandler = new DialogHandler(this);
 
 		this.setVisible(true);
 	}
@@ -130,6 +134,14 @@ public class MainFrame extends JFrame {
 		return tabs.getSelectedRow();
 	}
 
+	/**
+	 * @return the dialogHandler
+	 */
+	public DialogHandler getDialogHandler() {
+		return dialogHandler;
+	}
+
+	// TODO premjestiti sve metode ispod negdje drugo? kontroler? popup handler?
 	/**
 	 * U zavisnosti od trenutno selektovanog taba otvara dijalog za dodavanje
 	 * studenta, predmeta, ili profesora.

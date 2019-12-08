@@ -3,6 +3,7 @@
  */
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +11,10 @@ import java.util.List;
  * @author Milana Todorovic ra3-2017
  *
  */
-public class Predmet {
+public class Predmet implements Serializable {
 
+	private static final long serialVersionUID = 6746715361256232383L;
+	
 	private String sifraPredmeta;
 	private String nazivPredmeta;
 	private Integer godina;

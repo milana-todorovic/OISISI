@@ -16,11 +16,15 @@ public class PredmetiTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = -5601255137538031760L;
 
-	private String[] columnNames = { "Sifra", "Naziv", "Godina", "Semestar", "Profesor", "Broj studenata", "Studenti" };
+	private String[] columnNames = { "\u0160ifra", "Naziv", "Godina", "Semestar", "Profesor", "Broj studenata", "Studenti" };
 
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return false;
+		// Samo kolona sa dugmicima za prikaz studenata na predmetu je editable
+		if (columnIndex == 6)
+			return true;
+		else
+			return false;
 	}
 
 	@Override
