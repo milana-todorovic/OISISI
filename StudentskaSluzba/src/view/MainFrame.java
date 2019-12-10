@@ -9,11 +9,12 @@ import java.awt.HeadlessException;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import view.actions.Actions;
 
 /**
  * @author Milana Todorovic ra3-2017
@@ -29,6 +30,7 @@ public class MainFrame extends JFrame {
 	private Toolbar toolbar;
 
 	private DialogHandler dialogHandler;
+	private Actions actions;
 
 	/**
 	 * @return the instance
@@ -52,6 +54,8 @@ public class MainFrame extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		this.setAesthetic();
+
+		this.actions = new Actions();
 
 		this.addMenu();
 		this.addTabs();
@@ -86,7 +90,7 @@ public class MainFrame extends JFrame {
 	 * Dodaje traku sa alatima na glavni prozor aplikacije.
 	 */
 	private void addToolbar() {
-		this.toolbar = new Toolbar(Tabs.TabNames.STUDENTI);
+		this.toolbar = new Toolbar(Tabs.TabNames.STUDENTI, this.actions);
 		this.add(toolbar, BorderLayout.NORTH);
 	}
 
@@ -141,105 +145,11 @@ public class MainFrame extends JFrame {
 		return dialogHandler;
 	}
 
-	// TODO premjestiti sve metode ispod negdje drugo? kontroler? popup handler?
 	/**
-	 * U zavisnosti od trenutno selektovanog taba otvara dijalog za dodavanje
-	 * studenta, predmeta, ili profesora.
+	 * @return the actions
 	 */
-	public void addNew() {
-		switch (tabs.getSelectedTab()) {
-		case STUDENTI:
-			// TODO dodati kada bude implementirana funkcionalnost #dodavanje_studenta
-			break;
-		case PROFESORI:
-			// TODO dodati kada bude implementirana funkcionalnost #dodavanje_profesora
-			break;
-		case PREDMETI:
-			// TODO dodati kada bude implementirana funkcionalnost #dodavanje_predmeta
-			break;
-		}
-	}
-
-	/**
-	 * U zavisnosti od trenutno selektovanog taba otvara dijalog za izmjenu
-	 * selektovanog studenta, predmeta, ili profesora.
-	 */
-	public void edit() {
-		if (tabs.getSelectedRow() == -1) {
-			JOptionPane.showMessageDialog(this, "Nije izabrana stavka za izmenu!", title, JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-
-		switch (tabs.getSelectedTab()) {
-		case STUDENTI:
-			// TODO dodati kada bude implementirana funkcionalnost izmena_studenta
-			break;
-		case PROFESORI:
-			// TODO dodati kada bude implementirana funkcionalnost izmena_profesora
-			break;
-		case PREDMETI:
-			// TODO dodati kada bude implementirana funkcionalnost izmena_predmeta
-			break;
-		}
-	}
-
-	/**
-	 * U zavisnosti od trenutno selektovanog taba poziva metodu za brisanje
-	 * selektovanog studenta, predmeta, ili profesora.
-	 */
-	public void delete() {
-		if (tabs.getSelectedRow() == -1) {
-			JOptionPane.showMessageDialog(this, "Nije izabrana stavka za brisanje!", title, JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-
-		int choice = JOptionPane.showConfirmDialog(this,
-				"Da li ste sigurni da \u017Elite da obri\u0161ete izabranu stavku?", title, JOptionPane.YES_NO_OPTION);
-		if (choice == JOptionPane.YES_OPTION) {
-			switch (tabs.getSelectedTab()) {
-			case STUDENTI:
-				// TODO dodati kada bude implementirana funkcionalnost brisanje_studenta
-				break;
-			case PROFESORI:
-				// TODO dodati kada bude implementirana funkcionalnost brisanje_profesora
-				break;
-			case PREDMETI:
-				// TODO dodati kada bude implementirana funkcionalnost brisanje_predmeta
-				break;
-			}
-		}
-	}
-
-	/**
-	 * Otvara dijalog za dodavanje studenta na predmet.
-	 */
-	public void addStudentToSubject() {
-		if (tabs.getSelectedRow() == -1) {
-			JOptionPane.showMessageDialog(this, "Nije izabran predmet na koji treba dodati studenta!", title,
-					JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-
-		/*
-		 * TODO dodati tijelo kada bude implementirana funkcionalnost
-		 * #dodavanje_studenta_na_predmet
-		 */
-	}
-
-	/**
-	 * Otvara dijalog za dodavanje profesora na predmet.
-	 */
-	public void addProfessorToSubject() {
-		if (tabs.getSelectedRow() == -1) {
-			JOptionPane.showMessageDialog(this, "Nije izabran predmet na koji treba dodati profesora!", title,
-					JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-
-		/*
-		 * TODO dodati tijelo kada bude implementirana funkcionalnost
-		 * #dodavanje_profesora_na_predmet
-		 */
+	public Actions getActions() {
+		return actions;
 	}
 
 }
