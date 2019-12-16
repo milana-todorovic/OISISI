@@ -19,7 +19,7 @@ public class Predmet implements Serializable {
 	private String nazivPredmeta;
 	private Integer godina;
 	private Integer semestar;
-	private String profesor; // TODO zamjeniti profesorom kada bude implementirana funkcionalnost #profesor
+	private Profesor profesor;
 	private List<String> studenti; // TODO zamjeniti listom studenata kada bude implementirana funkcionalnost
 									// #student
 
@@ -98,14 +98,14 @@ public class Predmet implements Serializable {
 	/**
 	 * @return the profesor
 	 */
-	public String getProfesor() {
+	public Profesor getProfesor() {
 		return profesor;
 	}
 
 	/**
 	 * @param profesor the profesor to set
 	 */
-	public void setProfesor(String profesor) {
+	public void setProfesor(Profesor profesor) {
 		this.profesor = profesor;
 	}
 
@@ -125,7 +125,7 @@ public class Predmet implements Serializable {
 
 	@Override
 	public String toString() {
-		return sifraPredmeta + nazivPredmeta;
+		return sifraPredmeta + " " + nazivPredmeta;
 	}
 
 	@Override

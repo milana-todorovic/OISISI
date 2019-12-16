@@ -99,10 +99,10 @@ public class MainFrame extends JFrame {
 	 */
 	private void addTabs() {
 		/*
-		 * TODO Zamjeniti pozive konstruktora JTable() tacnim pozivima kada budu
-		 * zavrsene funkcionalnosti #student, #profesor
+		 * TODO Zamjeniti pozive konstruktora JTable() tacnim pozivima kada bude
+		 * zavrsena funkcionalnost #student
 		 */
-		tabs = new Tabs(new JTable(), new JTable(), new PredmetiTable());
+		tabs = new Tabs(new JTable(), new ProfesoriTable(), new PredmetiTable());
 		this.add(tabs, BorderLayout.CENTER);
 
 		tabs.addChangeListener(new ChangeListener() {

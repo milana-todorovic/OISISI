@@ -12,8 +12,7 @@ public class MainController {
 	private static MainController instance;
 	// TODO dodati kontroler za studente kada bude implementirana funkcionalnost
 	// #student
-	// TODO dodati kontroler za profesora kada bude implementirana funkcionalnost
-	// #profesor
+	private ProfesoriController profesoriController;
 	private PredmetiController predmetiController;
 
 	/**
@@ -28,6 +27,9 @@ public class MainController {
 	}
 
 	private MainController() {
+		// TODO instancirati kontroler za studente kada bude implementirana
+		// funkcionalnost #student
+		this.profesoriController = new ProfesoriController();
 		this.predmetiController = new PredmetiController();
 	}
 
@@ -36,6 +38,13 @@ public class MainController {
 	 */
 	public PredmetiController getPredmetiController() {
 		return predmetiController;
+	}
+
+	/**
+	 * @return the profesoriController
+	 */
+	public ProfesoriController getProfesoriController() {
+		return profesoriController;
 	}
 
 }
