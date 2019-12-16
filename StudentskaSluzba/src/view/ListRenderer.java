@@ -56,7 +56,7 @@ public class ListRenderer extends AbstractCellEditor implements TableCellRendere
 
 	@Override
 	public Object getCellEditorValue() {
-		return null;
+		return value;
 	}
 
 	@Override

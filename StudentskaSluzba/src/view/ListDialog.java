@@ -32,74 +32,9 @@ public class ListDialog extends JDialog {
 	JFrame parent;
 	DefaultListModel<Object> listModel;
 
-	/*
-	 * TODO odluciti izmedju cuvanja instance dijaloga i konstruisanja nove instance
-	 * kad god je dijalog potreban
-	 */
-	/**
-	 * Konstruktor koji ce se koristiti ako se pri svakoj upotrebi dijaloga pravi
-	 * nova instanca
-	 * 
-	 * @param parent
-	 * @param title
-	 * @param value  - podaci koje treba prikazati
-	 */
-	public ListDialog(JFrame parent, String title, List<?> value) {
-		super(parent, title, true);
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		// TODO odluciti da li se uvijek radi dispose ili ne?
-
-		this.parent = parent;
-		int minwidth = this.makeItems(value);
-
-		this.setMinimumSize(new Dimension(minwidth, 0));
-		Dimension d = parent.getSize();
-		this.setSize(d.width / 4, d.height / 2);
-		this.setLocationRelativeTo(parent);
-
-		this.setVisible(true);
-	}
-
-	/**
-	 * Inicijalizacija elemenata koja se koristi u paru sa konstruktorom
-	 * ListDialog(JFrame parent, String title, List<?> value)
-	 * 
-	 * @param value
-	 * @return minimalna sirina dijaloga
-	 */
-	private int makeItems(List<?> value) {
-		// JList
-		listModel = new DefaultListModel<Object>();
-		for (Object val : value) {
-			listModel.addElement(val);
-		}
-		JList<Object> list = new JList<Object>(listModel);
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		JScrollPane scroll = new JScrollPane(list);
-
-		// panel sa dugmicima
-		JPanel bottom = new JPanel();
-		bottom.setBorder(BorderFactory.createEmptyBorder(30, 0, 0, 0));
-		bottom.setLayout(new BoxLayout(bottom, BoxLayout.X_AXIS));
-		bottom.add(Box.createHorizontalGlue());
-		bottom.add(this.makeDeleteButton());
-		bottom.add(Box.createHorizontalStrut(15));
-		bottom.add(this.makeReturnButton());
-
-		JPanel content = new JPanel();
-		content.setLayout(new BorderLayout());
-		content.setBorder(BorderFactory.createEmptyBorder(30, 40, 30, 40));
-		content.add(scroll, BorderLayout.CENTER);
-		content.add(bottom, BorderLayout.SOUTH);
-
-		this.add(content, BorderLayout.CENTER);
-
-		return content.getMinimumSize().width + 18;
-	}
-
 	/**
 	 * Konstruktor koji pravi instancu dijaloga bez dodatih podataka (koristiti ako
-	 * ce postojati samo jedna instanca napravljena na pocetku izvrsavanja)
+	 * ce postojati samo jedna instanca napravljena na pocetku izvrsavanja).
 	 * 
 	 * @param parent
 	 */
@@ -115,7 +50,7 @@ public class ListDialog extends JDialog {
 
 	/**
 	 * Inicijalizacija elemenata sa praznom listom, koristiti sa konstruktorom
-	 * ListDialog(JFrame parent)
+	 * ListDialog(JFrame parent).
 	 * 
 	 * @return minimalna sirina dijaloga
 	 */
@@ -148,7 +83,7 @@ public class ListDialog extends JDialog {
 	}
 
 	/**
-	 * Azurira sadrzaj liste i prikazuje prozor
+	 * Azurira sadrzaj liste i prikazuje prozor.
 	 * 
 	 * @param title
 	 * @param value - podaci koje treba prikazati

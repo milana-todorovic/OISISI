@@ -210,6 +210,13 @@ public class Profesor implements Serializable {
 		this.predmeti = predmeti;
 	}
 
+	/**
+	 * @param predmet
+	 */
+	public void addPredmet(Predmet predmet) {
+		this.predmeti.add(predmet);
+	}
+
 	@Override
 	public String toString() {
 		return ime + " " + prezime;

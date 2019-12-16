@@ -59,27 +59,32 @@ public class Database implements Serializable {
 	}
 
 	private void predmetiMock() {
-		ArrayList<String> studenti = new ArrayList<String>();
-		studenti.add("ra1-2017");
-		studenti.add("ra2-2017");
-		studenti.add("ra3-2017");
-		studenti.add("ra4-2017");
-		studenti.add("ra5-2017");
-		studenti.add("ra6-2017");
-		studenti.add("ra7-2017");
-		studenti.add("ra8-2017");
-		studenti.add("ra9-2017");
-		studenti.add("ra10-2017");
-		studenti.add("ra11-2017");
-		studenti.add("ra12-2017");
-		studenti.add("ra13-2017");
-		studenti.add("ra14-2017");
-		studenti.add("ra15-2017");
-		studenti.add("ra16-2017");
 		predmeti.add(new Predmet("E227A", "LPRS 1", 2, 3));
 		predmeti.add(new Predmet("E216", "OET", 1, 2));
 		predmeti.add(new Predmet("E225", "Operativni sistemi", 2, 4));
-		predmeti.get(1).setStudenti(studenti);
+		predmeti.add(new Predmet("E217", "Arhitektura racunara", 1, 2));
+		predmeti.add(new Predmet("E214", "PJiSP", 1, 1));
+		predmeti.add(new Predmet("EJ1Z", "Engleski jezik - osnovni", 1, 1));
+		predmeti.add(new Predmet("E212", "Matematicka analiza 1", 1, 1));
+		predmeti.add(new Predmet("E213A", "Algebra", 1, 1));
+		predmeti.add(new Predmet("E214", "PJiSP", 1, 1));
+		predmeti.add(new Predmet("E223A", "Objektno programiranje", 2, 1));
+		predmeti.get(1).addStudent("ra1-2017");
+		predmeti.get(1).addStudent("ra3-2017");
+		predmeti.get(1).addStudent("ra36-2017");
+		predmeti.get(1).addStudent("ra186-2017");
+		predmeti.get(0).addStudent("ra5-2017");
+		predmeti.get(0).addStudent("ra36-2017");
+		predmeti.get(0).addStudent("ra15-2017");
+		predmeti.get(2).addStudent("ra125-2017");
+		predmeti.get(5).addStudent("ra31-2017");
+		predmeti.get(5).addStudent("ra136-2017");
+		predmeti.get(5).addStudent("ra16-2017");
+		predmeti.get(6).addStudent("ra5-2017");
+		predmeti.get(8).addStudent("ra1-2017");
+		predmeti.get(8).addStudent("ra3-2017");
+		predmeti.get(8).addStudent("ra36-2017");
+		predmeti.get(8).addStudent("ra186-2017");
 	}
 
 	private void profesoriMock() {
@@ -87,8 +92,12 @@ public class Database implements Serializable {
 				"kasikovic@uns.ac.rs", "Trg Dositeja Obradovica 6", "4960945", "titula", "zvanje"));
 		profesori.add(new Profesor("Ljubica", "Pantelic", LocalDate.of(1980, 10, 14), "Cara Lazara 37", "0614311227",
 				"ljubica@uns.ac.rs", "Trg Dositeja Obradovica 6", "1190000", "titula", "zvanje"));
-		profesori.add(new Profesor("Mihajlo", "Golub", LocalDate.of(1988, 2, 29), "Marka Miljanova 7", "0631111227",
+		profesori.add(new Profesor("Mihajlo", "Golub", LocalDate.of(1988, 2, 29), "Kosovska 7", "0631111227",
 				"golub@uns.ac.rs", "Trg Dositeja Obradovica 6", "1195550", "titula", "zvanje"));
+		profesori.add(new Profesor("Marko", "Maksimovic", LocalDate.of(1988, 2, 29), "Kisacka 7", "0631555227",
+				"marko@uns.ac.rs", "Trg Dositeja Obradovica 6", "6695550", "titula", "zvanje"));
+		profesori.add(new Profesor("Milica", "Todorovic", LocalDate.of(1988, 2, 29), "Marka Miljanova 7", "0601322175",
+				"milicatodorovic@uns.ac.rs", "Trg Dositeja Obradovica 6", "6666666", "titula", "zvanje"));
 		ArrayList<Predmet> pred1 = new ArrayList<Predmet>();
 		pred1.add(this.predmeti.get(1));
 		this.profesori.get(0).setPredmeti(pred1);
@@ -102,6 +111,8 @@ public class Database implements Serializable {
 		for (Predmet predmet : pred2) {
 			predmet.setProfesor(profesori.get(2));
 		}
+		profesori.get(4).addPredmet(predmeti.get(9));
+		predmeti.get(9).setProfesor(profesori.get(4));
 	}
 
 }

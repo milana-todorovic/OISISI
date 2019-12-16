@@ -70,7 +70,7 @@ public class PredmetiTableModel extends AbstractTableModel {
 		case 6:
 			return predmet.getStudenti();
 		default:
-			return null;
+			return "";
 		}
 	}
 

@@ -14,7 +14,7 @@ import java.util.List;
 public class Predmet implements Serializable {
 
 	private static final long serialVersionUID = 6746715361256232383L;
-	
+
 	private String sifraPredmeta;
 	private String nazivPredmeta;
 	private Integer godina;
@@ -121,6 +121,13 @@ public class Predmet implements Serializable {
 	 */
 	public void setStudenti(List<String> studenti) {
 		this.studenti = studenti;
+	}
+
+	/**
+	 * @param student
+	 */
+	public void addStudent(String student) {
+		this.studenti.add(student);
 	}
 
 	@Override
