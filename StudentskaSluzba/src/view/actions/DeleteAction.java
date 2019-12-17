@@ -22,13 +22,9 @@ public class DeleteAction extends AbstractAction {
 	private static final long serialVersionUID = -4037794738047100642L;
 
 	public DeleteAction() {
-		/*
-		 * TODO izabrati naziv i mnemonik kada bude implementirana funkcionalnost
-		 * #menu_bar
-		 */
-		// putValue(NAME, "Obri\u0161i");
-		// putValue(MNEMONIC_KEY, KeyEvent.VK_O);
-		putValue(SHORT_DESCRIPTION, "Dodaj (Ctrl+D)");
+		putValue(NAME, "Obri\u0161i");
+		putValue(MNEMONIC_KEY, KeyEvent.VK_O);
+		putValue(SHORT_DESCRIPTION, "Obri\u0161i (Ctrl+D)");
 		putValue(SMALL_ICON, new ImageIcon("resource/delete.png"));
 		putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_D, KeyEvent.CTRL_DOWN_MASK));
 	}
