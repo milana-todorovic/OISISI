@@ -17,9 +17,10 @@ public class Database implements Serializable {
 	private static final long serialVersionUID = 1857113152292828485L;
 
 	private static Database instance;
-	// TODO dodati listu studentata kada bude implementirana funkcionalnost #student
+
 	private List<Profesor> profesori;
 	private List<Predmet> predmeti;
+	private List<Student> studenti;
 
 	/**
 	 * @return the instance
@@ -34,12 +35,13 @@ public class Database implements Serializable {
 	}
 
 	private Database() {
-		// TODO instancirati listu studenata kada bude implementirana funkcionalnost
-		// #student
+
 		this.profesori = new ArrayList<Profesor>();
 		this.predmeti = new ArrayList<Predmet>();
+		this.studenti = new ArrayList<Student>();
 		this.predmetiMock();
 		this.profesoriMock();
+		this.studentiMock();
 	}
 
 	public int getBrojPredmeta() {
@@ -56,6 +58,14 @@ public class Database implements Serializable {
 
 	public Profesor getProfesor(int index) {
 		return profesori.get(index);
+	}
+
+	public int getBrojStudenata() {
+		return studenti.size();
+	}
+
+	public Student getStudent(int index) {
+		return studenti.get(index);
 	}
 
 	private void predmetiMock() {
@@ -113,6 +123,23 @@ public class Database implements Serializable {
 		}
 		profesori.get(4).addPredmet(predmeti.get(9));
 		predmeti.get(9).setProfesor(profesori.get(4));
+	}
+
+	private void studentiMock() {
+		studenti.add(new Student("Marko", "Petrovic", LocalDate.of(1998, 3, 16), "Jovana Ducica 16", "0664125861",
+				"markopetrovic@uns.ac.rs","ra16-2017",  LocalDate.of(2017, 7, 3), 3, Student.Status.B, 9.06));
+		studenti.add(new Student("Vasilije", "Butulija", LocalDate.of(1997, 4, 2), "Salvadora Aljendea 10",
+				"0654443322", "vasilijebutulija@uns.ac.rs", "ra140-2016", LocalDate.of(2016, 7, 5), 4, Student.Status.S,
+				7.55));
+		studenti.add(new Student("Viktorija", "Radojcic", LocalDate.of(1998, 8, 12), "Mihajla Pupina 21", "0661112202",
+				"vikiradojcic@uns.ac.rs", "ra12-2017", LocalDate.of(2017, 7, 1), 3, Student.Status.B, 10.00));
+		studenti.add(new Student("Iva", "Aleksic", LocalDate.of(1995, 7, 24), "Milutina Milankovica 18", "0656561221",
+				"ivaaleksic@uns.ac.rs","ra186-2016",  LocalDate.of(2016, 7, 2), 4, Student.Status.S, 8.88));
+		studenti.add(new Student("Milan", "Jovic", LocalDate.of(1997, 5, 5), "Desanke Maksimovic 14", "0654478998",
+				"milanjovic@uns.ac.rs","ee200-2016",  LocalDate.of(2016, 7, 5), 4, Student.Status.B, 6.67));
+		studenti.add(new Student("Helena", "Govedarica", LocalDate.of(1994, 10, 28), "Jovana Ducica 25", "0654011100",
+				"helenagov@uns.ac.rs","ee14-2015",  LocalDate.of(2015, 7, 1), 4, Student.Status.S, 8.04));
+
 	}
 
 }

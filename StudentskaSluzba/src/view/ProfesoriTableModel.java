@@ -16,7 +16,7 @@ public class ProfesoriTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1362931699790512868L;
 	private final String[] columnNames = { "Ime", "Prezime", "Datum ro\u0111enja", "Adresa stanovanja", "Kontakt telefon",
-			"E-mail", "Adresa kancelarije", "Broj li\u010Dne karte", "Titula", "Zvanje", "Predmeti" };
+			"E-mail adresa", "Adresa kancelarije", "Broj li\u010Dne karte", "Titula", "Zvanje", "Predmeti" };
 
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {

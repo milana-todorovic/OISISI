@@ -10,10 +10,10 @@ package controller;
 public class MainController {
 
 	private static MainController instance;
-	// TODO dodati kontroler za studente kada bude implementirana funkcionalnost
-	// #student
+	
 	private ProfesoriController profesoriController;
 	private PredmetiController predmetiController;
+	private StudentiController studentiController;
 
 	/**
 	 * @return the instance
@@ -27,10 +27,11 @@ public class MainController {
 	}
 
 	private MainController() {
-		// TODO instancirati kontroler za studente kada bude implementirana
-		// funkcionalnost #student
+
 		this.profesoriController = new ProfesoriController();
 		this.predmetiController = new PredmetiController();
+		this.studentiController = new StudentiController();
+
 	}
 
 	/**
@@ -45,6 +46,12 @@ public class MainController {
 	 */
 	public ProfesoriController getProfesoriController() {
 		return profesoriController;
+	}
+	/**
+	 * @return the studentiController
+	 */
+	public StudentiController getStudentiController() {
+		return studentiController;
 	}
 
 }
