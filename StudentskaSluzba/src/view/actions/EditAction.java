@@ -22,12 +22,8 @@ public class EditAction extends AbstractAction {
 	private static final long serialVersionUID = -5882406906480829694L;
 
 	public EditAction() {
-		/*
-		 * TODO izabrati naziv i mnemonik kada bude implementirana funkcionalnost
-		 * #menu_bar
-		 */
-		// putValue(NAME, "Izmeni");
-		// putValue(MNEMONIC_KEY, KeyEvent.VK_I);
+		putValue(NAME, "Izmeni");
+		putValue(MNEMONIC_KEY, KeyEvent.VK_I);
 		putValue(SHORT_DESCRIPTION, "Izmeni (Ctrl+E)");
 		putValue(SMALL_ICON, new ImageIcon("resource/edit.png"));
 		putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_E, KeyEvent.CTRL_DOWN_MASK));

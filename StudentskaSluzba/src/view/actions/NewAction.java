@@ -21,12 +21,8 @@ public class NewAction extends AbstractAction {
 	private static final long serialVersionUID = -8152983303057846936L;
 
 	public NewAction() {
-		/*
-		 * TODO izabrati naziv i mnemonik kada bude implementirana funkcionalnost
-		 * #menu_bar
-		 */
-		// putValue(NAME, "Dodaj");
-		// putValue(MNEMONIC_KEY, KeyEvent.VK_D);
+		putValue(NAME, "Dodaj");
+		putValue(MNEMONIC_KEY, KeyEvent.VK_D);
 		putValue(SHORT_DESCRIPTION, "Dodaj (Ctrl+N)");
 		putValue(SMALL_ICON, new ImageIcon("resource/new.png"));
 		putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK));

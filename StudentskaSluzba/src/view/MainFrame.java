@@ -82,8 +82,8 @@ public class MainFrame extends JFrame {
 	 * Dodaje traku sa menijima na glavni prozor aplikacije.
 	 */
 	private void addMenu() {
-		// TODO Dodati tijelo kada funkcionalnost #menu_bar bude zavrsena
-
+		MenuBar menu = new MenuBar(actions);
+		this.setJMenuBar(menu);
 	}
 
 	/**
