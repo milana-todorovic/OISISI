@@ -9,7 +9,6 @@ import java.awt.HeadlessException;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
-import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -98,11 +97,8 @@ public class MainFrame extends JFrame {
 	 * Dodaje panel sa tabovima na glavni prozor aplikacije.
 	 */
 	private void addTabs() {
-		/*
-		 * TODO Zamjeniti pozive konstruktora JTable() tacnim pozivima kada bude
-		 * zavrsena funkcionalnost #student
-		 */
-		tabs = new Tabs(new JTable(), new ProfesoriTable(), new PredmetiTable());
+
+		tabs = new Tabs(new StudentiTable(), new ProfesoriTable(), new PredmetiTable());
 		this.add(tabs, BorderLayout.CENTER);
 
 		tabs.addChangeListener(new ChangeListener() {

@@ -20,8 +20,7 @@ public class Predmet implements Serializable {
 	private Integer godina;
 	private Integer semestar;
 	private Profesor profesor;
-	private List<String> studenti; // TODO zamjeniti listom studenata kada bude implementirana funkcionalnost
-									// #student
+	private List<Student> studenti;
 
 	/**
 	 * @param sifraPredmeta
@@ -36,7 +35,7 @@ public class Predmet implements Serializable {
 		this.godina = godina;
 		this.semestar = semestar;
 		this.profesor = null;
-		this.studenti = new ArrayList<String>();
+		this.studenti = new ArrayList<Student>();
 	}
 
 	/**
@@ -112,21 +111,23 @@ public class Predmet implements Serializable {
 	/**
 	 * @return the studenti
 	 */
-	public List<String> getStudenti() {
+	public List<Student> getStudenti() {
 		return studenti;
 	}
 
 	/**
 	 * @param studenti the studenti to set
 	 */
-	public void setStudenti(List<String> studenti) {
+	public void setStudenti(List<Student> studenti) {
+		if (studenti == null)
+			return;
 		this.studenti = studenti;
 	}
 
 	/**
 	 * @param student
 	 */
-	public void addStudent(String student) {
+	public void addStudent(Student student) {
 		this.studenti.add(student);
 	}
 
