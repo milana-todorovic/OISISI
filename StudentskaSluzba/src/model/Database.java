@@ -115,7 +115,7 @@ public class Database implements Serializable {
 		studenti.add(new Student("Vasilije", "Butulija", LocalDate.of(1997, 4, 2), "Salvadora Aljendea 10",
 				"0654443322", "vasilijebutulija@uns.ac.rs", "ra140-2016", LocalDate.of(2016, 7, 5), 4, Student.Status.S,
 				7.55));
-		studenti.add(new Student("Viktorija", "Radojcic", LocalDate.of(1998, 8, 12), "Mihajla Pupina 21", "0661112202",
+		studenti.add(new Student("Viktorija", "Radojcic", LocalDate.of(1998, 3, 18), "Mihajla Pupina 21", "0661112202",
 				"vikiradojcic@uns.ac.rs", "ra12-2017", LocalDate.of(2017, 7, 1), 3, Student.Status.B, 10.00));
 		studenti.add(new Student("Iva", "Aleksic", LocalDate.of(1995, 7, 24), "Milutina Milankovica 18", "0656561221",
 				"ivaaleksic@uns.ac.rs", "ra186-2016", LocalDate.of(2016, 7, 2), 4, Student.Status.S, 8.88));
