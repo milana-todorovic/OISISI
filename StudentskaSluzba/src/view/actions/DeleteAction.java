@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
+import controller.MainController;
 import view.MainFrame;
 
 /**
@@ -41,19 +42,12 @@ public class DeleteAction extends AbstractAction {
 				"Da li ste sigurni da \u017Elite da obri\u0161ete izabranu stavku?", "Potvrda brisanja",
 				JOptionPane.YES_NO_OPTION);
 		if (choice == JOptionPane.YES_OPTION) {
-			// TODO u kontroler?
-			switch (MainFrame.getInstance().getSelectedTab()) {
-			case STUDENTI:
-				// TODO dodati kada bude implementirana funkcionalnost brisanje_studenta
-				break;
-			case PROFESORI:
-				// TODO dodati kada bude implementirana funkcionalnost brisanje_profesora
-				break;
-			case PREDMETI:
-				// TODO dodati kada bude implementirana funkcionalnost brisanje_predmeta
-				break;
-			}
+			MainController.getInstance().remove(MainFrame.getInstance().getSelectedRow(),
+					MainFrame.getInstance().getSelectedTab());
+			JOptionPane.showMessageDialog(MainFrame.getInstance(), "Izabrana stavka je uspe\u0161no obrisana.", "Brisanje",
+					JOptionPane.INFORMATION_MESSAGE);
 		}
+
 	}
 
 }

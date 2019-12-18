@@ -147,5 +147,9 @@ public class MainFrame extends JFrame {
 	public Actions getActions() {
 		return actions;
 	}
+	
+	public void updateTable() {
+		tabs.updateTable();
+	}
 
 }
