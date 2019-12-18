@@ -15,9 +15,8 @@ import model.Student;
 public class StudentiTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 3340702328479443513L;
-	private final String[] columnNames = { "Broj indeksa", "Ime", "Prezime", "Godina studija", "Status",
-			"Prose\u010Dna ocena", "Datum ro\u0111enja", "Adresa stanovanja", "Broj telefona", "E-mail adresa",
-			"Datum upisa", "Predmeti" };
+	private final String[] columnNames = { "Broj indeksa", "Ime", "Prezime", "Godina", "Status", "Prosek",
+			"Datum ro\u0111enja", "Adresa stanovanja", "Broj telefona", "E-mail adresa", "Datum upisa", "Predmeti" };
 
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -74,10 +73,8 @@ public class StudentiTableModel extends AbstractTableModel {
 			return student.getEmailAdresa();
 		case 10:
 			return student.getDatumUpisa().toString();
-
 		case 11:
 			return student.getPredmeti();
-
 		default:
 			return "";
 		}

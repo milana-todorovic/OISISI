@@ -79,22 +79,6 @@ public class Database implements Serializable {
 		predmeti.add(new Predmet("E213A", "Algebra", 1, 1));
 		predmeti.add(new Predmet("E214", "PJiSP", 1, 1));
 		predmeti.add(new Predmet("E223A", "Objektno programiranje", 2, 1));
-		predmeti.get(1).addStudent("ra1-2017");
-		predmeti.get(1).addStudent("ra3-2017");
-		predmeti.get(1).addStudent("ra36-2017");
-		predmeti.get(1).addStudent("ra186-2017");
-		predmeti.get(0).addStudent("ra5-2017");
-		predmeti.get(0).addStudent("ra36-2017");
-		predmeti.get(0).addStudent("ra15-2017");
-		predmeti.get(2).addStudent("ra125-2017");
-		predmeti.get(5).addStudent("ra31-2017");
-		predmeti.get(5).addStudent("ra136-2017");
-		predmeti.get(5).addStudent("ra16-2017");
-		predmeti.get(6).addStudent("ra5-2017");
-		predmeti.get(8).addStudent("ra1-2017");
-		predmeti.get(8).addStudent("ra3-2017");
-		predmeti.get(8).addStudent("ra36-2017");
-		predmeti.get(8).addStudent("ra186-2017");
 	}
 
 	private void profesoriMock() {
@@ -127,19 +111,32 @@ public class Database implements Serializable {
 
 	private void studentiMock() {
 		studenti.add(new Student("Marko", "Petrovic", LocalDate.of(1998, 3, 16), "Jovana Ducica 16", "0664125861",
-				"markopetrovic@uns.ac.rs","ra16-2017",  LocalDate.of(2017, 7, 3), 3, Student.Status.B, 9.06));
+				"markopetrovic@uns.ac.rs", "ra16-2017", LocalDate.of(2017, 7, 3), 3, Student.Status.B, 9.06));
 		studenti.add(new Student("Vasilije", "Butulija", LocalDate.of(1997, 4, 2), "Salvadora Aljendea 10",
 				"0654443322", "vasilijebutulija@uns.ac.rs", "ra140-2016", LocalDate.of(2016, 7, 5), 4, Student.Status.S,
 				7.55));
 		studenti.add(new Student("Viktorija", "Radojcic", LocalDate.of(1998, 8, 12), "Mihajla Pupina 21", "0661112202",
 				"vikiradojcic@uns.ac.rs", "ra12-2017", LocalDate.of(2017, 7, 1), 3, Student.Status.B, 10.00));
 		studenti.add(new Student("Iva", "Aleksic", LocalDate.of(1995, 7, 24), "Milutina Milankovica 18", "0656561221",
-				"ivaaleksic@uns.ac.rs","ra186-2016",  LocalDate.of(2016, 7, 2), 4, Student.Status.S, 8.88));
+				"ivaaleksic@uns.ac.rs", "ra186-2016", LocalDate.of(2016, 7, 2), 4, Student.Status.S, 8.88));
 		studenti.add(new Student("Milan", "Jovic", LocalDate.of(1997, 5, 5), "Desanke Maksimovic 14", "0654478998",
-				"milanjovic@uns.ac.rs","ee200-2016",  LocalDate.of(2016, 7, 5), 4, Student.Status.B, 6.67));
+				"milanjovic@uns.ac.rs", "ee200-2016", LocalDate.of(2016, 7, 5), 4, Student.Status.B, 6.67));
 		studenti.add(new Student("Helena", "Govedarica", LocalDate.of(1994, 10, 28), "Jovana Ducica 25", "0654011100",
-				"helenagov@uns.ac.rs","ee14-2015",  LocalDate.of(2015, 7, 1), 4, Student.Status.S, 8.04));
-
+				"helenagov@uns.ac.rs", "ee14-2015", LocalDate.of(2015, 7, 1), 4, Student.Status.S, 8.04));
+		ArrayList<Student> studenti1 = new ArrayList<Student>();
+		studenti1.add(studenti.get(1));
+		studenti1.add(studenti.get(3));
+		studenti1.add(studenti.get(4));
+		predmeti.get(3).setStudenti(studenti1);
+		predmeti.get(0).setStudenti(studenti1);
+		for (Student student : studenti1) {
+			student.addPredmet(predmeti.get(3));
+			student.addPredmet(predmeti.get(0));
+		}
+		predmeti.get(5).setStudenti(studenti);
+		for (Student student : studenti) {
+			student.addPredmet(predmeti.get(5));
+		}
 	}
 
 }

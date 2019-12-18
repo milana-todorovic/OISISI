@@ -10,7 +10,7 @@ package controller;
 public class MainController {
 
 	private static MainController instance;
-	
+
 	private ProfesoriController profesoriController;
 	private PredmetiController predmetiController;
 	private StudentiController studentiController;
@@ -47,6 +47,7 @@ public class MainController {
 	public ProfesoriController getProfesoriController() {
 		return profesoriController;
 	}
+
 	/**
 	 * @return the studentiController
 	 */

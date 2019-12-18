@@ -207,6 +207,8 @@ public class Profesor implements Serializable {
 	 * @param predmeti the predmeti to set
 	 */
 	public void setPredmeti(List<Predmet> predmeti) {
+		if (predmeti == null)
+			return;
 		this.predmeti = predmeti;
 	}
 

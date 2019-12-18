@@ -17,7 +17,7 @@ public class Student implements Serializable {
 	public static enum Status {
 		B, S;
 
-		private String[] status = { "Bud\u017Eet", "Samofinansiranje" };
+		private String[] status = { "B", "S" };
 
 		@Override
 		public String toString() {
@@ -42,7 +42,7 @@ public class Student implements Serializable {
 	private List<Predmet> predmeti;
 
 	public Student(String ime, String prezime, LocalDate datumRodjenja, String adresaStanovanja, String brTelefona,
-			String emailAdresa,String brIndeksa,  LocalDate datumUpisa, Integer trenutnaGodStudija, Status status,
+			String emailAdresa, String brIndeksa, LocalDate datumUpisa, Integer trenutnaGodStudija, Status status,
 			Double prosecnaOcena) {
 		super();
 		this.ime = ime;
@@ -224,6 +224,8 @@ public class Student implements Serializable {
 	 * @param predmeti the predmeti to set
 	 */
 	public void setPredmeti(List<Predmet> predmeti) {
+		if (predmeti == null)
+			return;
 		this.predmeti = predmeti;
 	}
 
