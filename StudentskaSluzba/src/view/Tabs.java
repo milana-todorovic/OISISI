@@ -62,5 +62,10 @@ public class Tabs extends JTabbedPane {
 		Tab selected = (Tab) this.getSelectedComponent();
 		return selected.getSelectedRow();
 	}
+	
+	public void updateTable() {
+		Tab selected = (Tab) this.getSelectedComponent();
+		selected.updateTable();
+	}
 
 }

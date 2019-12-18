@@ -19,5 +19,9 @@ public class PredmetiController {
 	public Predmet getPredmet(int index) {
 		return Database.getInstance().getPredmet(index);
 	}
+	
+	public void remove(int index) {
+		Database.getInstance().removePredmet(index);
+	}
 
 }

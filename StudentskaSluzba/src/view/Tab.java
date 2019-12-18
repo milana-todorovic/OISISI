@@ -10,6 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.AbstractTableModel;
 
 /**
  * @author Milana Todorovic ra3-2017
@@ -18,7 +19,7 @@ import javax.swing.border.EmptyBorder;
 public class Tab extends JPanel {
 
 	private static final long serialVersionUID = 5969935635528507723L;
-	
+
 	private JTable table;
 
 	public Tab(JTable table) {
@@ -26,7 +27,7 @@ public class Tab extends JPanel {
 
 		this.setLayout(new BorderLayout());
 
-		this.table = table;		
+		this.table = table;
 		/*
 		 * TODO Ako je potrebno pozvati neke metode iz JTable za sve tri tabele, staviti
 		 * ovde
@@ -43,7 +44,12 @@ public class Tab extends JPanel {
 	 * @return selektovani red u tabeli
 	 */
 	public int getSelectedRow() {
-		return table.getSelectedRow();
+		int index = table.getSelectedRow();
+		return (index == -1) ? index : table.convertRowIndexToModel(index);
+	}
+
+	public void updateTable() {
+		((AbstractTableModel) table.getModel()).fireTableDataChanged();
 	}
 
 }

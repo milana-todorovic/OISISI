@@ -52,6 +52,18 @@ public class Database implements Serializable {
 		return predmeti.get(index);
 	}
 
+	public void removePredmet(int index) {
+		Predmet predmet = this.predmeti.get(index);
+		for (Student student : predmet.getStudenti()) {
+			student.getPredmeti().remove(predmet);
+		}
+		Profesor profesor = predmet.getProfesor();
+		if (profesor != null) {
+			profesor.getPredmeti().remove(predmet);
+		}
+		predmeti.remove(index);
+	}
+
 	public int getBrojProfesora() {
 		return profesori.size();
 	}
@@ -77,7 +89,6 @@ public class Database implements Serializable {
 		predmeti.add(new Predmet("EJ1Z", "Engleski jezik - osnovni", 1, 1));
 		predmeti.add(new Predmet("E212", "Matematicka analiza 1", 1, 1));
 		predmeti.add(new Predmet("E213A", "Algebra", 1, 1));
-		predmeti.add(new Predmet("E214", "PJiSP", 1, 1));
 		predmeti.add(new Predmet("E223A", "Objektno programiranje", 2, 1));
 	}
 
@@ -105,8 +116,8 @@ public class Database implements Serializable {
 		for (Predmet predmet : pred2) {
 			predmet.setProfesor(profesori.get(2));
 		}
-		profesori.get(4).addPredmet(predmeti.get(9));
-		predmeti.get(9).setProfesor(profesori.get(4));
+		profesori.get(4).addPredmet(predmeti.get(8));
+		predmeti.get(8).setProfesor(profesori.get(4));
 	}
 
 	private void studentiMock() {

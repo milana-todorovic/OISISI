@@ -3,6 +3,9 @@
  */
 package controller;
 
+import view.MainFrame;
+import view.Tabs;
+
 /**
  * @author Milana Todorovic ra3-2017
  *
@@ -53,6 +56,30 @@ public class MainController {
 	 */
 	public StudentiController getStudentiController() {
 		return studentiController;
+	}
+
+	/**
+	 * Metoda koja u zavisnosti od izabranog taba poziva brisanje predmeta,
+	 * studenta, ili profesora.
+	 * 
+	 * @param index - indeks stavke koju treba obrisati
+	 */
+	public void remove(int index, Tabs.TabNames tab) {
+		switch(tab) {
+		case PREDMETI:
+			this.predmetiController.remove(index);
+			break;
+		case PROFESORI:
+			// TODO dodati kada bude implementirana funkcionalnost #brisanje_profesora
+			break;
+		case STUDENTI:
+			// TODO dodati kada bude implementirana funkcionalnost #brisanje_studenta
+			break;
+		default:
+			break;		
+		}
+		
+		MainFrame.getInstance().updateTable();
 	}
 
 }
