@@ -19,5 +19,8 @@ public class StudentiController {
 	public Student getStudent(int index) {
 		return Database.getInstance().getStudent(index);
 	}
+	public void remove(int index) {
+		Database.getInstance().removeStudent(index);
+	}
 
 }

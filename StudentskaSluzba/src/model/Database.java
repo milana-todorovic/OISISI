@@ -89,6 +89,14 @@ public class Database implements Serializable {
 		return studenti.get(index);
 	}
 
+	public void removeStudent(int index) {
+		Student student = this.studenti.get(index);
+		for (Predmet predmet : student.getPredmeti()) {
+			predmet.getStudenti().remove(student);
+		}
+		this.studenti.remove(index);
+	}
+
 	private void predmetiMock() {
 		predmeti.add(new Predmet("E227A", "LPRS 1", 2, 3));
 		predmeti.add(new Predmet("E216", "OET", 1, 2));
@@ -153,7 +161,7 @@ public class Database implements Serializable {
 			student.addPredmet(predmeti.get(3));
 			student.addPredmet(predmeti.get(0));
 		}
-		predmeti.get(5).setStudenti(studenti);
+		predmeti.get(5).setStudenti(new ArrayList<Student>(studenti));
 		for (Student student : studenti) {
 			student.addPredmet(predmeti.get(5));
 		}

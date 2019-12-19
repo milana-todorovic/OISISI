@@ -74,7 +74,7 @@ public class MainController {
 			this.profesoriController.remove(index);
 			break;
 		case STUDENTI:
-			// TODO dodati kada bude implementirana funkcionalnost #brisanje_studenta
+			this.studentiController.remove(index);
 			break;
 		default:
 			break;		
