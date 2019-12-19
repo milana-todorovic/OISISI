@@ -148,8 +148,8 @@ public class MainFrame extends JFrame {
 		return actions;
 	}
 	
-	public void updateTable() {
-		tabs.updateTable();
+	public void rowDeletedInDipslayedTable(int index) {
+		tabs.rowDeleted(index);
 	}
 
 }

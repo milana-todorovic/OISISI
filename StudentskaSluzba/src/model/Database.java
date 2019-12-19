@@ -61,7 +61,7 @@ public class Database implements Serializable {
 		if (profesor != null) {
 			profesor.getPredmeti().remove(predmet);
 		}
-		predmeti.remove(index);
+		this.predmeti.remove(index);
 	}
 
 	public int getBrojProfesora() {
@@ -70,6 +70,14 @@ public class Database implements Serializable {
 
 	public Profesor getProfesor(int index) {
 		return profesori.get(index);
+	}
+
+	public void removeProfesor(int index) {
+		Profesor profesor = this.profesori.get(index);
+		for (Predmet predmet : profesor.getPredmeti()) {
+			predmet.setProfesor(null);
+		}
+		this.profesori.remove(index);
 	}
 
 	public int getBrojStudenata() {

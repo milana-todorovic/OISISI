@@ -43,7 +43,11 @@ public class StudentiTableModel extends AbstractTableModel {
 
 	@Override
 	public Class<?> getColumnClass(int c) {
-		return getValueAt(0, c).getClass();
+		if (this.getRowCount() != 0) {
+			return getValueAt(0, c).getClass();
+		} else {
+			return String.class;
+		}
 	}
 
 	@Override
@@ -64,7 +68,7 @@ public class StudentiTableModel extends AbstractTableModel {
 		case 5:
 			return student.getProsecnaOcena();
 		case 6:
-			return student.getDatumRodjenja().toString();
+			return student.getDatumRodjenja();
 		case 7:
 			return student.getAdresaStanovanja();
 		case 8:
@@ -72,7 +76,7 @@ public class StudentiTableModel extends AbstractTableModel {
 		case 9:
 			return student.getEmailAdresa();
 		case 10:
-			return student.getDatumUpisa().toString();
+			return student.getDatumUpisa();
 		case 11:
 			return student.getPredmeti();
 		default:

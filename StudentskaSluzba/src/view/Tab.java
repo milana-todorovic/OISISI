@@ -48,8 +48,8 @@ public class Tab extends JPanel {
 		return (index == -1) ? index : table.convertRowIndexToModel(index);
 	}
 
-	public void updateTable() {
-		((AbstractTableModel) table.getModel()).fireTableDataChanged();
+	public void rowDeleted(int index) {
+		((AbstractTableModel) table.getModel()).fireTableRowsDeleted(index, index);
 	}
 
 }

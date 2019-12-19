@@ -70,7 +70,7 @@ public class MainController {
 			this.predmetiController.remove(index);
 			break;
 		case PROFESORI:
-			// TODO dodati kada bude implementirana funkcionalnost #brisanje_profesora
+			this.profesoriController.remove(index);
 			break;
 		case STUDENTI:
 			// TODO dodati kada bude implementirana funkcionalnost #brisanje_studenta
@@ -79,7 +79,7 @@ public class MainController {
 			break;		
 		}
 		
-		MainFrame.getInstance().updateTable();
+		MainFrame.getInstance().rowDeletedInDipslayedTable(index);
 	}
 
 }

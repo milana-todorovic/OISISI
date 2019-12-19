@@ -63,9 +63,9 @@ public class Tabs extends JTabbedPane {
 		return selected.getSelectedRow();
 	}
 	
-	public void updateTable() {
+	public void rowDeleted(int index) {
 		Tab selected = (Tab) this.getSelectedComponent();
-		selected.updateTable();
+		selected.rowDeleted(index);
 	}
 
 }

@@ -19,5 +19,9 @@ public class ProfesoriController {
 	public Profesor getProfesor(int index) {
 		return Database.getInstance().getProfesor(index);
 	}
+	
+	public void remove(int index) {
+		Database.getInstance().removeProfesor(index);
+	}
 
 }

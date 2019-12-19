@@ -16,7 +16,8 @@ public class PredmetiTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = -5601255137538031760L;
 
-	private final String[] columnNames = { "\u0160ifra", "Naziv", "Godina", "Semestar", "Profesor", "Broj studenata", "Studenti" };
+	private final String[] columnNames = { "\u0160ifra", "Naziv", "Godina", "Semestar", "Profesor", "Broj studenata",
+			"Studenti" };
 
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -44,7 +45,11 @@ public class PredmetiTableModel extends AbstractTableModel {
 
 	@Override
 	public Class<?> getColumnClass(int c) {
-		return getValueAt(0, c).getClass();
+		if (this.getRowCount() != 0) {
+			return getValueAt(0, c).getClass();
+		} else {
+			return String.class;
+		}
 	}
 
 	@Override

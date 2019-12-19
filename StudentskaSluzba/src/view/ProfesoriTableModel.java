@@ -15,8 +15,9 @@ import model.Profesor;
 public class ProfesoriTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1362931699790512868L;
-	private final String[] columnNames = { "Ime", "Prezime", "Datum ro\u0111enja", "Adresa stanovanja", "Kontakt telefon",
-			"E-mail adresa", "Adresa kancelarije", "Broj li\u010Dne karte", "Titula", "Zvanje", "Predmeti" };
+	private final String[] columnNames = { "Ime", "Prezime", "Datum ro\u0111enja", "Adresa stanovanja",
+			"Kontakt telefon", "E-mail adresa", "Adresa kancelarije", "Broj li\u010Dne karte", "Titula", "Zvanje",
+			"Predmeti" };
 
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -43,7 +44,12 @@ public class ProfesoriTableModel extends AbstractTableModel {
 
 	@Override
 	public Class<?> getColumnClass(int c) {
-		return getValueAt(0, c).getClass();
+		// row sorter poziva ovo prije nego sto provjeri da li je tabela prazna
+		if (this.getRowCount() != 0) {
+			return getValueAt(0, c).getClass();
+		} else {
+			return String.class;
+		}
 	}
 
 	@Override
@@ -55,7 +61,7 @@ public class ProfesoriTableModel extends AbstractTableModel {
 		case 1:
 			return profesor.getPrezime();
 		case 2:
-			return profesor.getDatumRodjenja().toString();
+			return profesor.getDatumRodjenja();
 		case 3:
 			return profesor.getAdresa();
 		case 4:
