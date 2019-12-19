@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * @author Milana Todorovic ra3-2017
+ * @author Ana Perisic ra1-2017
  *
  */
 public class Database implements Serializable {

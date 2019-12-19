@@ -116,8 +116,8 @@ public class MainFrame extends JFrame {
 	 * Dodaje statusnu traku na glavni prozor aplikacije.
 	 */
 	private void addStatusBar() {
-		// TODO Dodati tijelo kada funkcionalnost #status_bar bude zavrsena
-
+		StatusBar statusBar = new StatusBar(title);
+		this.add(statusBar, BorderLayout.SOUTH);
 	}
 
 	/**
@@ -147,7 +147,7 @@ public class MainFrame extends JFrame {
 	public Actions getActions() {
 		return actions;
 	}
-	
+
 	public void rowDeletedInDipslayedTable(int index) {
 		tabs.rowDeleted(index);
 	}

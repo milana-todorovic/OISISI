@@ -10,6 +10,7 @@ import javax.swing.table.TableRowSorter;
 
 /**
  * @author Milana Todorovic ra3-2017
+ * @author Ana Perisic ra1-2017
  *
  */
 public class ProfesoriTable extends JTable {
