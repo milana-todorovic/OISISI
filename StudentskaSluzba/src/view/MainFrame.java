@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.table.AbstractTableModel;
 
 import view.actions.Actions;
 import view.dialogs.DialogHandler;
@@ -136,6 +137,20 @@ public class MainFrame extends JFrame {
 	}
 
 	/**
+	 * @return trenutno selektovani red tabele u trenutno selektovanom tabu
+	 */
+	public void setSelectedRow(int index) {
+		tabs.setSelectedRow(index);
+	}
+
+	/**
+	 * @return model trenutno prikazane tabele
+	 */
+	public AbstractTableModel getTableModel() {
+		return tabs.getTableModel();
+	}
+
+	/**
 	 * @return the dialogHandler
 	 */
 	public DialogHandler getDialogHandler() {
@@ -154,10 +169,6 @@ public class MainFrame extends JFrame {
 	 */
 	public Actions getActions() {
 		return actions;
-	}
-
-	public void rowDeletedInDipslayedTable(int index) {
-		tabs.rowDeleted(index);
 	}
 
 }

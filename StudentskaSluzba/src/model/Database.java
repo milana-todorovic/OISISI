@@ -6,6 +6,7 @@ package model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -52,7 +53,7 @@ public class Database implements Serializable {
 	public Predmet getPredmet(int index) {
 		return predmeti.get(index);
 	}
-	
+
 	public Predmet findPredmetById(String sifra) {
 		int index = predmeti.indexOf(new Predmet(sifra, "", 0, 0));
 		return (index == -1) ? null : predmeti.get(index);
@@ -177,6 +178,15 @@ public class Database implements Serializable {
 		Predmet predmet = profesor.getPredmeti().get(predmetIndex);
 		predmet.setProfesor(null);
 		profesor.getPredmeti().remove(predmetIndex);
+	}
+
+	public boolean addPredmet(HashMap<String, Object> values) {
+		for (String key : Predmet.keys) {
+			if (!values.containsKey(key))
+				return false;
+		}
+		predmeti.add(new Predmet(values));
+		return true;
 	}
 
 }

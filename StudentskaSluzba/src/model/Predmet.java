@@ -5,6 +5,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -14,6 +15,8 @@ import java.util.List;
 public class Predmet implements Serializable {
 
 	private static final long serialVersionUID = 6746715361256232383L;
+
+	public static final String[] keys = { "Sifra", "Naziv", "Godina", "Semestar" };
 
 	private String sifraPredmeta;
 	private String nazivPredmeta;
@@ -34,6 +37,21 @@ public class Predmet implements Serializable {
 		this.nazivPredmeta = nazivPredmeta;
 		this.godina = godina;
 		this.semestar = semestar;
+		this.profesor = null;
+		this.studenti = new ArrayList<Student>();
+	}
+
+	/**
+	 * Konstruise objekat klase Predmet od vrijednosti sadržanih u parametru values,
+	 * uz pretpostavku da values sadrzi sve kljuceve iz niza stringova keys.
+	 * 
+	 * @param values
+	 */
+	public Predmet(HashMap<String, Object> values) {
+		this.sifraPredmeta = (String) values.get(keys[0]);
+		this.nazivPredmeta = (String) values.get(keys[1]);
+		this.godina = (Integer) values.get(keys[2]);
+		this.semestar = (Integer) values.get(keys[3]);
 		this.profesor = null;
 		this.studenti = new ArrayList<Student>();
 	}

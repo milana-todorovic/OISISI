@@ -81,7 +81,7 @@ public class MainController {
 			break;
 		}
 
-		MainFrame.getInstance().rowDeletedInDipslayedTable(index);
+		MainFrame.getInstance().getTableModel().fireTableRowsDeleted(index, index);
 	}
 
 	/**

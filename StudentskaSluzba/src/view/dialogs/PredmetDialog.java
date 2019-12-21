@@ -11,6 +11,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -20,6 +21,7 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -199,8 +201,18 @@ public class PredmetDialog extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				HashMap<String, Object> values = new HashMap<String, Object>();
+				values.put(Predmet.keys[0], sifra.getText().toUpperCase());
+				values.put(Predmet.keys[1], naziv.getText());
+				values.put(Predmet.keys[2], godina.getSelectedIndex() + 1);
+				values.put(Predmet.keys[3], semestar.getSelectedIndex() + 1);
 
+				if (MainController.getInstance().getPredmetiController().addPredmet(values)) {
+					dispose();
+				} else {
+					JOptionPane.showMessageDialog(PredmetDialog.this, "Gre\u0161ka pri dodavanju!", "Gre\u0161ka!",
+							JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		});
 
@@ -214,7 +226,6 @@ public class PredmetDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-
 			}
 		});
 

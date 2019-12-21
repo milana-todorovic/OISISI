@@ -5,6 +5,7 @@ package view;
 
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
 
 /**
  * @author Milana Todorovic ra3-2017
@@ -62,10 +63,14 @@ public class Tabs extends JTabbedPane {
 		Tab selected = (Tab) this.getSelectedComponent();
 		return selected.getSelectedRow();
 	}
-	
-	public void rowDeleted(int index) {
+
+	public AbstractTableModel getTableModel() {
 		Tab selected = (Tab) this.getSelectedComponent();
-		selected.rowDeleted(index);
+		return selected.getModel();
+	}
+
+	public void setSelectedRow(int index) {
+		((Tab) this.getSelectedComponent()).setSelectedRow(index);
 	}
 
 }
