@@ -34,18 +34,7 @@ public class NewAction extends AbstractAction {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO pomjeriti ovu provjeru u kontroler ili ne?
-		switch (MainFrame.getInstance().getSelectedTab()) {
-		case STUDENTI:
-			// TODO dodati kada bude implementirana funkcionalnost #dodavanje_studenta
-			break;
-		case PROFESORI:
-			// TODO dodati kada bude implementirana funkcionalnost #dodavanje_profesora
-			break;
-		case PREDMETI:
-			// TODO dodati kada bude implementirana funkcionalnost #dodavanje_predmeta
-			break;
-		}
+		MainFrame.getInstance().launchAdd();
 	}
 
 }

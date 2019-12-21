@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
+import controller.MainController;
 import view.MainFrame;
 
 /**
@@ -37,18 +38,7 @@ public class EditAction extends AbstractAction {
 			return;
 		}
 
-		// TODO u kontroler?
-		switch (MainFrame.getInstance().getSelectedTab()) {
-		case STUDENTI:
-			// TODO dodati kada bude implementirana funkcionalnost izmena_studenta
-			break;
-		case PROFESORI:
-			// TODO dodati kada bude implementirana funkcionalnost izmena_profesora
-			break;
-		case PREDMETI:
-			// TODO dodati kada bude implementirana funkcionalnost izmena_predmeta
-			break;
-		}
+		MainController.getInstance().launchEdit(MainFrame.getInstance().getSelectedRow());
 	}
 
 }

@@ -98,9 +98,9 @@ public class Database implements Serializable {
 	}
 
 	private void predmetiMock() {
-		predmeti.add(new Predmet("E227A", "LPRS 1", 2, 3));
+		predmeti.add(new Predmet("E227A", "LPRS 1", 2, 1));
 		predmeti.add(new Predmet("E216", "OET", 1, 2));
-		predmeti.add(new Predmet("E225", "Operativni sistemi", 2, 4));
+		predmeti.add(new Predmet("E225", "Operativni sistemi", 2, 2));
 		predmeti.add(new Predmet("E217", "Arhitektura racunara", 1, 2));
 		predmeti.add(new Predmet("E214", "PJiSP", 1, 1));
 		predmeti.add(new Predmet("EJ1Z", "Engleski jezik - osnovni", 1, 1));

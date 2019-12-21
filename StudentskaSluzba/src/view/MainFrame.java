@@ -14,6 +14,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import view.actions.Actions;
+import view.dialogs.DialogHandler;
 
 /**
  * @author Milana Todorovic ra3-2017
@@ -139,6 +140,13 @@ public class MainFrame extends JFrame {
 	 */
 	public DialogHandler getDialogHandler() {
 		return dialogHandler;
+	}
+
+	/**
+	 * Otvara prozor za dodavanje profesora, predmeta, ili studenta.
+	 */
+	public void launchAdd() {
+		this.dialogHandler.launchAdd(this.getSelectedTab());
 	}
 
 	/**
