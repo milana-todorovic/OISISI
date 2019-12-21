@@ -52,6 +52,11 @@ public class Database implements Serializable {
 	public Predmet getPredmet(int index) {
 		return predmeti.get(index);
 	}
+	
+	public Predmet findPredmetById(String sifra) {
+		int index = predmeti.indexOf(new Predmet(sifra, "", 0, 0));
+		return (index == -1) ? null : predmeti.get(index);
+	}
 
 	public void removePredmet(int index) {
 		Predmet predmet = this.predmeti.get(index);

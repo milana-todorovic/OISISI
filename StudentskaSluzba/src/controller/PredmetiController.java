@@ -23,5 +23,9 @@ public class PredmetiController {
 	public void remove(int index) {
 		Database.getInstance().removePredmet(index);
 	}
+	
+	public Predmet findByID(String sifra) {
+		return Database.getInstance().findPredmetById(sifra);
+	}
 
 }
