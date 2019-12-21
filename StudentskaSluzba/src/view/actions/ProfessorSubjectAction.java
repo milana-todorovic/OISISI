@@ -20,8 +20,8 @@ public class ProfessorSubjectAction extends AbstractAction {
 	private static final long serialVersionUID = -58116647230194991L;
 
 	public ProfessorSubjectAction() {
-		putValue(NAME, "Dodaj profesora na predmet");
-		putValue(SHORT_DESCRIPTION, "Dodaj profesora na predmet (Ctrl+P)");
+		putValue(NAME, "Izmeni profesora na predmetu");
+		putValue(SHORT_DESCRIPTION, "Izmeni profesora na predmetu (Ctrl+P)");
 		putValue(SMALL_ICON, new ImageIcon("resource/profesor.png"));
 	}
 
@@ -29,14 +29,19 @@ public class ProfessorSubjectAction extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 		if (MainFrame.getInstance().getSelectedRow() == -1) {
 			JOptionPane.showMessageDialog(MainFrame.getInstance(),
-					"Nije izabran predmet na koji treba dodati profesora!", "Gre\u0161ka!", JOptionPane.ERROR_MESSAGE);
+					"Nije izabran predmet na kom treba izmeniti profesora!", "Gre\u0161ka!", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 
 		/*
 		 * TODO dodati tijelo kada bude implementirana funkcionalnost
 		 * #dodavanje_profesora_na_predmet
+		 * 
+		 * TODO u prozor za dodavanje/izmjenu profesora na predmetu dodati i dugme za
+		 * brisanje?? Ili novo dugme na toolbar?
+		 * 
 		 */
+
 	}
 
 }
