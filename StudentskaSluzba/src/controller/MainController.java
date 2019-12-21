@@ -3,6 +3,7 @@
  */
 package controller;
 
+import model.Database;
 import view.MainFrame;
 import view.Tabs;
 
@@ -66,7 +67,7 @@ public class MainController {
 	 * @param index - indeks stavke koju treba obrisati
 	 */
 	public void remove(int index, Tabs.TabNames tab) {
-		switch(tab) {
+		switch (tab) {
 		case PREDMETI:
 			this.predmetiController.remove(index);
 			break;
@@ -77,10 +78,31 @@ public class MainController {
 			this.studentiController.remove(index);
 			break;
 		default:
-			break;		
+			break;
 		}
-		
+
 		MainFrame.getInstance().rowDeletedInDipslayedTable(index);
+	}
+
+	/**
+	 * @param index
+	 */
+	public void removeXfromX(int innerIndex) {
+		int outerIndex = MainFrame.getInstance().getSelectedRow();
+		
+		switch (MainFrame.getInstance().getSelectedTab()) {
+		case PREDMETI:
+			// TODO dodati kada bude implementirana funkcionalnost #uklanjanje_studenta_sa_predmeta
+			break;
+		case PROFESORI:
+			Database.getInstance().removeProfesorPredmet(outerIndex, innerIndex);
+			break;
+		case STUDENTI:
+			// TODO dodati kada bude implementirana funkcionalnost #uklanjanje_studenta_sa_predmeta
+			break;
+		default:
+			break;
+		}
 	}
 
 }

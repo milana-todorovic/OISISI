@@ -17,9 +17,12 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+
+import controller.MainController;
 
 /**
  * @author Milana Todorovic ra3-2017
@@ -30,7 +33,7 @@ public class ListDialog extends JDialog {
 	private static final long serialVersionUID = 8545980548311697543L;
 
 	JFrame parent;
-	DefaultListModel<Object> listModel;
+	JList<Object> list;
 
 	/**
 	 * Konstruktor koji pravi instancu dijaloga bez dodatih podataka (koristiti ako
@@ -56,8 +59,8 @@ public class ListDialog extends JDialog {
 	 */
 	private int makeItems() {
 		// JList
-		listModel = new DefaultListModel<Object>();
-		JList<Object> list = new JList<Object>(listModel);
+		DefaultListModel<Object> listModel = new DefaultListModel<Object>();
+		list = new JList<Object>(listModel);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setFixedCellHeight(25);
 		JScrollPane scroll = new JScrollPane(list);
@@ -90,6 +93,7 @@ public class ListDialog extends JDialog {
 	 */
 	public void show(String title, List<?> value) {
 		this.setTitle(title);
+		DefaultListModel<Object> listModel = (DefaultListModel<Object>) list.getModel();
 		listModel.removeAllElements();
 		for (Object val : value) {
 			listModel.addElement(val);
@@ -109,10 +113,27 @@ public class ListDialog extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				/*
-				 * TODO Dodati kada budu implementirane funkcionalnosti
-				 * #uklanjanje_studenta_sa_predmeta i #uklanjanje_profesora_sa_predmeta
-				 */
+				int index = list.getSelectedIndex();
+
+				if (index == -1) {
+					JOptionPane.showMessageDialog(ListDialog.this, "Nije izabrana stavka za brisanje!", "Gre\u0161ka!",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				int choice = JOptionPane.showConfirmDialog(ListDialog.this,
+						"Da li ste sigurni da \u017Eelite da potvrdite brisanje izabrane stavke?", "Potvrda brisanja",
+						JOptionPane.YES_NO_OPTION);
+
+				if (choice == JOptionPane.YES_OPTION) {
+					// ukloni vezu iz baze
+					MainController.getInstance().removeXfromX(index);
+					// ukloni iz view-a
+					((DefaultListModel<Object>) list.getModel()).remove(index);
+
+					JOptionPane.showMessageDialog(ListDialog.this, "Izabrana stavka je uspe\u0161no obrisana.",
+							"Brisanje", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 
 		});
