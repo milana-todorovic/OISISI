@@ -5,8 +5,8 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Milana Todorovic ra3-2017
@@ -47,7 +47,7 @@ public class Predmet implements Serializable {
 	 * 
 	 * @param values
 	 */
-	public Predmet(HashMap<String, Object> values) {
+	public Predmet(Map<String, Object> values) {
 		this.sifraPredmeta = (String) values.get(keys[0]);
 		this.nazivPredmeta = (String) values.get(keys[1]);
 		this.godina = (Integer) values.get(keys[2]);
@@ -147,6 +147,19 @@ public class Predmet implements Serializable {
 	 */
 	public void addStudent(Student student) {
 		this.studenti.add(student);
+	}
+
+	/**
+	 * Postavlja polje na vrijednost iz parametra values, ako values sadrzi kljuc
+	 * koji odgovara tom polju.
+	 * 
+	 * @param values
+	 */
+	public void set(Map<String, Object> values) {
+		this.sifraPredmeta = (values.containsKey(keys[0])) ? (String) values.get(keys[0]) : sifraPredmeta;
+		this.nazivPredmeta = (values.containsKey(keys[1])) ? (String) values.get(keys[1]) : nazivPredmeta;
+		this.godina = (values.containsKey(keys[2])) ? (Integer) values.get(keys[2]) : godina;
+		this.semestar = (values.containsKey(keys[3])) ? (Integer) values.get(keys[3]) : semestar;
 	}
 
 	@Override

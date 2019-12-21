@@ -3,7 +3,7 @@
  */
 package controller;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import model.Database;
 import model.Predmet;
@@ -31,7 +31,7 @@ public class PredmetiController {
 		return Database.getInstance().findPredmetById(sifra);
 	}
 
-	public boolean addPredmet(HashMap<String, Object> values) {
+	public boolean addPredmet(Map<String, Object> values) {
 		if (Database.getInstance().addPredmet(values)) {
 			int index = getBrojPredmeta() - 1;
 			MainFrame.getInstance().getTableModel().fireTableRowsInserted(index, index);
@@ -40,6 +40,13 @@ public class PredmetiController {
 		} else {
 			return false;
 		}
+	}
+	
+	public void updatePredmet(Map<String, Object> values) {
+		int index = MainFrame.getInstance().getSelectedRow();
+		Database.getInstance().updatePredmet(index, values);
+		MainFrame.getInstance().getTableModel().fireTableDataChanged();
+		MainFrame.getInstance().setSelectedRow(index);
 	}
 
 }

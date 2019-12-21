@@ -6,8 +6,8 @@ package model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Milana Todorovic ra3-2017
@@ -180,13 +180,17 @@ public class Database implements Serializable {
 		profesor.getPredmeti().remove(predmetIndex);
 	}
 
-	public boolean addPredmet(HashMap<String, Object> values) {
+	public boolean addPredmet(Map<String, Object> values) {
 		for (String key : Predmet.keys) {
 			if (!values.containsKey(key))
 				return false;
 		}
 		predmeti.add(new Predmet(values));
 		return true;
+	}
+
+	public void updatePredmet(int index, Map<String, Object> values) {
+		predmeti.get(index).set(values);
 	}
 
 }

@@ -48,16 +48,22 @@ public class Tab extends JPanel {
 		return (index == -1) ? index : table.convertRowIndexToModel(index);
 	}
 
-	public AbstractTableModel getModel() {
-		return (AbstractTableModel) table.getModel();
-	}
-
+	/**
+	 * Selektuje parametar index u tabeli ako je moguce, ako nije brise selekciju.
+	 * 
+	 * @param index
+	 */
 	public void setSelectedRow(int index) {
 		try {
-			table.setRowSelectionInterval(index, index);
-		} catch (IllegalArgumentException e) {
+			int viewIndex = table.convertRowIndexToView(index);
+			table.setRowSelectionInterval(viewIndex, viewIndex);
+		} catch (IllegalArgumentException | IndexOutOfBoundsException e) {
 			table.clearSelection();
 		}
+	}
+
+	public AbstractTableModel getModel() {
+		return (AbstractTableModel) table.getModel();
 	}
 
 }

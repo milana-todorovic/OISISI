@@ -171,7 +171,7 @@ public class PredmetDialog extends JDialog {
 				if (s.isEmpty()) {
 					nazivError.invalidNotNull();
 					valid = false;
-				} else if (!Validator.isAlphanumeric(s)) {
+				} else if (!Validator.isNazivPredmeta(s)) {
 					nazivError.invalidAlphanum();
 					valid = false;
 				} else {
@@ -225,7 +225,14 @@ public class PredmetDialog extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				HashMap<String, Object> values = new HashMap<String, Object>();
+				values.put(Predmet.keys[0], sifra.getText().toUpperCase());
+				values.put(Predmet.keys[1], naziv.getText());
+				values.put(Predmet.keys[2], godina.getSelectedIndex() + 1);
+				values.put(Predmet.keys[3], semestar.getSelectedIndex() + 1);
+				
+				MainController.getInstance().getPredmetiController().updatePredmet(values);
+				dispose();
 			}
 		});
 
@@ -255,13 +262,12 @@ public class PredmetDialog extends JDialog {
 		currentlyEditing = predmet;
 
 		sifra.setText(predmet.getSifraPredmeta());
-		sifraError.valid();
 		naziv.setText(predmet.getNazivPredmeta());
-		nazivError.valid();
 		godina.setSelectedIndex(predmet.getGodina() - 1);
 		semestar.setSelectedIndex(predmet.getSemestar() - 1);
 
 		dodaj.setVisible(false);
+		izmeni.setEnabled(true);
 		izmeni.setVisible(true);
 
 		Dimension d = parent.getSize();
@@ -278,9 +284,7 @@ public class PredmetDialog extends JDialog {
 		currentlyEditing = null;
 
 		sifra.setText("");
-		sifraError.valid();
 		naziv.setText("");
-		nazivError.valid();
 		godina.setSelectedIndex(0);
 		semestar.setSelectedIndex(0);
 

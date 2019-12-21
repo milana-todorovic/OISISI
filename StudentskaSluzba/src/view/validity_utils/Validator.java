@@ -13,7 +13,12 @@ package view.validity_utils;
 public class Validator {
 
 	public static Boolean isAlphanumeric(String s) {
-		return s.matches("[a-zA-Z0-9]*");
+		return s.matches("[\\p{IsAlphabetic}0-9]*");
 	}
+	
+	public static Boolean isNazivPredmeta(String s) {
+		return s.matches("[\\p{IsAlphabetic}0-9 -]*");
+	}
+
 
 }
