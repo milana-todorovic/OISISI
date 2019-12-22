@@ -22,21 +22,30 @@ public class ErrorLabel extends JLabel {
 	public static final String NOT_NULL_VIOLATED = "Polje je obavezno!";
 	public static final String UNIQUE_VIOLATED = "Vrednost polja mora biti jedinstvena!";
 	public static final String FORMAT_VIOLATED = "Dozvoljeni formati unosa: ";
+	public static final String SEARCH_PARAMS_VIOLATED = "Nepoznat parametar pretrage!";
 
 	private Color validColor;
 	private Color invalidColor;
 	private String formats;
+	private boolean toggleVisibility;
 
-	public ErrorLabel(Color validColor, Color invalidColor, String formats) {
+	public ErrorLabel(Color validColor, Color invalidColor, String formats, boolean toggleVisibility) {
 		super("!");
 
 		this.invalidColor = invalidColor;
 		this.validColor = validColor;
 		this.formats = formats;
+		this.toggleVisibility = toggleVisibility;
 
 		Font font = this.getFont();
 		this.setFont(new Font(font.getName(), Font.BOLD, 18));
-		this.setForeground(invalidColor);
+		this.setForeground(validColor);
+		if (toggleVisibility)
+			this.setVisible(false);
+	}
+
+	public ErrorLabel(Color validColor, Color invalidColor, String formats) {
+		this(validColor, invalidColor, formats, false);
 	}
 
 	public ErrorLabel(Color validColor, Color invalidColor) {
@@ -46,25 +55,43 @@ public class ErrorLabel extends JLabel {
 	public void invalidAlphanum() {
 		this.setToolTipText(ALPHANUM_VIOLATED);
 		this.setForeground(invalidColor);
+		if (toggleVisibility)
+			this.setVisible(true);
 	}
 
 	public void invalidUnique() {
 		this.setToolTipText(UNIQUE_VIOLATED);
 		this.setForeground(invalidColor);
+		if (toggleVisibility)
+			this.setVisible(true);
 	}
 
 	public void invalidNotNull() {
 		this.setToolTipText(NOT_NULL_VIOLATED);
 		this.setForeground(invalidColor);
+		if (toggleVisibility)
+			this.setVisible(true);
 	}
 
 	public void invalidFormat() {
 		this.setToolTipText(FORMAT_VIOLATED + formats);
 		this.setForeground(invalidColor);
+		if (toggleVisibility)
+			this.setVisible(true);
+	}
+
+	public void invalidSearchParams() {
+		this.setToolTipText(SEARCH_PARAMS_VIOLATED);
+		this.setForeground(invalidColor);
+		if (toggleVisibility)
+			this.setVisible(true);
 	}
 
 	public void valid() {
+		this.setToolTipText(null);
 		this.setForeground(validColor);
+		if (toggleVisibility)
+			this.setVisible(false);
 	}
 
 }

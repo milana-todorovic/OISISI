@@ -3,16 +3,17 @@
  */
 package view;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ActionMap;
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.InputMap;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
-import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import view.actions.Actions;
@@ -20,6 +21,9 @@ import view.actions.CancelSearchAction;
 import view.actions.ProfessorSubjectAction;
 import view.actions.SearchAction;
 import view.actions.StudentSubjectAction;
+import view.validity_utils.ErrorLabel;
+import view.validity_utils.Validator;
+import view.validity_utils.ValidityListener;
 
 /**
  * @author Milana Todorovic ra3-2017
@@ -31,11 +35,12 @@ public class Toolbar extends JToolBar {
 
 	private static final int SEARCH_NOT_ACTIVE = 0;
 	private static final int SEARCH_ACTIVE = 1;
+	private static final int SEARCH_PARAMS_INVALID = 2;
 
 	private static final int STUDENTS_INDEX = 3;
 	private static final int PROFESSORS_INDEX = 4;
-	private static final int START_SEARCH_INDEX = 7;
-	private static final int CANCEL_SEARCH_INDEX = 8;
+	private static final int START_SEARCH_INDEX = 8;
+	private static final int CANCEL_SEARCH_INDEX = 9;
 
 	// Instance akcija koje koristi samo toolbar
 	private StudentSubjectAction studentSubject;
@@ -44,6 +49,8 @@ public class Toolbar extends JToolBar {
 	private CancelSearchAction cancelSearch;
 
 	private JTextField search;
+	private DocumentListener searchTextListener;
+	private ErrorLabel searchError;
 
 	private int[] searchState;
 	private String[] searchText;
@@ -73,6 +80,7 @@ public class Toolbar extends JToolBar {
 		this.add(this.studentSubject);
 		this.add(this.professorSubject);
 		this.add(Box.createHorizontalGlue());
+		this.add(this.searchError);
 		this.add(this.search);
 		this.add(this.startSearch);
 		this.add(this.cancelSearch);
@@ -86,6 +94,9 @@ public class Toolbar extends JToolBar {
 	private void initSearchField() {
 		this.search = new JTextField(30);
 		this.search.setMaximumSize(this.search.getPreferredSize());
+		this.searchError = new ErrorLabel(this.getBackground(), Color.RED, "kljuc:vrednost;...;kljuc:vrednost[;]",
+				true);
+		this.searchError.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
 
 		this.searchState = new int[3];
 		this.searchText = new String[3];
@@ -93,25 +104,74 @@ public class Toolbar extends JToolBar {
 			searchState[i] = SEARCH_NOT_ACTIVE;
 			searchText[i] = "";
 		}
-
 		// tekst u polju ce se cuvati pri promjeni taba i kad nije aktivna pretraga
-		this.search.getDocument().addDocumentListener(new DocumentListener() {
-
+		this.searchTextListener = new ValidityListener() {
 			@Override
-			public void insertUpdate(DocumentEvent e) {
-				searchText[MainFrame.getInstance().getSelectedTab().ordinal()] = search.getText();
+			public void checkValidity(String s) {
+				Tabs.TabNames tab = MainFrame.getInstance().getSelectedTab();
+
+				if (searchState[tab.ordinal()] == SEARCH_ACTIVE)
+					return;
+
+				searchText[tab.ordinal()] = s;
+
+				s = s.trim();
+
+				if (s.isEmpty()) {
+					searchState[tab.ordinal()] = SEARCH_NOT_ACTIVE;
+					searchError.valid();
+					startSearch.setEnabled(true);
+					return;
+				} else if (!Validator.matchesSearchFormat(s)) {
+					searchState[tab.ordinal()] = SEARCH_PARAMS_INVALID;
+					searchError.invalidFormat();
+					startSearch.setEnabled(false);
+					return;
+				} else {
+					switch (tab) {
+					case PREDMETI:
+						if (!Validator.searchParamsValid(s, PredmetiTableModel.validKeywords)) {
+							searchState[Tabs.TabNames.PREDMETI.ordinal()] = SEARCH_PARAMS_INVALID;
+							searchError.invalidSearchParams();
+							startSearch.setEnabled(false);
+						} else {
+							searchState[Tabs.TabNames.PREDMETI.ordinal()] = SEARCH_NOT_ACTIVE;
+							searchError.valid();
+							startSearch.setEnabled(true);
+						}
+						break;
+					case PROFESORI:
+						if (!Validator.searchParamsValid(s, ProfesoriTableModel.validKeywords)) {
+							searchState[Tabs.TabNames.PROFESORI.ordinal()] = SEARCH_PARAMS_INVALID;
+							searchError.invalidSearchParams();
+							startSearch.setEnabled(false);
+						} else {
+							searchState[Tabs.TabNames.PROFESORI.ordinal()] = SEARCH_NOT_ACTIVE;
+							searchError.valid();
+							startSearch.setEnabled(true);
+						}
+						break;
+					case STUDENTI:
+						if (!Validator.searchParamsValid(s, StudentiTableModel.validKeywords)) {
+							searchState[Tabs.TabNames.STUDENTI.ordinal()] = SEARCH_PARAMS_INVALID;
+							searchError.invalidSearchParams();
+							startSearch.setEnabled(false);
+						} else {
+							searchState[Tabs.TabNames.STUDENTI.ordinal()] = SEARCH_NOT_ACTIVE;
+							searchError.valid();
+							startSearch.setEnabled(true);
+						}
+						break;
+					default:
+						break;
+					}
+				}
+
 			}
 
-			@Override
-			public void removeUpdate(DocumentEvent e) {
-				searchText[MainFrame.getInstance().getSelectedTab().ordinal()] = search.getText();
-			}
+		};
 
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-			}
-
-		});
+		this.search.getDocument().addDocumentListener(searchTextListener);
 
 	}
 
@@ -201,6 +261,7 @@ public class Toolbar extends JToolBar {
 		case SEARCH_ACTIVE:
 			this.search.setText(searchText[state.ordinal()]);
 			this.search.setEnabled(false);
+			this.searchError.valid();
 			this.startSearch.setEnabled(false);
 			this.getComponentAtIndex(START_SEARCH_INDEX).setVisible(false);
 			this.cancelSearch.setEnabled(true);
@@ -208,10 +269,20 @@ public class Toolbar extends JToolBar {
 			break;
 		case SEARCH_NOT_ACTIVE:
 			this.search.setText(searchText[state.ordinal()]);
+			this.searchError.valid();
 			this.cancelSearch.setEnabled(false);
 			this.getComponentAtIndex(CANCEL_SEARCH_INDEX).setVisible(false);
 			this.search.setEnabled(true);
 			this.startSearch.setEnabled(true);
+			this.getComponentAtIndex(START_SEARCH_INDEX).setVisible(true);
+			break;
+		case SEARCH_PARAMS_INVALID:
+			this.search.setText(searchText[state.ordinal()]);
+			// ovo iznad ce pokrenuti i validity listener, koji azurira ErrorLabel
+			this.cancelSearch.setEnabled(false);
+			this.getComponentAtIndex(CANCEL_SEARCH_INDEX).setVisible(false);
+			this.search.setEnabled(true);
+			this.startSearch.setEnabled(false);
 			this.getComponentAtIndex(START_SEARCH_INDEX).setVisible(true);
 			break;
 		}

@@ -284,7 +284,9 @@ public class PredmetDialog extends JDialog {
 		currentlyEditing = null;
 
 		sifra.setText("");
+		sifraError.valid();
 		naziv.setText("");
+		nazivError.valid();
 		godina.setSelectedIndex(0);
 		semestar.setSelectedIndex(0);
 

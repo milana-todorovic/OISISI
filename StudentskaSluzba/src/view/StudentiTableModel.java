@@ -3,6 +3,10 @@
  */
 package view;
 
+import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import javax.swing.table.AbstractTableModel;
 
 import controller.MainController;
@@ -15,6 +19,14 @@ import model.Student;
 public class StudentiTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 3340702328479443513L;
+
+	public static final Map<String, Integer> validKeywords = Arrays
+			.stream(new Object[][] { { "", 0 } /*
+												 * TODO ubaciti stvarne kljucne rijeci za pretagu kada bude
+												 * implementirana funkcionalnost #pretraga_studenata
+												 */ })
+			.collect(Collectors.toMap(keyMapper -> (String) keyMapper[0], valueMapper -> (Integer) valueMapper[1]));
+
 	private final String[] columnNames = { "Broj indeksa", "Ime", "Prezime", "Godina", "Status", "Prosek",
 			"Datum ro\u0111enja", "Adresa stanovanja", "Broj telefona", "E-mail adresa", "Datum upisa", "Predmeti" };
 

@@ -34,10 +34,6 @@ public abstract class ValidityListener implements DocumentListener {
 
 	@Override
 	public void changedUpdate(DocumentEvent e) {
-		try {
-			checkValidity(e.getDocument().getText(0, e.getDocument().getLength()));
-		} catch (BadLocationException e1) {
-		}
 	}
 
 	public abstract void checkValidity(String s);
