@@ -20,12 +20,16 @@ public class StudentiTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 3340702328479443513L;
 
-	public static final Map<String, Integer> validKeywords = Arrays
-			.stream(new Object[][] { { "", 0 } /*
-												 * TODO ubaciti stvarne kljucne rijeci za pretagu kada bude
-												 * implementirana funkcionalnost #pretraga_studenata
-												 */ })
-			.collect(Collectors.toMap(keyMapper -> (String) keyMapper[0], valueMapper -> (Integer) valueMapper[1]));
+	public static final Map<String, Integer> validKeywords = Arrays.stream(new Object[][] { { "indeks", 0 },
+			{ "broj indeksa", 0 }, { "ime", 1 }, { "ime studenta", 1 }, { "prezime", 2 }, { "prezime studenta", 2 },
+			{ "godina", 3 }, { "trenutna godina", 3 }, { "godina studija", 3 }, { "trenutna godina studija", 3 },
+			{ "status", 4 }, { "status studenta", 4 }, { "prosek", 5 }, { "prosecna ocena", 5 },
+			{ "prose\u010Dna ocena", 5 }, { "datum ro\u0111enja", 6 }, { "datum rodjenja", 6 }, { "adresa", 7 },
+			{ "adresa stanovanja", 7 }, { "adresa stanovanja studenta", 7 }, { "broj telefona", 8 },
+			{ "kontakt telefon", 8 }, { "email", 9 }, { "e-mail", 9 }, { "email adresa", 9 }, { "e-mail adresa", 9 },
+			{ "datum upisa", 10 }
+
+	}).collect(Collectors.toMap(keyMapper -> (String) keyMapper[0], valueMapper -> (Integer) valueMapper[1]));
 
 	private final String[] columnNames = { "Broj indeksa", "Ime", "Prezime", "Godina", "Status", "Prosek",
 			"Datum ro\u0111enja", "Adresa stanovanja", "Broj telefona", "E-mail adresa", "Datum upisa", "Predmeti" };
