@@ -21,10 +21,14 @@ public class ProfesoriTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1362931699790512868L;
 
 	public static final Map<String, Integer> validKeywords = Arrays
-			.stream(new Object[][] { { "", 0 } /*
-												 * TODO ubaciti stvarne kljucne rijeci za pretagu kada bude
-												 * implementirana funkcionalnost #pretraga_profesora
-												 */ })
+			.stream(new Object[][] { { "ime", 0 }, { "ime profesora", 0 }, { "prezime", 1 }, { "prezime profesora", 1 },
+					{ "datum rodjenja", 2 }, { "datum ro\u0111enja", 2 }, { "adresa", 3 }, { "adresa stanovanja", 3 },
+					{ "telefon", 4 }, { "broj telefona", 4 }, { "kontakt", 4 }, { "kontakt telefon", 4 },
+					{ "email", 5 }, { "e-mail", 5 }, { "mejl", 5 }, { "email adresa", 5 }, { "e-mail adresa", 5 },
+					{ "mejl adresa", 5 }, { "adresa kancelarije", 6 }, { "kancelarija", 6 },
+					{ "broj li\u010Dne karte", 7 }, { "broj licne karte", 7 }, { "licna", 7 }, { "li\u010Dna", 7 },
+					{ "broj li\u010Dne", 7 }, { "broj licne", 7 }, { "li\u010Dna karta", 7 }, { "licna karta", 7 },
+					{ "titula", 8 }, { "zvanje", 9 } })
 			.collect(Collectors.toMap(keyMapper -> (String) keyMapper[0], valueMapper -> (Integer) valueMapper[1]));
 
 	private final String[] columnNames = { "Ime", "Prezime", "Datum ro\u0111enja", "Adresa stanovanja",

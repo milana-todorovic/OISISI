@@ -134,6 +134,7 @@ public class MainController {
 			this.predmetiController.startSearch(searchParam);
 			break;
 		case PROFESORI:
+			this.profesoriController.startSearch(searchParam);
 			break;
 		case STUDENTI:
 			break;
