@@ -25,8 +25,8 @@ public class StudentiTableModel extends AbstractTableModel {
 			{ "godina", 3 }, { "trenutna godina", 3 }, { "godina studija", 3 }, { "trenutna godina studija", 3 },
 			{ "status", 4 }, { "status studenta", 4 }, { "prosek", 5 }, { "prosecna ocena", 5 },
 			{ "prose\u010Dna ocena", 5 }, { "datum ro\u0111enja", 6 }, { "datum rodjenja", 6 }, { "adresa", 7 },
-			{ "adresa stanovanja", 7 }, { "adresa stanovanja studenta", 7 }, { "broj telefona", 8 },
-			{ "kontakt telefon", 8 }, { "email", 9 }, { "e-mail", 9 }, { "email adresa", 9 }, { "e-mail adresa", 9 },
+			{ "adresa stanovanja", 7 }, { "telefon", 8 }, { "broj telefona", 8 }, { "kontakt telefon", 8 },
+			{ "kontakt", 8 }, { "email", 9 }, { "e-mail", 9 }, { "email adresa", 9 }, { "e-mail adresa", 9 },
 			{ "datum upisa", 10 }
 
 	}).collect(Collectors.toMap(keyMapper -> (String) keyMapper[0], valueMapper -> (Integer) valueMapper[1]));
