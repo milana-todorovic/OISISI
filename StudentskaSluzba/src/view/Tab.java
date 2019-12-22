@@ -11,6 +11,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  * @author Milana Todorovic ra3-2017
@@ -64,6 +65,10 @@ public class Tab extends JPanel {
 
 	public AbstractTableModel getModel() {
 		return (AbstractTableModel) table.getModel();
+	}
+
+	public TableRowSorter<?> getRowSorter() {
+		return (TableRowSorter<?>) table.getRowSorter();
 	}
 
 }

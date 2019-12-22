@@ -22,7 +22,7 @@ public class ErrorLabel extends JLabel {
 	public static final String NOT_NULL_VIOLATED = "Polje je obavezno!";
 	public static final String UNIQUE_VIOLATED = "Vrednost polja mora biti jedinstvena!";
 	public static final String FORMAT_VIOLATED = "Dozvoljeni formati unosa: ";
-	public static final String SEARCH_PARAMS_VIOLATED = "Nepoznat parametar pretrage!";
+	public static final String SEARCH_PARAMS_VIOLATED = "Nedozvoljeni parametri pretrage!";
 
 	private Color validColor;
 	private Color invalidColor;

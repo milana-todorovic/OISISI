@@ -120,8 +120,31 @@ public class MainController {
 			break;
 		default:
 			break;
+		}
+	}
+
+	public void startSearch(String searchParam) {
+		if (searchParam.isEmpty()) {
+			MainFrame.getInstance().getRowSorter().setRowFilter(null);
+			return;
+		}
+
+		switch (MainFrame.getInstance().getSelectedTab()) {
+		case PREDMETI:
+			this.predmetiController.startSearch(searchParam);
+			break;
+		case PROFESORI:
+			break;
+		case STUDENTI:
+			break;
+		default:
+			break;
 
 		}
+	}
+
+	public void cancelSearch() {
+		MainFrame.getInstance().getRowSorter().setRowFilter(null);
 	}
 
 }

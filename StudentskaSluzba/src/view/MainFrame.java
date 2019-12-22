@@ -13,6 +13,7 @@ import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableRowSorter;
 
 import view.actions.Actions;
 import view.dialogs.DialogHandler;
@@ -151,6 +152,13 @@ public class MainFrame extends JFrame {
 	}
 
 	/**
+	 * @return sorter trenutno prikazane tabele
+	 */
+	public TableRowSorter<?> getRowSorter() {
+		return tabs.getRowSorter();
+	}
+
+	/**
 	 * @return the dialogHandler
 	 */
 	public DialogHandler getDialogHandler() {
@@ -169,6 +177,13 @@ public class MainFrame extends JFrame {
 	 */
 	public Actions getActions() {
 		return actions;
+	}
+
+	/**
+	 * Metoda za programsko pritiskanje dugmeta za zaustavljanje pretrage.
+	 */
+	public void cancelSearch() {
+		toolbar.cancelSearch();
 	}
 
 }

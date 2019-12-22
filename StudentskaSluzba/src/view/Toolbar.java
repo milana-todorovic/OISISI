@@ -6,6 +6,7 @@ package view;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 
+import javax.swing.AbstractButton;
 import javax.swing.ActionMap;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -286,6 +287,10 @@ public class Toolbar extends JToolBar {
 			this.getComponentAtIndex(START_SEARCH_INDEX).setVisible(true);
 			break;
 		}
+	}
+	
+	public void cancelSearch() {
+		((AbstractButton) this.getComponentAtIndex(CANCEL_SEARCH_INDEX)).doClick();
 	}
 
 }

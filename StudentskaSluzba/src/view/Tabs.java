@@ -6,6 +6,7 @@ package view;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  * @author Milana Todorovic ra3-2017
@@ -67,6 +68,11 @@ public class Tabs extends JTabbedPane {
 	public AbstractTableModel getTableModel() {
 		Tab selected = (Tab) this.getSelectedComponent();
 		return selected.getModel();
+	}
+	
+	public TableRowSorter<?> getRowSorter() {
+		Tab selected = (Tab) this.getSelectedComponent();
+		return selected.getRowSorter();
 	}
 
 	public void setSelectedRow(int index) {
