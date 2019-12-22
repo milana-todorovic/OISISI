@@ -27,11 +27,11 @@ public class ProfesoriController {
 	public Profesor getProfesor(int index) {
 		return Database.getInstance().getProfesor(index);
 	}
-	
+
 	public void remove(int index) {
 		Database.getInstance().removeProfesor(index);
 	}
-	
+
 	public void startSearch(String searchParam) {
 		String[] splits = searchParam.split(";");
 		ArrayList<RowFilter<ProfesoriTableModel, Integer>> filters = new ArrayList<RowFilter<ProfesoriTableModel, Integer>>();
@@ -39,7 +39,7 @@ public class ProfesoriController {
 
 		for (String string : splits) {
 			int separator = string.indexOf(":");
-			filters.add(RowFilter.regexFilter("(?i)" + string.substring(separator + 1).trim(),
+			filters.add(RowFilter.regexFilter("(?ui)" + string.substring(separator + 1).trim(),
 					keys.get(string.substring(0, separator).trim())));
 		}
 

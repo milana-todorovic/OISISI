@@ -63,7 +63,7 @@ public class PredmetiController {
 
 		for (String string : splits) {
 			int separator = string.indexOf(":");
-			filters.add(RowFilter.regexFilter("(?i)" + string.substring(separator + 1).trim(),
+			filters.add(RowFilter.regexFilter("(?ui)" + string.substring(separator + 1).trim(),
 					keys.get(string.substring(0, separator).trim())));
 		}
 
