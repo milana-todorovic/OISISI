@@ -15,6 +15,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -44,7 +45,7 @@ public class ProfesorPredmetDialog extends JDialog {
 	 * @param parent
 	 */
 	public ProfesorPredmetDialog(JFrame parent) {
-		super(parent, "Izmena profesora na predmetu", true);
+		super(parent, "Izbor profesora na predmetu", true);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
 		this.parent = parent;
@@ -59,7 +60,7 @@ public class ProfesorPredmetDialog extends JDialog {
 		JScrollPane scroll = new JScrollPane(table);
 		scroll.getViewport().setBackground(Color.WHITE);
 
-		this.makeTextField();
+		JPanel top = this.makeTextField();
 
 		JPanel bottom = new JPanel();
 		bottom.setLayout(new BoxLayout(bottom, BoxLayout.X_AXIS));
@@ -70,7 +71,7 @@ public class ProfesorPredmetDialog extends JDialog {
 
 		JPanel content = new JPanel(new BorderLayout(0, 30));
 		content.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
-		content.add(this.search, BorderLayout.NORTH);
+		content.add(top, BorderLayout.NORTH);
 		content.add(scroll, BorderLayout.CENTER);
 		content.add(bottom, BorderLayout.SOUTH);
 
@@ -93,7 +94,8 @@ public class ProfesorPredmetDialog extends JDialog {
 		table.setRowSorter(rowSorter);
 	}
 
-	private void makeTextField() {
+	private JPanel makeTextField() {
+		JLabel searchLabel = new JLabel("Pretra\u017Ei:");
 		this.search = new JTextField();
 
 		this.search.getDocument().addDocumentListener(new DocumentListener() {
@@ -113,6 +115,14 @@ public class ProfesorPredmetDialog extends JDialog {
 			}
 
 		});
+
+		JPanel searchPanel = new JPanel();
+		searchPanel.setLayout(new BoxLayout(searchPanel, BoxLayout.X_AXIS));
+		searchPanel.add(searchLabel);
+		searchPanel.add(Box.createHorizontalStrut(15));
+		searchPanel.add(this.search);
+
+		return searchPanel;
 	}
 
 	@SuppressWarnings("unchecked")
