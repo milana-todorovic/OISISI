@@ -123,6 +123,9 @@ public class Predmet implements Serializable {
 	 * @param profesor the profesor to set
 	 */
 	public void setProfesor(Profesor profesor) {
+		if (this.getProfesor() != null) {
+			this.getProfesor().getPredmeti().remove(this);
+		}
 		this.profesor = profesor;
 	}
 
@@ -139,6 +142,11 @@ public class Predmet implements Serializable {
 	public void setStudenti(List<Student> studenti) {
 		if (studenti == null)
 			return;
+		if (!this.studenti.isEmpty()) {
+			for (Student student : this.studenti) {
+				student.getPredmeti().remove(this);
+			}
+		}
 		this.studenti = studenti;
 	}
 

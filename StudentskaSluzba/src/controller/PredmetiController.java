@@ -74,4 +74,17 @@ public class PredmetiController {
 		sorter.setRowFilter(filter);
 	}
 
+	public void launchProfesorNaPredmetuEdit(int predmet) {
+		int profesor = Database.getInstance().indeksProfesoraNaPredmetu(predmet);
+		MainFrame.getInstance().getDialogHandler().launchProfesorNaPredmetuEdit(profesor);
+	}
+
+	public void izmeniProfesoraNaPredmetu(int profesor) {
+		int predmet = MainFrame.getInstance().getSelectedRow();
+		Database.getInstance().izmeniProfesoraNaPredmetu(profesor, predmet);
+		MainFrame.getInstance().cancelSearch();
+		MainFrame.getInstance().getTableModel().fireTableDataChanged();
+		MainFrame.getInstance().setSelectedRow(predmet);
+	}
+
 }
