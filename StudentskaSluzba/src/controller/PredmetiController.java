@@ -86,5 +86,12 @@ public class PredmetiController {
 		MainFrame.getInstance().getTableModel().fireTableDataChanged();
 		MainFrame.getInstance().setSelectedRow(predmet);
 	}
+	
+	public void ukloniProfesoraSaPredmeta(int predmet) {
+		Database.getInstance().ukloniProfesoraSaPredmeta(predmet);
+		MainFrame.getInstance().cancelSearch();
+		MainFrame.getInstance().getTableModel().fireTableDataChanged();
+		MainFrame.getInstance().setSelectedRow(predmet);
+	}
 
 }

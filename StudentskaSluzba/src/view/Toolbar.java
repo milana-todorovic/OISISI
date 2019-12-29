@@ -20,6 +20,7 @@ import javax.swing.event.DocumentListener;
 import view.actions.Actions;
 import view.actions.CancelSearchAction;
 import view.actions.ProfessorSubjectAction;
+import view.actions.ProfessorSubjectRemoveAction;
 import view.actions.SearchAction;
 import view.actions.StudentSubjectAction;
 import view.validity_utils.ErrorLabel;
@@ -40,12 +41,14 @@ public class Toolbar extends JToolBar {
 
 	private static final int STUDENTS_INDEX = 3;
 	private static final int PROFESSORS_INDEX = 4;
-	private static final int START_SEARCH_INDEX = 8;
-	private static final int CANCEL_SEARCH_INDEX = 9;
+	private static final int PROFESSORS_REMOVE_INDEX = 5;
+	private static final int START_SEARCH_INDEX = 9;
+	private static final int CANCEL_SEARCH_INDEX = 10;
 
 	// Instance akcija koje koristi samo toolbar
 	private StudentSubjectAction studentSubject;
 	private ProfessorSubjectAction professorSubject;
+	private ProfessorSubjectRemoveAction professorSubjectRemove;
 	private SearchAction startSearch;
 	private CancelSearchAction cancelSearch;
 
@@ -70,6 +73,7 @@ public class Toolbar extends JToolBar {
 	private void makeItems(Actions actions) {
 		this.studentSubject = new StudentSubjectAction();
 		this.professorSubject = new ProfessorSubjectAction();
+		this.professorSubjectRemove = new ProfessorSubjectRemoveAction();
 		this.startSearch = new SearchAction(this);
 		this.cancelSearch = new CancelSearchAction(this);
 
@@ -80,6 +84,7 @@ public class Toolbar extends JToolBar {
 		this.add(actions.getDeleteAction());
 		this.add(this.studentSubject);
 		this.add(this.professorSubject);
+		this.add(this.professorSubjectRemove);
 		this.add(Box.createHorizontalGlue());
 		this.add(this.searchError);
 		this.add(this.search);
@@ -187,11 +192,13 @@ public class Toolbar extends JToolBar {
 		InputMap inputMap = this.getInputMap(WHEN_IN_FOCUSED_WINDOW);
 		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK), "student na predmet");
 		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_P, KeyEvent.CTRL_DOWN_MASK), "profesor na predmet");
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_R, KeyEvent.CTRL_DOWN_MASK), "profesor uklanjanje");
 		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F, KeyEvent.CTRL_DOWN_MASK), "pretraga");
 		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_X, KeyEvent.CTRL_DOWN_MASK), "kraj pretrage");
 		ActionMap actionMap = this.getActionMap();
 		actionMap.put("student na predmet", this.studentSubject);
 		actionMap.put("profesor na predmet", this.professorSubject);
+		actionMap.put("profesor uklanjanje", this.professorSubjectRemove);
 		actionMap.put("pretraga", this.startSearch);
 		actionMap.put("kraj pretrage", this.cancelSearch);
 	}
@@ -249,12 +256,16 @@ public class Toolbar extends JToolBar {
 			this.getComponentAtIndex(STUDENTS_INDEX).setVisible(true);
 			this.professorSubject.setEnabled(true);
 			this.getComponentAtIndex(PROFESSORS_INDEX).setVisible(true);
+			this.professorSubjectRemove.setEnabled(true);
+			this.getComponentAtIndex(PROFESSORS_REMOVE_INDEX).setVisible(true);
 			break;
 		default:
 			this.studentSubject.setEnabled(false);
 			this.getComponentAtIndex(STUDENTS_INDEX).setVisible(false);
 			this.professorSubject.setEnabled(false);
 			this.getComponentAtIndex(PROFESSORS_INDEX).setVisible(false);
+			this.professorSubjectRemove.setEnabled(false);
+			this.getComponentAtIndex(PROFESSORS_REMOVE_INDEX).setVisible(false);
 		}
 
 		// Pretraga ostaje aktivna pri promjeni taba
