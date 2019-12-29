@@ -134,15 +134,15 @@ public class PredmetDialog extends JDialog {
 		this.sifraError = new ErrorLabel(this.getBackground(), Color.RED);
 		this.sifra.getDocument().addDocumentListener(new ValidityListener() {
 
-			public void checkValidity(String s) {				
+			public void checkValidity(String s) {
 				String s1 = s.trim();
 				boolean valid;
-				
+
 				if (s1.isEmpty()) {
 					sifraError.invalidNotNull();
 					valid = false;
 				} else if (!Validator.isAlphanumeric(s1)) {
-					sifraError.invalidAlphanum();
+					sifraError.invalidCharacter();
 					valid = false;
 				} else {
 					Predmet found = MainController.getInstance().getPredmetiController().findByID(s1.toUpperCase());
@@ -170,15 +170,19 @@ public class PredmetDialog extends JDialog {
 
 		});
 		this.naziv = new JTextField();
-		this.nazivError = new ErrorLabel(this.getBackground(), Color.RED, "reci ili brojevi razdvojeni razmacima ili belim karakterima");
+		this.nazivError = new ErrorLabel(this.getBackground(), Color.RED,
+				"reci ili brojevi razdvojeni razmacima ili crticom");
 		this.naziv.getDocument().addDocumentListener(new ValidityListener() {
 
 			public void checkValidity(String s) {
-				String s1 = s.trim();				
+				String s1 = s.trim();
 				Boolean valid;
-				
+
 				if (s1.isEmpty()) {
 					nazivError.invalidNotNull();
+					valid = false;
+				} else if (!Validator.isAlphanumericWithSeparators(s1)) {
+					nazivError.invalidCharacter();
 					valid = false;
 				} else if (!Validator.isNazivPredmeta(s1)) {
 					nazivError.invalidFormat();

@@ -19,6 +19,10 @@ public class Validator {
 	public static Boolean isAlphanumeric(String s) {
 		return s.matches("[\\p{IsAlphabetic}0-9]*");
 	}
+	
+	public static Boolean isAlphanumericWithSeparators(String s) {
+		return s.matches("[\\p{IsAlphabetic}0-9 -]*");
+	}
 
 	public static Boolean isNazivPredmeta(String s) {
 		return s.matches("[\\p{IsAlphabetic}0-9]+([ ]*-?[ ]*[\\p{IsAlphabetic}0-9]+)*");
