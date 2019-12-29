@@ -21,7 +21,7 @@ public class Validator {
 	}
 
 	public static Boolean isNazivPredmeta(String s) {
-		return s.matches("[\\p{IsAlphabetic}0-9 -]*");
+		return s.matches("[\\p{IsAlphabetic}0-9]+([ ]*-?[ ]*[\\p{IsAlphabetic}0-9]+)*");
 	}
 
 	public static Boolean matchesSearchFormat(String s) {

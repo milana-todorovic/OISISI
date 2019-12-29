@@ -86,6 +86,13 @@ public class ErrorLabel extends JLabel {
 		if (toggleVisibility)
 			this.setVisible(true);
 	}
+	
+	public void invalid(String customTooltip) {
+		this.setToolTipText(customTooltip);
+		this.setForeground(invalidColor);
+		if (toggleVisibility)
+			this.setVisible(true);
+	}
 
 	public void valid() {
 		this.setToolTipText(null);
