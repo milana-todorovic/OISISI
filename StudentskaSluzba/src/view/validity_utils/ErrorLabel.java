@@ -18,7 +18,7 @@ public class ErrorLabel extends JLabel {
 
 	private static final long serialVersionUID = 5653834200990424650L;
 
-	public static final String ALPHANUM_VIOLATED = "Polje moze da sadr\u017Ei samo alfanumericke znakove!";
+	public static final String CHARACTER_INVALID = "Nedozvoljeni karakter!";
 	public static final String NOT_NULL_VIOLATED = "Polje je obavezno!";
 	public static final String UNIQUE_VIOLATED = "Vrednost polja mora biti jedinstvena!";
 	public static final String FORMAT_VIOLATED = "Dozvoljeni formati unosa: ";
@@ -52,8 +52,8 @@ public class ErrorLabel extends JLabel {
 		this(validColor, invalidColor, null);
 	}
 
-	public void invalidAlphanum() {
-		this.setToolTipText(ALPHANUM_VIOLATED);
+	public void invalidCharacter() {
+		this.setToolTipText(CHARACTER_INVALID);
 		this.setForeground(invalidColor);
 		if (toggleVisibility)
 			this.setVisible(true);
@@ -82,6 +82,13 @@ public class ErrorLabel extends JLabel {
 
 	public void invalidSearchParams() {
 		this.setToolTipText(SEARCH_PARAMS_VIOLATED);
+		this.setForeground(invalidColor);
+		if (toggleVisibility)
+			this.setVisible(true);
+	}
+	
+	public void invalid(String customTooltip) {
+		this.setToolTipText(customTooltip);
 		this.setForeground(invalidColor);
 		if (toggleVisibility)
 			this.setVisible(true);

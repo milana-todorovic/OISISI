@@ -9,6 +9,7 @@ import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+import controller.MainController;
 import view.MainFrame;
 
 /**
@@ -27,20 +28,15 @@ public class ProfessorSubjectAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (MainFrame.getInstance().getSelectedRow() == -1) {
+		int predmet = MainFrame.getInstance().getSelectedRow();
+
+		if (predmet == -1) {
 			JOptionPane.showMessageDialog(MainFrame.getInstance(),
 					"Nije izabran predmet na kom treba izmeniti profesora!", "Gre\u0161ka!", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 
-		/*
-		 * TODO dodati tijelo kada bude implementirana funkcionalnost
-		 * #dodavanje_profesora_na_predmet
-		 * 
-		 * TODO u prozor za dodavanje/izmjenu profesora na predmetu dodati i dugme za
-		 * brisanje?? Ili novo dugme na toolbar?
-		 * 
-		 */
+		MainController.getInstance().getPredmetiController().launchProfesorNaPredmetuEdit(predmet);
 
 	}
 

@@ -123,6 +123,9 @@ public class Predmet implements Serializable {
 	 * @param profesor the profesor to set
 	 */
 	public void setProfesor(Profesor profesor) {
+		if (this.getProfesor() != null) {
+			this.getProfesor().getPredmeti().remove(this);
+		}
 		this.profesor = profesor;
 	}
 
@@ -139,6 +142,11 @@ public class Predmet implements Serializable {
 	public void setStudenti(List<Student> studenti) {
 		if (studenti == null)
 			return;
+		if (!this.studenti.isEmpty()) {
+			for (Student student : this.studenti) {
+				student.getPredmeti().remove(this);
+			}
+		}
 		this.studenti = studenti;
 	}
 
@@ -158,8 +166,16 @@ public class Predmet implements Serializable {
 	public void set(Map<String, Object> values) {
 		this.sifraPredmeta = (values.containsKey(keys[0])) ? (String) values.get(keys[0]) : sifraPredmeta;
 		this.nazivPredmeta = (values.containsKey(keys[1])) ? (String) values.get(keys[1]) : nazivPredmeta;
-		this.godina = (values.containsKey(keys[2])) ? (Integer) values.get(keys[2]) : godina;
 		this.semestar = (values.containsKey(keys[3])) ? (Integer) values.get(keys[3]) : semestar;
+
+		int godinaNewValue = (values.containsKey(keys[2])) ? (Integer) values.get(keys[2]) : godina;
+		if (godinaNewValue != this.godina) {
+			for (Student student : studenti) {
+				student.getPredmeti().remove(this);
+			}
+			this.studenti = new ArrayList<Student>();
+			this.godina = godinaNewValue;
+		}
 	}
 
 	@Override

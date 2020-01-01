@@ -11,6 +11,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.HashMap;
 
 import javax.swing.BorderFactory;
@@ -53,6 +55,7 @@ public class PredmetDialog extends JDialog {
 	private JTextField naziv;
 	private ErrorLabel nazivError;
 	private JComboBox<String> godina;
+	private ErrorLabel godinaWarning;
 	private JComboBox<String> semestar;
 	private JButton dodaj;
 	private JButton izmeni;
@@ -78,8 +81,8 @@ public class PredmetDialog extends JDialog {
 
 	private int makeItems() {
 		this.makeTextFields();
-		String[] godine = { "I (prva)", "II (druga)", "III (treca)", "IV (cetvrta)" };
-		this.godina = new JComboBox<String>(godine);
+		this.makeGodinaComboBox();
+
 		String[] semestri = { "I (zimski)", "II (letnji)" };
 		this.semestar = new JComboBox<String>(semestri);
 
@@ -104,6 +107,8 @@ public class PredmetDialog extends JDialog {
 		content.add(new JLabel("Godina*: "), new GridBagConstraints(0, 2, 1, 1, 0, 100, GridBagConstraints.WEST,
 				GridBagConstraints.HORIZONTAL, new Insets(0, 10, 0, 10), 0, 0));
 		content.add(this.godina, new GridBagConstraints(1, 2, 2, 1, 100, 100, GridBagConstraints.WEST,
+				GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
+		content.add(this.godinaWarning, new GridBagConstraints(3, 2, 1, 1, 0, 0, GridBagConstraints.WEST,
 				GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
 
 		content.add(new JLabel("Semestar*: "), new GridBagConstraints(0, 3, 1, 1, 0, 100, GridBagConstraints.WEST,
@@ -130,15 +135,17 @@ public class PredmetDialog extends JDialog {
 		this.sifra.getDocument().addDocumentListener(new ValidityListener() {
 
 			public void checkValidity(String s) {
+				String s1 = s.trim();
 				boolean valid;
-				if (s.isEmpty()) {
+
+				if (s1.isEmpty()) {
 					sifraError.invalidNotNull();
 					valid = false;
-				} else if (!Validator.isAlphanumeric(s)) {
-					sifraError.invalidAlphanum();
+				} else if (!Validator.isAlphanumeric(s1)) {
+					sifraError.invalidCharacter();
 					valid = false;
 				} else {
-					Predmet found = MainController.getInstance().getPredmetiController().findByID(s.toUpperCase());
+					Predmet found = MainController.getInstance().getPredmetiController().findByID(s1.toUpperCase());
 					if (found == currentlyEditing || found == null) {
 						sifraError.valid();
 						valid = true;
@@ -163,16 +170,22 @@ public class PredmetDialog extends JDialog {
 
 		});
 		this.naziv = new JTextField();
-		this.nazivError = new ErrorLabel(this.getBackground(), Color.RED);
+		this.nazivError = new ErrorLabel(this.getBackground(), Color.RED,
+				"reci ili brojevi razdvojeni razmacima ili crticom");
 		this.naziv.getDocument().addDocumentListener(new ValidityListener() {
 
 			public void checkValidity(String s) {
+				String s1 = s.trim();
 				Boolean valid;
-				if (s.isEmpty()) {
+
+				if (s1.isEmpty()) {
 					nazivError.invalidNotNull();
 					valid = false;
-				} else if (!Validator.isNazivPredmeta(s)) {
-					nazivError.invalidAlphanum();
+				} else if (!Validator.isAlphanumericWithSeparators(s1)) {
+					nazivError.invalidCharacter();
+					valid = false;
+				} else if (!Validator.isNazivPredmeta(s1)) {
+					nazivError.invalidFormat();
 					valid = false;
 				} else {
 					nazivError.valid();
@@ -195,6 +208,28 @@ public class PredmetDialog extends JDialog {
 		});
 	}
 
+	private void makeGodinaComboBox() {
+		String[] godine = { "I (prva)", "II (druga)", "III (treca)", "IV (cetvrta)" };
+		this.godina = new JComboBox<String>(godine);
+		this.godinaWarning = new ErrorLabel(this.getBackground(), Color.ORANGE);
+
+		this.godina.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					if (currentlyEditing != null && !currentlyEditing.getStudenti().isEmpty()
+							&& currentlyEditing.getGodina() != (godina.getSelectedIndex() + 1)) {
+						godinaWarning.invalid("Ovim izmenom se gube veze sa studentima " + currentlyEditing.getGodina()
+								+ ". godine koji trenutno slusaju predmet.");
+					} else
+						godinaWarning.valid();
+				}
+			}
+
+		});
+	}
+
 	private JButton makeAddButton() {
 		dodaj = new JButton("Dodaj");
 		dodaj.addActionListener(new ActionListener() {
@@ -202,8 +237,8 @@ public class PredmetDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				HashMap<String, Object> values = new HashMap<String, Object>();
-				values.put(Predmet.keys[0], sifra.getText().toUpperCase());
-				values.put(Predmet.keys[1], naziv.getText());
+				values.put(Predmet.keys[0], sifra.getText().trim().toUpperCase());
+				values.put(Predmet.keys[1], naziv.getText().trim());
 				values.put(Predmet.keys[2], godina.getSelectedIndex() + 1);
 				values.put(Predmet.keys[3], semestar.getSelectedIndex() + 1);
 
@@ -226,11 +261,11 @@ public class PredmetDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				HashMap<String, Object> values = new HashMap<String, Object>();
-				values.put(Predmet.keys[0], sifra.getText().toUpperCase());
-				values.put(Predmet.keys[1], naziv.getText());
+				values.put(Predmet.keys[0], sifra.getText().trim().toUpperCase());
+				values.put(Predmet.keys[1], naziv.getText().trim());
 				values.put(Predmet.keys[2], godina.getSelectedIndex() + 1);
 				values.put(Predmet.keys[3], semestar.getSelectedIndex() + 1);
-				
+
 				MainController.getInstance().getPredmetiController().updatePredmet(values);
 				dispose();
 			}

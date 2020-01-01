@@ -163,27 +163,27 @@ public class Database implements Serializable {
 
 	private void studentiMock() {
 		studenti.add(new Student("Marko", "Petrovic", LocalDate.of(1998, 3, 16), "Jovana Ducica 16", "0664125861",
-				"markopetrovic@uns.ac.rs", "ra16-2017", LocalDate.of(2017, 7, 3), 3, Student.Status.B, 9.06));
+				"markopetrovic@uns.ac.rs", "ra16-2017", LocalDate.of(2017, 7, 3), 1, Student.Status.B, 9.06));
 		studenti.add(new Student("Vasilije", "Butulija", LocalDate.of(1997, 4, 2), "Salvadora Aljendea 10",
-				"0654443322", "vasilijebutulija@uns.ac.rs", "ra140-2016", LocalDate.of(2016, 7, 5), 4, Student.Status.S,
+				"0654443322", "vasilijebutulija@uns.ac.rs", "ra140-2016", LocalDate.of(2016, 7, 5), 1, Student.Status.S,
 				7.55));
 		studenti.add(new Student("Viktorija", "Radojcic", LocalDate.of(1998, 3, 18), "Mihajla Pupina 21", "0661112202",
-				"vikiradojcic@uns.ac.rs", "ra12-2017", LocalDate.of(2017, 7, 1), 3, Student.Status.B, 10.00));
+				"vikiradojcic@uns.ac.rs", "ra12-2017", LocalDate.of(2017, 7, 1), 1, Student.Status.B, 10.00));
 		studenti.add(new Student("Iva", "Aleksic", LocalDate.of(1995, 7, 24), "Milutina Milankovica 18", "0656561221",
-				"ivaaleksic@uns.ac.rs", "ra186-2016", LocalDate.of(2016, 7, 2), 4, Student.Status.S, 8.88));
+				"ivaaleksic@uns.ac.rs", "ra186-2016", LocalDate.of(2016, 7, 2), 1, Student.Status.S, 8.88));
 		studenti.add(new Student("Milan", "Jovic", LocalDate.of(1997, 5, 5), "Desanke Maksimovic 14", "0654478998",
-				"milanjovic@uns.ac.rs", "ee200-2016", LocalDate.of(2016, 7, 5), 4, Student.Status.B, 6.67));
+				"milanjovic@uns.ac.rs", "ee200-2016", LocalDate.of(2016, 7, 5), 1, Student.Status.B, 6.67));
 		studenti.add(new Student("Helena", "Govedarica", LocalDate.of(1994, 10, 28), "Jovana Ducica 25", "0654011100",
-				"helenagov@uns.ac.rs", "ee14-2015", LocalDate.of(2015, 7, 1), 4, Student.Status.S, 8.04));
+				"helenagov@uns.ac.rs", "ee14-2015", LocalDate.of(2015, 7, 1), 1, Student.Status.S, 8.04));
 		ArrayList<Student> studenti1 = new ArrayList<Student>();
 		studenti1.add(studenti.get(1));
 		studenti1.add(studenti.get(3));
 		studenti1.add(studenti.get(4));
 		predmeti.get(3).setStudenti(studenti1);
-		predmeti.get(0).setStudenti(studenti1);
+		predmeti.get(1).setStudenti(studenti1);
 		for (Student student : studenti1) {
 			student.addPredmet(predmeti.get(3));
-			student.addPredmet(predmeti.get(0));
+			student.addPredmet(predmeti.get(1));
 		}
 		predmeti.get(5).setStudenti(new ArrayList<Student>(studenti));
 		for (Student student : studenti) {
@@ -195,7 +195,18 @@ public class Database implements Serializable {
 		Profesor profesor = this.profesori.get(profesorIndex);
 		Predmet predmet = profesor.getPredmeti().get(predmetIndex);
 		predmet.setProfesor(null);
-		profesor.getPredmeti().remove(predmetIndex);
+	}
+	
+	public void ukloniProfesoraSaPredmeta(int predmetIndex) {
+		this.predmeti.get(predmetIndex).setProfesor(null);
+	}
+	
+	public int indeksProfesoraNaPredmetu(int indeksPredmeta) {
+		Predmet predmet = this.predmeti.get(indeksPredmeta);
+		if (predmet.getProfesor() == null)
+			return -1;
+		else 
+			return this.profesori.indexOf(predmet.getProfesor());
 	}
 
 	public boolean addPredmet(Map<String, Object> values) {
@@ -210,4 +221,12 @@ public class Database implements Serializable {
 	public void updatePredmet(int index, Map<String, Object> values) {
 		predmeti.get(index).set(values);
 	}
+	
+	public void izmeniProfesoraNaPredmetu(int profesorIndex, int predmetIndex) {
+		Predmet predmet = predmeti.get(predmetIndex);
+		Profesor profesor = profesori.get(profesorIndex);
+		predmet.setProfesor(profesor);
+		profesor.addPredmet(predmet);
+	}
+
 }
