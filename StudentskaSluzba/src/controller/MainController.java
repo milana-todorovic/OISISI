@@ -92,15 +92,16 @@ public class MainController {
 
 		switch (MainFrame.getInstance().getSelectedTab()) {
 		case PREDMETI:
-			// TODO dodati kada bude implementirana funkcionalnost
-			// #uklanjanje_studenta_sa_predmeta
+			Database.getInstance().removePredmetStudent(outerIndex, innerIndex);
+			MainFrame.getInstance().cancelSearch();
+			MainFrame.getInstance().getTableModel().fireTableDataChanged();
+			MainFrame.getInstance().setSelectedRow(outerIndex);
 			break;
 		case PROFESORI:
 			Database.getInstance().removeProfesorPredmet(outerIndex, innerIndex);
 			break;
 		case STUDENTI:
-			// TODO dodati kada bude implementirana funkcionalnost
-			// #uklanjanje_studenta_sa_predmeta
+			Database.getInstance().removeStudentPredmet(outerIndex, innerIndex);
 			break;
 		default:
 			break;

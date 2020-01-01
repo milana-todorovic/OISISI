@@ -103,6 +103,24 @@ public class Database implements Serializable {
 		this.studenti.remove(index);
 	}
 
+	public void removeStudentPredmet(int studentIndex, int predmetIndex) {
+		Student student = this.studenti.get(studentIndex);
+		Predmet predmet = student.getPredmeti().get(predmetIndex);
+
+		student.getPredmeti().remove(predmet);
+		predmet.getStudenti().remove(student);
+
+	}
+
+	public void removePredmetStudent(int predmetIndex, int studentIndex) {
+		Predmet predmet = this.predmeti.get(predmetIndex);
+		Student student = predmet.getStudenti().get(studentIndex);
+
+		predmet.getStudenti().remove(student);
+		student.getPredmeti().remove(predmet);
+
+	}
+
 	private void predmetiMock() {
 		predmeti.add(new Predmet("E227A", "LPRS 1", 2, 1));
 		predmeti.add(new Predmet("E216", "OET", 1, 2));
@@ -192,5 +210,4 @@ public class Database implements Serializable {
 	public void updatePredmet(int index, Map<String, Object> values) {
 		predmeti.get(index).set(values);
 	}
-
 }
