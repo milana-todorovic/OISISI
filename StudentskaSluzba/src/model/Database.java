@@ -195,10 +195,13 @@ public class Database implements Serializable {
 		Profesor profesor = this.profesori.get(profesorIndex);
 		Predmet predmet = profesor.getPredmeti().get(predmetIndex);
 		predmet.setProfesor(null);
+		profesor.getPredmeti().remove(predmetIndex);
 	}
 	
 	public void ukloniProfesoraSaPredmeta(int predmetIndex) {
-		this.predmeti.get(predmetIndex).setProfesor(null);
+		Predmet predmet = this.predmeti.get(predmetIndex);
+		predmet.getProfesor().getPredmeti().remove(predmet);
+		predmet.setProfesor(null);
 	}
 	
 	public int indeksProfesoraNaPredmetu(int indeksPredmeta) {
@@ -225,6 +228,9 @@ public class Database implements Serializable {
 	public void izmeniProfesoraNaPredmetu(int profesorIndex, int predmetIndex) {
 		Predmet predmet = predmeti.get(predmetIndex);
 		Profesor profesor = profesori.get(profesorIndex);
+		if (predmet.getProfesor() != null) {
+			predmet.getProfesor().getPredmeti().remove(predmet);
+		}
 		predmet.setProfesor(profesor);
 		profesor.addPredmet(predmet);
 	}
