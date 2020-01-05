@@ -11,9 +11,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -101,17 +98,17 @@ public class StudentDialog extends JDialog {
 		this.adresaError = new ErrorLabel(this.getBackground(), Color.RED,
 				"reci ili brojevi razdvojeni razmacima ili crticom");
 		this.brojTel = new JTextField();
-		this.brojTelError = new ErrorLabel(this.getBackground(), Color.RED, "brojevi,minimalno 9 cifara,maksimalno 20");
+		this.brojTelError = new ErrorLabel(this.getBackground(), Color.RED, "realan broj izmedju 9 i 20");
 		this.brojInd = new JTextField();
 		this.brojIndError = new ErrorLabel(this.getBackground(), Color.RED,
 				"oznaka smera razdvojena brojem upisa pa crticom pa godinom upisa");
 		this.emailAdresa = new JTextField();
 		this.emailAdresaError = new ErrorLabel(this.getBackground(), Color.RED,
-				"slova i brojevi bez razmaka,moguc separator tacka,@domen");
+				"slova i brojevi bez razmaka,moguc separator _ ili tacka,@domen");
 		this.prosek = new JTextField();
-		this.prosekError = new ErrorLabel(this.getBackground(), Color.RED, "cifre razdvojene , ");
+		this.prosekError = new ErrorLabel(this.getBackground(), Color.RED, "cifre razdvojene . ");
 		this.datumUpisa = new JTextField();
-		this.datumUpisaError = new ErrorLabel(this.getBackground(), Color.RED, "format yyyy-MM-hh");
+		this.datumUpisaError = new ErrorLabel(this.getBackground(), Color.RED, "yyyy-MM-dd");
 		this.godina = new JComboBox<String>(godina);
 		this.budzetRB = new JRadioButton("Bu\u01C6et");
 		this.samofinansiranjeRB = new JRadioButton("Samofinansiranje");
@@ -339,7 +336,7 @@ public class StudentDialog extends JDialog {
 				if (s1.isEmpty()) {
 					brojIndError.invalidNotNull();
 					valid = false;
-				} else if (!Validator.isAlphanumericWithSeparator(s1)) {
+				} else if (!Validator.isAlphanumericWithDash(s1)) {
 					brojIndError.invalidCharacter();
 					valid = false;
 				} else if (!Validator.isBrojIndeksa(s1)) {
@@ -399,7 +396,7 @@ public class StudentDialog extends JDialog {
 				if (s1.isEmpty()) {
 					emailAdresaError.invalidNotNull();
 					valid = false;
-				} else if (!Validator.isAlphanumericWithDot(s1)) {
+				} else if (!Validator.isAlphanumericWithDotUnderscore(s1)) {
 					emailAdresaError.invalidCharacter();
 					valid = false;
 				} else if (!Validator.isEmailAdresa(s1)) {
@@ -429,7 +426,7 @@ public class StudentDialog extends JDialog {
 				if (s1.isEmpty()) {
 					prosekError.invalidNotNull();
 					valid = false;
-				} else if (!Validator.isNumericWithComma(s1)) {
+				} else if (!Validator.isNumericWithDot(s1)) {
 					prosekError.invalidCharacter();
 					valid = false;
 				} else if (!Validator.isProsek(s1)) {
@@ -460,10 +457,10 @@ public class StudentDialog extends JDialog {
 				if (s1.isEmpty()) {
 					datumRodjenjaError.invalidNotNull();
 					valid = false;
-				} else if (!Validator.isNumericWithSep(s1)) {
+				} else if (!Validator.isNumericWithDash(s1)) {
 					datumRodjenjaError.invalidCharacter();
 					valid = false;
-				} else if (!isLocalDate(s1)) {
+				} else if (!Validator.isLocalDate(s1)) {
 					datumRodjenjaError.invalidFormat();
 					valid = false;
 				} else {
@@ -490,10 +487,10 @@ public class StudentDialog extends JDialog {
 				if (s1.isEmpty()) {
 					datumUpisaError.invalidNotNull();
 					valid = false;
-				} else if (!Validator.isNumericWithSep(s1)) {
+				} else if (!Validator.isNumericWithDash(s1)) {
 					datumUpisaError.invalidCharacter();
 					valid = false;
-				} else if (!isLocalDate(s1)) {
+				} else if (!Validator.isLocalDate(s1)) {
 					datumUpisaError.invalidFormat();
 					valid = false;
 				} else {
@@ -513,15 +510,6 @@ public class StudentDialog extends JDialog {
 			}
 		});
 
-	}
-
-	public boolean isLocalDate(String s) {
-		try {
-			LocalDate.parse(s);
-			return true;
-		} catch (DateTimeParseException e) {
-			return false;
-		}
 	}
 
 	public void addMode() {
