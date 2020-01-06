@@ -11,6 +11,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.util.HashMap;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -20,9 +22,13 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import controller.MainController;
+import model.Student;
+import model.Student.Status;
 import view.validity_utils.ErrorLabel;
 import view.validity_utils.Validator;
 import view.validity_utils.ValidityListener;
@@ -207,12 +213,37 @@ public class StudentDialog extends JDialog {
 
 	private JButton makeConfirmButton() {
 		dodaj = new JButton("Dodaj");
-
 		dodaj.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				HashMap<String, Object> values = new HashMap<String, Object>();
+				values.put(Student.keys[0], ime.getText().trim());
+				values.put(Student.keys[1], prezime.getText().trim());
 
+				values.put(Student.keys[2], LocalDate.parse(datumRodjenja.getText()));
+
+				values.put(Student.keys[3], adresa.getText().trim());
+				values.put(Student.keys[4], brojTel.getText().trim());
+				values.put(Student.keys[5], emailAdresa.getText().trim());
+				values.put(Student.keys[6], brojInd.getText().trim());
+
+				values.put(Student.keys[7], LocalDate.parse(datumUpisa.getText()));
+
+				values.put(Student.keys[8], godina.getSelectedIndex() + 1);
+				if (budzetRB.isSelected()) {
+					values.put(Student.keys[9], Status.B);
+				} else if (samofinansiranjeRB.isSelected()) {
+					values.put(Student.keys[9], Status.S);
+				}
+				values.put(Student.keys[10], Double.parseDouble(prosek.getText()));
+
+				if (MainController.getInstance().getStudentiController().addStudent(values)) {
+					dispose();
+				} else {
+					JOptionPane.showMessageDialog(StudentDialog.this, "Gre\u0161ka pri dodavanju!", "Gre\u0161ka!",
+							JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		});
 
