@@ -100,7 +100,7 @@ public class ListDialog extends JDialog {
 		}
 
 		Dimension d = parent.getSize();
-		this.setSize(d.width / 4, d.height / 2);
+		this.setSize(d.width / 3, d.height / 2);
 		this.setLocationRelativeTo(parent);
 
 		this.setVisible(true);

@@ -32,6 +32,19 @@ public class StudentiController {
 		Database.getInstance().removeStudent(index);
 	}
 
+	public boolean addStudent(Map<String, Object> values) {
+
+		if (Database.getInstance().addStudent(values)) {
+			int index = getBrojStudenata() - 1;
+			MainFrame.getInstance().cancelSearch();
+			MainFrame.getInstance().getTableModel().fireTableRowsInserted(index, index);
+			MainFrame.getInstance().setSelectedRow(index);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public void startSearch(String searchParam) {
 		String[] splits = searchParam.split(";");
 		ArrayList<RowFilter<StudentiTableModel, Integer>> filters = new ArrayList<RowFilter<StudentiTableModel, Integer>>();

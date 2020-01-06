@@ -20,6 +20,7 @@ public class DialogHandler {
 	private ListDialog listDialog;
 	private PredmetDialog predmetDialog;
 	private ProfesorPredmetDialog profesorPredmetDialog;
+	private StudentDialog studentDialog;
 
 	/**
 	 * Konstruktor koji instancira sve cesto koristene dijaloge.
@@ -32,6 +33,7 @@ public class DialogHandler {
 		this.listDialog = new ListDialog(parent);
 		this.predmetDialog = new PredmetDialog(parent);
 		this.profesorPredmetDialog = new ProfesorPredmetDialog(parent);
+		this.studentDialog = new StudentDialog(parent);
 	}
 
 	public void showListDialog(String title, List<?> value) {
@@ -53,7 +55,7 @@ public class DialogHandler {
 			// TODO dodati kada bude implementirana funkcionalnost #dodavanje_profesora
 			break;
 		case STUDENTI:
-			// TODO dodati kada bude implementirana funkcionalnost #dodavanje_studenta
+			studentDialog.addMode();
 			break;
 		default:
 			break;
@@ -63,7 +65,7 @@ public class DialogHandler {
 	public void launchPredmetiEdit(Predmet predmet) {
 		predmetDialog.editMode(predmet);
 	}
-	
+
 	public void launchProfesorNaPredmetuEdit(int index) {
 		profesorPredmetDialog.show(index);
 	}

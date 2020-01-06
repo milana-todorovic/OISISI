@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Ana Perisic ra1-2017
@@ -27,6 +28,9 @@ public class Student implements Serializable {
 	}
 
 	private static final long serialVersionUID = -8950945688057768215L;
+
+	public static final String[] keys = { "Ime", "Prezime", "Datum rodjenja", "Adresa stanovanja", "Broj telefona",
+			"Email adresa", "Broj indeksa", "Datum upisa", "Godina studija", "Status", "Prosek" };
 
 	private String ime;
 	private String prezime;
@@ -56,6 +60,21 @@ public class Student implements Serializable {
 		this.trenutnaGodStudija = trenutnaGodStudija;
 		this.prosecnaOcena = prosecnaOcena;
 		this.status = status;
+		this.predmeti = new ArrayList<Predmet>();
+	}
+
+	public Student(Map<String, Object> values) {
+		this.ime = (String) values.get(keys[0]);
+		this.prezime = (String) values.get(keys[1]);
+		this.datumRodjenja = (LocalDate) values.get(keys[2]);
+		this.adresaStanovanja = (String) values.get(keys[3]);
+		this.brTelefona = (String) values.get(keys[4]);
+		this.emailAdresa = (String) values.get(keys[5]);
+		this.brIndeksa = (String) values.get(keys[6]);
+		this.datumUpisa = (LocalDate) values.get(keys[7]);
+		this.trenutnaGodStudija = (Integer) values.get(keys[8]);
+		this.status = (Status) values.get(keys[9]);
+		this.prosecnaOcena = (Double) values.get(keys[10]);
 		this.predmeti = new ArrayList<Predmet>();
 	}
 

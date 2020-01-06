@@ -197,18 +197,18 @@ public class Database implements Serializable {
 		predmet.setProfesor(null);
 		profesor.getPredmeti().remove(predmetIndex);
 	}
-	
+
 	public void ukloniProfesoraSaPredmeta(int predmetIndex) {
 		Predmet predmet = this.predmeti.get(predmetIndex);
 		predmet.getProfesor().getPredmeti().remove(predmet);
 		predmet.setProfesor(null);
 	}
-	
+
 	public int indeksProfesoraNaPredmetu(int indeksPredmeta) {
 		Predmet predmet = this.predmeti.get(indeksPredmeta);
 		if (predmet.getProfesor() == null)
 			return -1;
-		else 
+		else
 			return this.profesori.indexOf(predmet.getProfesor());
 	}
 
@@ -224,7 +224,7 @@ public class Database implements Serializable {
 	public void updatePredmet(int index, Map<String, Object> values) {
 		predmeti.get(index).set(values);
 	}
-	
+
 	public void izmeniProfesoraNaPredmetu(int profesorIndex, int predmetIndex) {
 		Predmet predmet = predmeti.get(predmetIndex);
 		Profesor profesor = profesori.get(profesorIndex);
@@ -233,6 +233,15 @@ public class Database implements Serializable {
 		}
 		predmet.setProfesor(profesor);
 		profesor.addPredmet(predmet);
+	}
+
+	public boolean addStudent(Map<String, Object> values) {
+		for (String key : Student.keys) {
+			if (!values.containsKey(key))
+				return false;
+		}
+		studenti.add(new Student(values));
+		return true;
 	}
 
 }
