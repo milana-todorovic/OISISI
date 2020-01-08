@@ -45,6 +45,14 @@ public class StudentiController {
 		}
 	}
 
+	public void updateStudent(Map<String, Object> values) {
+		int index = MainFrame.getInstance().getSelectedRow();
+		Database.getInstance().updateStudent(index, values);
+		MainFrame.getInstance().cancelSearch();
+		MainFrame.getInstance().getTableModel().fireTableDataChanged();
+		MainFrame.getInstance().setSelectedRow(index);
+	}
+
 	public void startSearch(String searchParam) {
 		String[] splits = searchParam.split(";");
 		ArrayList<RowFilter<StudentiTableModel, Integer>> filters = new ArrayList<RowFilter<StudentiTableModel, Integer>>();
@@ -61,6 +69,10 @@ public class StudentiController {
 		TableRowSorter<StudentiTableModel> sorter = ((TableRowSorter<StudentiTableModel>) MainFrame.getInstance()
 				.getRowSorter());
 		sorter.setRowFilter(filter);
+	}
+
+	public Student findByInd(String brIndeksa) {
+		return Database.getInstance().findStudentByInd(brIndeksa);
 	}
 
 }

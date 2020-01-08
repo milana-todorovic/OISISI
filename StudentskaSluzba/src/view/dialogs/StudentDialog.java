@@ -11,6 +11,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.time.LocalDate;
 import java.util.HashMap;
 import javax.swing.BorderFactory;
@@ -75,7 +77,11 @@ public class StudentDialog extends JDialog {
 	private JComboBox<String> godina;
 	private JRadioButton budzetRB;
 	private JRadioButton samofinansiranjeRB;
+	private ErrorLabel godinaWarning;
 	private JButton dodaj;
+	private JButton izmeni;
+
+	private Student currentlyEditing;
 
 	public StudentDialog(JFrame parent) {
 		super(parent, "", true);
@@ -92,8 +98,6 @@ public class StudentDialog extends JDialog {
 		content.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 		this.add(content, BorderLayout.CENTER);
 
-		String[] godina = { "I (prva)", "II (druga)", "III (tre\u0107a)", "IV (\u010Detvrta)" };
-
 		this.ime = new JTextField();
 		this.imeError = new ErrorLabel(this.getBackground(), Color.RED, "reci razdvojene razmacima ili crticom");
 		this.prezime = new JTextField();
@@ -104,7 +108,7 @@ public class StudentDialog extends JDialog {
 		this.adresaError = new ErrorLabel(this.getBackground(), Color.RED,
 				"reci ili brojevi razdvojeni razmacima ili crticom");
 		this.brojTel = new JTextField();
-		this.brojTelError = new ErrorLabel(this.getBackground(), Color.RED, "realan broj izmedju 9 i 20");
+		this.brojTelError = new ErrorLabel(this.getBackground(), Color.RED, "broj cifara izmedju 9 i 20");
 		this.brojInd = new JTextField();
 		this.brojIndError = new ErrorLabel(this.getBackground(), Color.RED,
 				"oznaka smera razdvojena brojem upisa pa crticom pa godinom upisa");
@@ -112,14 +116,15 @@ public class StudentDialog extends JDialog {
 		this.emailAdresaError = new ErrorLabel(this.getBackground(), Color.RED,
 				"slova i brojevi bez razmaka,moguc separator _ ili tacka,@domen");
 		this.prosek = new JTextField();
-		this.prosekError = new ErrorLabel(this.getBackground(), Color.RED, "cifre razdvojene . ");
+		this.prosekError = new ErrorLabel(this.getBackground(), Color.RED, "realan broj od 6 do 10");
 		this.datumUpisa = new JTextField();
 		this.datumUpisaError = new ErrorLabel(this.getBackground(), Color.RED, "yyyy-MM-dd");
-		this.godina = new JComboBox<String>(godina);
 		this.budzetRB = new JRadioButton("Bu\u01C6et");
 		this.samofinansiranjeRB = new JRadioButton("Samofinansiranje");
 		budzetRB.setSelected(true);
+
 		this.validacija();
+		this.makeGodinaComboBox();
 
 		ButtonGroup group = new ButtonGroup();
 		group.add(budzetRB);
@@ -192,6 +197,8 @@ public class StudentDialog extends JDialog {
 				GridBagConstraints.HORIZONTAL, new Insets(0, 10, 0, 10), 0, 0));
 		content.add(this.godina, new GridBagConstraints(1, 9, 2, 1, 100, 100, GridBagConstraints.WEST,
 				GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
+		content.add(this.godinaWarning, new GridBagConstraints(3, 9, 1, 1, 0, 0, GridBagConstraints.WEST,
+				GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
 
 		content.add(this.budzetRB, new GridBagConstraints(0, 10, 1, 1, 0, 100, GridBagConstraints.WEST,
 				GridBagConstraints.HORIZONTAL, new Insets(0, 10, 0, 10), 0, 0));
@@ -203,12 +210,35 @@ public class StudentDialog extends JDialog {
 		buttons.setLayout(new BoxLayout(buttons, BoxLayout.X_AXIS));
 
 		buttons.add(makeConfirmButton());
+		buttons.add(makeEditButton());
 		buttons.add(Box.createHorizontalStrut(15));
 		buttons.add(makeReturnButton());
 
 		content.add(buttons, new GridBagConstraints(0, 12, 3, 1, 100, 100, GridBagConstraints.EAST,
 				GridBagConstraints.VERTICAL, new Insets(15, 10, 0, 10), 0, 0));
 
+	}
+
+	private void makeGodinaComboBox() {
+
+		this.godinaWarning = new ErrorLabel(this.getBackground(), Color.ORANGE);
+		String[] godine = { "I (prva)", "II (druga)", "III (treca)", "IV (cetvrta)" };
+		this.godina = new JComboBox<String>(godine);
+		this.godina.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					if (currentlyEditing != null && !currentlyEditing.getPredmeti().isEmpty()
+							&& currentlyEditing.getTrenutnaGodStudija() != (godina.getSelectedIndex() + 1)) {
+						godinaWarning.invalid("Ovom izmenom se gube veze sa predmetima "
+								+ currentlyEditing.getTrenutnaGodStudija() + ". godine koje ovaj student slusa.");
+					} else
+						godinaWarning.valid();
+				}
+			}
+
+		});
 	}
 
 	private JButton makeConfirmButton() {
@@ -221,14 +251,14 @@ public class StudentDialog extends JDialog {
 				values.put(Student.keys[0], ime.getText().trim());
 				values.put(Student.keys[1], prezime.getText().trim());
 
-				values.put(Student.keys[2], LocalDate.parse(datumRodjenja.getText()));
+				values.put(Student.keys[2], LocalDate.parse(datumRodjenja.getText().trim()));
 
 				values.put(Student.keys[3], adresa.getText().trim());
 				values.put(Student.keys[4], brojTel.getText().trim());
 				values.put(Student.keys[5], emailAdresa.getText().trim());
-				values.put(Student.keys[6], brojInd.getText().trim());
+				values.put(Student.keys[6], brojInd.getText().trim().toUpperCase());
 
-				values.put(Student.keys[7], LocalDate.parse(datumUpisa.getText()));
+				values.put(Student.keys[7], LocalDate.parse(datumUpisa.getText().trim()));
 
 				values.put(Student.keys[8], godina.getSelectedIndex() + 1);
 				if (budzetRB.isSelected()) {
@@ -236,7 +266,7 @@ public class StudentDialog extends JDialog {
 				} else if (samofinansiranjeRB.isSelected()) {
 					values.put(Student.keys[9], Status.S);
 				}
-				values.put(Student.keys[10], Double.parseDouble(prosek.getText()));
+				values.put(Student.keys[10], Double.parseDouble(prosek.getText().trim()));
 
 				if (MainController.getInstance().getStudentiController().addStudent(values)) {
 					dispose();
@@ -249,6 +279,43 @@ public class StudentDialog extends JDialog {
 
 		return dodaj;
 
+	}
+
+	private JButton makeEditButton() {
+		izmeni = new JButton("Izmeni");
+
+		izmeni.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				HashMap<String, Object> values = new HashMap<String, Object>();
+				values.put(Student.keys[0], ime.getText().trim());
+				values.put(Student.keys[1], prezime.getText().trim());
+
+				values.put(Student.keys[2], LocalDate.parse(datumRodjenja.getText().trim()));
+
+				values.put(Student.keys[3], adresa.getText().trim());
+				values.put(Student.keys[4], brojTel.getText().trim());
+				values.put(Student.keys[5], emailAdresa.getText().trim());
+				values.put(Student.keys[6], brojInd.getText().trim());
+
+				values.put(Student.keys[7], LocalDate.parse(datumUpisa.getText().trim()));
+
+				values.put(Student.keys[8], godina.getSelectedIndex() + 1);
+				if (budzetRB.isSelected()) {
+					values.put(Student.keys[9], Status.B);
+				} else if (samofinansiranjeRB.isSelected()) {
+					values.put(Student.keys[9], Status.S);
+				}
+				values.put(Student.keys[10], Double.parseDouble(prosek.getText().trim()));
+
+				MainController.getInstance().getStudentiController().updateStudent(values);
+				dispose();
+
+			}
+		});
+
+		return izmeni;
 	}
 
 	private JButton makeReturnButton() {
@@ -289,10 +356,12 @@ public class StudentDialog extends JDialog {
 				if (!valid) {
 					validity = validity & ~(IME_VALID);
 					dodaj.setEnabled(false);
+					izmeni.setEnabled(false);
 				} else {
 					validity = validity | IME_VALID;
 					if (validity == ALL_VALID) {
 						dodaj.setEnabled(true);
+						izmeni.setEnabled(true);
 					}
 				}
 
@@ -320,10 +389,12 @@ public class StudentDialog extends JDialog {
 				if (!valid) {
 					validity = validity & ~(PREZIME_VALID);
 					dodaj.setEnabled(false);
+					izmeni.setEnabled(false);
 				} else {
 					validity = validity | PREZIME_VALID;
 					if (validity == ALL_VALID) {
 						dodaj.setEnabled(true);
+						izmeni.setEnabled(true);
 					}
 				}
 
@@ -350,10 +421,12 @@ public class StudentDialog extends JDialog {
 				if (!valid) {
 					validity = validity & ~(ADRESA_VALID);
 					dodaj.setEnabled(false);
+					izmeni.setEnabled(false);
 				} else {
 					validity = validity | ADRESA_VALID;
 					if (validity == ALL_VALID) {
 						dodaj.setEnabled(true);
+						izmeni.setEnabled(true);
 					}
 				}
 
@@ -374,16 +447,24 @@ public class StudentDialog extends JDialog {
 					brojIndError.invalidFormat();
 					valid = false;
 				} else {
-					brojIndError.valid();
-					valid = true;
+					Student found = MainController.getInstance().getStudentiController().findByInd(s1.toUpperCase());
+					if (found == currentlyEditing || found == null) {
+						brojIndError.valid();
+						valid = true;
+					} else {
+						brojIndError.invalidUnique();
+						valid = false;
+					}
 				}
 				if (!valid) {
 					validity = validity & ~(BROJIND_VALID);
 					dodaj.setEnabled(false);
+					izmeni.setEnabled(false);
 				} else {
 					validity = validity | BROJIND_VALID;
 					if (validity == ALL_VALID) {
 						dodaj.setEnabled(true);
+						izmeni.setEnabled(true);
 					}
 				}
 
@@ -410,10 +491,12 @@ public class StudentDialog extends JDialog {
 				if (!valid) {
 					validity = validity & ~(BROJTEL_VALID);
 					dodaj.setEnabled(false);
+					izmeni.setEnabled(false);
 				} else {
 					validity = validity | BROJTEL_VALID;
 					if (validity == ALL_VALID) {
 						dodaj.setEnabled(true);
+						izmeni.setEnabled(true);
 					}
 				}
 
@@ -440,10 +523,12 @@ public class StudentDialog extends JDialog {
 				if (!valid) {
 					validity = validity & ~(EMAIL_VALID);
 					dodaj.setEnabled(false);
+					izmeni.setEnabled(false);
 				} else {
 					validity = validity | EMAIL_VALID;
 					if (validity == ALL_VALID) {
 						dodaj.setEnabled(true);
+						izmeni.setEnabled(true);
 					}
 				}
 
@@ -470,10 +555,12 @@ public class StudentDialog extends JDialog {
 				if (!valid) {
 					validity = validity & ~(PROSEK_VALID);
 					dodaj.setEnabled(false);
+					izmeni.setEnabled(false);
 				} else {
 					validity = validity | PROSEK_VALID;
 					if (validity == ALL_VALID) {
 						dodaj.setEnabled(true);
+						izmeni.setEnabled(true);
 					}
 				}
 
@@ -501,10 +588,12 @@ public class StudentDialog extends JDialog {
 				if (!valid) {
 					validity = validity & ~(DATRODJ_VALID);
 					dodaj.setEnabled(false);
+					izmeni.setEnabled(false);
 				} else {
 					validity = validity | DATRODJ_VALID;
 					if (validity == ALL_VALID) {
 						dodaj.setEnabled(true);
+						izmeni.setEnabled(true);
 					}
 				}
 
@@ -531,10 +620,12 @@ public class StudentDialog extends JDialog {
 				if (!valid) {
 					validity = validity & ~(DATUPIS_VALID);
 					dodaj.setEnabled(false);
+					izmeni.setEnabled(false);
 				} else {
 					validity = validity | DATUPIS_VALID;
 					if (validity == ALL_VALID) {
 						dodaj.setEnabled(true);
+						izmeni.setEnabled(true);
 					}
 				}
 
@@ -543,10 +634,45 @@ public class StudentDialog extends JDialog {
 
 	}
 
+	public void editMode(Student student) {
+		this.setTitle("Izmena studenta");
+
+		this.validity = ALL_VALID;
+
+		this.currentlyEditing = student;
+
+		ime.setText(student.getIme());
+		prezime.setText(student.getPrezime());
+		adresa.setText(student.getAdresaStanovanja());
+		emailAdresa.setText(student.getEmailAdresa());
+		brojTel.setText(student.getBrTelefona());
+		brojInd.setText(student.getBrIndeksa());
+		prosek.setText(student.getProsecnaOcena().toString());
+		datumRodjenja.setText(student.getDatumRodjenja().toString());
+		datumUpisa.setText(student.getDatumUpisa().toString());
+
+		godina.setSelectedIndex(student.getTrenutnaGodStudija() - 1);
+		if (student.getStatus() == Status.B) {
+			budzetRB.setSelected(true);
+		} else if (student.getStatus() == Status.S) {
+			samofinansiranjeRB.setSelected(true);
+		}
+
+		dodaj.setVisible(false);
+		izmeni.setEnabled(true);
+		izmeni.setVisible(true);
+
+		Dimension d = parent.getSize();
+		this.setSize(d.width / 3, (int) (d.height * 0.75));
+		this.setLocationRelativeTo(parent);
+		this.setVisible(true);
+	}
+
 	public void addMode() {
 		this.setTitle("Dodavanje studenta");
 
 		this.validity = 0b000000000;
+		this.currentlyEditing = null;
 
 		ime.setText("");
 		imeError.valid();
@@ -569,10 +695,12 @@ public class StudentDialog extends JDialog {
 		godina.setSelectedIndex(0);
 		budzetRB.setSelected(true);
 
+		izmeni.setVisible(false);
 		dodaj.setEnabled(false);
+		dodaj.setVisible(true);
 
 		Dimension d = parent.getSize();
-		this.setSize(d.width / 2, (int) (d.height * 0.75));
+		this.setSize(d.width / 3, (int) (d.height * 0.75));
 		this.setLocationRelativeTo(parent);
 		this.setVisible(true);
 

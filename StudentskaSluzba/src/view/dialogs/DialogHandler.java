@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import model.Predmet;
+import model.Student;
 import view.Tabs;
 import view.dialogs.dodavanjeProfesoraNaPredmet.ProfesorPredmetDialog;
 
@@ -68,6 +69,10 @@ public class DialogHandler {
 
 	public void launchProfesorNaPredmetuEdit(int index) {
 		profesorPredmetDialog.show(index);
+	}
+
+	public void launchStudentiEdit(Student student) {
+		studentDialog.editMode(student);
 	}
 
 }

@@ -257,6 +257,27 @@ public class Student implements Serializable {
 		this.predmeti.add(predmet);
 	}
 
+	/**
+	 * Postavlja polje na vrijednost iz parametra values, ako values sadrzi kljuc
+	 * koji odgovara tom polju.
+	 * 
+	 * @param values
+	 */
+	public void set(Map<String, Object> values) {
+		this.ime = (values.containsKey(keys[0])) ? (String) values.get(keys[0]) : ime;
+		this.prezime = (values.containsKey(keys[1])) ? (String) values.get(keys[1]) : prezime;
+		this.datumRodjenja = (values.containsKey(keys[2])) ? (LocalDate) values.get(keys[2]) : datumRodjenja;
+		this.adresaStanovanja = (values.containsKey(keys[3])) ? (String) values.get(keys[3]) : adresaStanovanja;
+		this.brTelefona = (values.containsKey(keys[4])) ? (String) values.get(keys[4]) : brTelefona;
+		this.emailAdresa = (values.containsKey(keys[5])) ? (String) values.get(keys[5]) : emailAdresa;
+		this.brIndeksa = (values.containsKey(keys[6])) ? (String) values.get(keys[6]) : brIndeksa;
+		this.datumUpisa = (values.containsKey(keys[7])) ? (LocalDate) values.get(keys[7]) : datumUpisa;
+		this.trenutnaGodStudija = (values.containsKey(keys[8])) ? (Integer) values.get(keys[8]): trenutnaGodStudija;
+		this.status = (values.containsKey(keys[9])) ? (Status) values.get(keys[9]) : status;
+		this.prosecnaOcena = (values.containsKey(keys[10])) ? (Double) values.get(keys[10]) : prosecnaOcena;
+		this.predmeti = new ArrayList<Predmet>();
+	}
+
 	@Override
 	public String toString() {
 		return brIndeksa + " " + prezime + " " + ime;

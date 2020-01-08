@@ -117,7 +117,7 @@ public class MainController {
 			// TODO
 			break;
 		case STUDENTI:
-			// TODO
+			MainFrame.getInstance().getDialogHandler().launchStudentiEdit(studentiController.getStudent(selected));
 			break;
 		default:
 			break;

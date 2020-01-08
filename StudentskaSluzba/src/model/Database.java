@@ -244,4 +244,19 @@ public class Database implements Serializable {
 		return true;
 	}
 
+	public void updateStudent(int index, Map<String, Object> values) {
+		studenti.get(index).set(values);
+	}
+
+	public Student findStudentByInd(String brIndeksa) {
+		int index = -1;
+		for (int i = 0; i < studenti.size(); i++) {
+			if (studenti.get(i).getBrIndeksa().toUpperCase().equals(brIndeksa)) {
+				index = i;
+				break;
+			}
+		}
+		return (index == -1) ? null : studenti.get(index);
+	}
+
 }
