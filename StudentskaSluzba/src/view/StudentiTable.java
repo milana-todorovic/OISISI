@@ -29,15 +29,15 @@ public class StudentiTable extends JTable {
 
 			@Override
 			public int compare(String o1, String o2) {
-				String oznakaSmera1 = o1.substring(0, 2);
-				String oznakaSmera2 = o2.substring(0, 2);
+				String oznakaSmera1 = o1.substring(0, 3);
+				String oznakaSmera2 = o2.substring(0, 3);
 
 				if (oznakaSmera1.equals(oznakaSmera2)) {
-					String o1godBroj = o1.substring(2);
-					String o2godBroj = o2.substring(2);
+					String o1godBroj = o1.substring(3);
+					String o2godBroj = o2.substring(3);
 
-					String[] splits1 = o1godBroj.split("-");
-					String[] splits2 = o2godBroj.split("-");
+					String[] splits1 = o1godBroj.split("/");
+					String[] splits2 = o2godBroj.split("/");
 
 					if (splits1[1].equals(splits2[1])) {
 						if (Integer.parseInt(splits1[0]) < Integer.parseInt(splits2[0])) {

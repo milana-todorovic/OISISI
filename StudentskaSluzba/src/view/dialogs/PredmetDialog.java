@@ -180,7 +180,7 @@ public class PredmetDialog extends JDialog {
 
 		this.naziv = new JTextField();
 		this.nazivError = new ErrorLabel(this.getBackground(), Color.RED,
-				"reci ili brojevi razdvojeni razmacima ili crticom");
+				"re\u010di ili brojevi razdvojeni razmacima ili crticom");
 		this.naziv.getDocument().addDocumentListener(new ValidityListener() {
 
 			public void checkValidity(String s) {
@@ -256,7 +256,7 @@ public class PredmetDialog extends JDialog {
 				values.put(Predmet.keys[0], sifra.getText().trim().toUpperCase());
 				values.put(Predmet.keys[1], naziv.getText().trim());
 				values.put(Predmet.keys[2], godina.getSelectedIndex() + 1);
-				values.put(Predmet.keys[3], semestar.getSelectedIndex() + 1);
+				values.put(Predmet.keys[3], godina.getSelectedIndex() * 2 + semestar.getSelectedIndex() + 1);
 
 				if (MainController.getInstance().getPredmetiController().addPredmet(values)) {
 					dispose();
@@ -283,7 +283,7 @@ public class PredmetDialog extends JDialog {
 				values.put(Predmet.keys[0], sifra.getText().trim().toUpperCase());
 				values.put(Predmet.keys[1], naziv.getText().trim());
 				values.put(Predmet.keys[2], godina.getSelectedIndex() + 1);
-				values.put(Predmet.keys[3], semestar.getSelectedIndex() + 1);
+				values.put(Predmet.keys[3], godina.getSelectedIndex() * 2 + semestar.getSelectedIndex() + 1);
 
 				MainController.getInstance().getPredmetiController().updatePredmet(values);
 				dispose();

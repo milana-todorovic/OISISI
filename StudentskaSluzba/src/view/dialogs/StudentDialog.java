@@ -99,24 +99,25 @@ public class StudentDialog extends JDialog {
 		this.add(content, BorderLayout.CENTER);
 
 		this.ime = new JTextField();
-		this.imeError = new ErrorLabel(this.getBackground(), Color.RED, "reci razdvojene razmacima ili crticom");
+		this.imeError = new ErrorLabel(this.getBackground(), Color.RED, "re\u010di razdvojene razmacima ili crticom");
 		this.prezime = new JTextField();
-		this.prezimeError = new ErrorLabel(this.getBackground(), Color.RED, "reci razdvojene razmacima ili crticom");
+		this.prezimeError = new ErrorLabel(this.getBackground(), Color.RED,
+				"re\u010di razdvojene razmacima ili crticom");
 		this.datumRodjenja = new JTextField();
 		this.datumRodjenjaError = new ErrorLabel(this.getBackground(), Color.RED, "yyyy-MM-dd");
 		this.adresa = new JTextField();
 		this.adresaError = new ErrorLabel(this.getBackground(), Color.RED,
-				"reci ili brojevi razdvojeni razmacima ili crticom");
+				"re\u010di ili brojevi razdvojeni razmacima, crticom, zarezom, ili ta\u010dkom");
 		this.brojTel = new JTextField();
-		this.brojTelError = new ErrorLabel(this.getBackground(), Color.RED, "broj cifara izmedju 9 i 20");
+		this.brojTelError = new ErrorLabel(this.getBackground(), Color.RED, "xxx/xxx-xxx");
 		this.brojInd = new JTextField();
 		this.brojIndError = new ErrorLabel(this.getBackground(), Color.RED,
-				"oznaka smera razdvojena brojem upisa pa crticom pa godinom upisa");
+				"[oznaka smera]\" \"[broj upisa]\"/\"[godina upisa]");
 		this.emailAdresa = new JTextField();
 		this.emailAdresaError = new ErrorLabel(this.getBackground(), Color.RED,
-				"slova i brojevi bez razmaka,moguc separator _ ili tacka,@domen");
+				"[slova, brojevi, donja crta, ta\u010dka]\"@\"domen");
 		this.prosek = new JTextField();
-		this.prosekError = new ErrorLabel(this.getBackground(), Color.RED, "realan broj od 6 do 10");
+		this.prosekError = new ErrorLabel(this.getBackground(), Color.RED, "realan broj izme\u0111u 6 i 10");
 		this.datumUpisa = new JTextField();
 		this.datumUpisaError = new ErrorLabel(this.getBackground(), Color.RED, "yyyy-MM-dd");
 		this.budzetRB = new JRadioButton("Bu\u01C6et");
@@ -408,7 +409,7 @@ public class StudentDialog extends JDialog {
 				if (s1.isEmpty()) {
 					adresaError.invalidNotNull();
 					valid = false;
-				} else if (!Validator.isAlphanumericWithSeparators(s1)) {
+				} else if (!Validator.isAlphanumericWithCommaDashDotSpace(s1)) {
 					adresaError.invalidCharacter();
 					valid = false;
 				} else if (!Validator.isAdresa(s1)) {
@@ -440,7 +441,7 @@ public class StudentDialog extends JDialog {
 				if (s1.isEmpty()) {
 					brojIndError.invalidNotNull();
 					valid = false;
-				} else if (!Validator.isAlphanumericWithDash(s1)) {
+				} else if (!Validator.isAlphanumericWithSpaceSlash(s1)) {
 					brojIndError.invalidCharacter();
 					valid = false;
 				} else if (!Validator.isBrojIndeksa(s1)) {
@@ -478,7 +479,7 @@ public class StudentDialog extends JDialog {
 				if (s1.isEmpty()) {
 					brojTelError.invalidNotNull();
 					valid = false;
-				} else if (!Validator.isNumeric(s1)) {
+				} else if (!Validator.isNumericWithSlashDash(s1)) {
 					brojTelError.invalidCharacter();
 					valid = false;
 				} else if (!Validator.isBrojTel(s1)) {
