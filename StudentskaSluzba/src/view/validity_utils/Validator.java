@@ -84,7 +84,7 @@ public class Validator {
 	}
 
 	public static Boolean isBrojTel(String s) {
-		return s.matches("[0-9]{3}/[0-9]{3}-[0-9]{3}");
+		return s.matches("[0-9]{3}/[0-9]{3,4}-[0-9]{3}");
 	}
 
 	public static Boolean isProsek(String s) {

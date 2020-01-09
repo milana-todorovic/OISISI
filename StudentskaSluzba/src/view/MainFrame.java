@@ -7,8 +7,11 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -53,7 +56,20 @@ public class MainFrame extends JFrame {
 		Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setSize((int) (0.75 * screenDimension.getWidth()), (int) (0.75 * screenDimension.getHeight()));
 		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				int choice = JOptionPane.showConfirmDialog(MainFrame.getInstance(),
+						"Da li ste sigurni da \u017Eelite da zatvorite aplikaciju?", "Zatvaranje aplikacije",
+						JOptionPane.YES_NO_OPTION);
+				if (choice == JOptionPane.YES_OPTION) {
+					// TODO serijalizuj bazu
+					setDefaultCloseOperation(EXIT_ON_CLOSE);
+				}
+			}
+		});
 
 		this.setAesthetic();
 

@@ -93,14 +93,15 @@ public class ProfesorDialog extends JDialog {
 		this.ime = new JTextField();
 		this.imeError = new ErrorLabel(this.getBackground(), Color.RED, "re\u010di razdvojene razmacima ili crticom");
 		this.prezime = new JTextField();
-		this.prezimeError = new ErrorLabel(this.getBackground(), Color.RED, "re\u010di razdvojene razmacima ili crticom");
+		this.prezimeError = new ErrorLabel(this.getBackground(), Color.RED,
+				"re\u010di razdvojene razmacima ili crticom");
 		this.datumRodjenja = new JTextField();
 		this.datumRodjenjaError = new ErrorLabel(this.getBackground(), Color.RED, "yyyy-MM-dd");
 		this.adresa = new JTextField();
 		this.adresaError = new ErrorLabel(this.getBackground(), Color.RED,
 				"re\u010di ili brojevi razdvojeni razmacima, crticom, zarezom, ili ta\u010dkom");
 		this.brojTel = new JTextField();
-		this.brojTelError = new ErrorLabel(this.getBackground(), Color.RED, "xxx/xxx-xxx");
+		this.brojTelError = new ErrorLabel(this.getBackground(), Color.RED, "xxx/xxx-xxx, xxx/xxxx-xxx");
 
 		this.emailAdresa = new JTextField();
 		this.emailAdresaError = new ErrorLabel(this.getBackground(), Color.RED,

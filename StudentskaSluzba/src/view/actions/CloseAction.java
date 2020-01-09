@@ -5,10 +5,13 @@ package view.actions;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
+
+import view.MainFrame;
 
 /**
  * @author Ana Perisic ra1-2017
@@ -27,8 +30,7 @@ public class CloseAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO dodati kada bude implementirana serijalizacija
-
+		MainFrame.getInstance().dispatchEvent(new WindowEvent(MainFrame.getInstance(), WindowEvent.WINDOW_CLOSING));
 	}
 
 }

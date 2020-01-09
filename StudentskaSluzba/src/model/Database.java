@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import serialization_util.Serializator;
+
 /**
  * @author Milana Todorovic ra3-2017
  * @author Ana Perisic ra1-2017
@@ -29,9 +31,12 @@ public class Database implements Serializable {
 	 */
 	public static Database getInstance() {
 		if (instance == null)
-			// TODO dodati provjeru da li vec postoji serijalizovan objekat i
-			// deserijalizaciju
-			instance = new Database();
+			try {
+				instance = (Database) Serializator
+						.deserialize("resource" + System.getProperty("file.separator") + "database.txt");
+			} catch (Exception e) {
+				instance = new Database();
+			}
 
 		return instance;
 	}
@@ -192,8 +197,8 @@ public class Database implements Serializable {
 		studenti.add(new Student("Marko", "Petrovic", LocalDate.of(1998, 3, 16), "Jovana Ducica 16", "066/437-227",
 				"markopetrovic@uns.ac.rs", "ra 16/2017", LocalDate.of(2017, 7, 3), 1, Student.Status.B, 9.06));
 		studenti.add(new Student("Vasilije", "Butulija", LocalDate.of(1997, 4, 2), "Salvadora Aljendea 10",
-				"066/437-227", "vasilijebutulija@uns.ac.rs", "ra 140/2016", LocalDate.of(2016, 7, 5), 1, Student.Status.S,
-				7.55));
+				"066/437-227", "vasilijebutulija@uns.ac.rs", "ra 140/2016", LocalDate.of(2016, 7, 5), 1,
+				Student.Status.S, 7.55));
 		studenti.add(new Student("Viktorija", "Radojcic", LocalDate.of(1998, 3, 18), "Mihajla Pupina 21", "066/437-227",
 				"vikiradojcic@uns.ac.rs", "ra 12/2017", LocalDate.of(2017, 7, 1), 1, Student.Status.B, 10.00));
 		studenti.add(new Student("Iva", "Aleksic", LocalDate.of(1995, 7, 24), "Milutina Milankovica 18", "066/437-227",

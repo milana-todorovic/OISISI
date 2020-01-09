@@ -109,7 +109,7 @@ public class StudentDialog extends JDialog {
 		this.adresaError = new ErrorLabel(this.getBackground(), Color.RED,
 				"re\u010di ili brojevi razdvojeni razmacima, crticom, zarezom, ili ta\u010dkom");
 		this.brojTel = new JTextField();
-		this.brojTelError = new ErrorLabel(this.getBackground(), Color.RED, "xxx/xxx-xxx");
+		this.brojTelError = new ErrorLabel(this.getBackground(), Color.RED, "xxx/xxx-xxx, xxx/xxxx-xxx");
 		this.brojInd = new JTextField();
 		this.brojIndError = new ErrorLabel(this.getBackground(), Color.RED,
 				"[oznaka smera]\" \"[broj upisa]\"/\"[godina upisa]");
