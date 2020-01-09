@@ -168,5 +168,9 @@ public class MainController {
 	public void cancelSearch() {
 		MainFrame.getInstance().getRowSorter().setRowFilter(null);
 	}
+	
+	public boolean saveDatabase() {
+		return Database.getInstance().saveState();
+	}
 
 }

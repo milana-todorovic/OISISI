@@ -18,6 +18,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableRowSorter;
 
+import controller.MainController;
 import view.actions.Actions;
 import view.dialogs.DialogHandler;
 
@@ -61,11 +62,13 @@ public class MainFrame extends JFrame {
 		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				int choice = JOptionPane.showConfirmDialog(MainFrame.getInstance(),
+				int choice = JOptionPane.showConfirmDialog(e.getComponent(),
 						"Da li ste sigurni da \u017Eelite da zatvorite aplikaciju?", "Zatvaranje aplikacije",
 						JOptionPane.YES_NO_OPTION);
 				if (choice == JOptionPane.YES_OPTION) {
-					// TODO serijalizuj bazu
+					if (!MainController.getInstance().saveDatabase())
+						JOptionPane.showMessageDialog(e.getComponent(), "Doslo je do greske pri cuvanju podataka!",
+								"Zatvaranje aplikacije", JOptionPane.INFORMATION_MESSAGE);
 					setDefaultCloseOperation(EXIT_ON_CLOSE);
 				}
 			}

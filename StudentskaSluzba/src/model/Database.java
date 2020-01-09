@@ -20,6 +20,7 @@ public class Database implements Serializable {
 
 	private static final long serialVersionUID = 1857113152292828485L;
 
+	private static String databaseSaveFile = "resource" + System.getProperty("file.separator") + "database.txt";
 	private static Database instance;
 
 	private List<Profesor> profesori;
@@ -32,8 +33,7 @@ public class Database implements Serializable {
 	public static Database getInstance() {
 		if (instance == null)
 			try {
-				instance = (Database) Serializator
-						.deserialize("resource" + System.getProperty("file.separator") + "database.txt");
+				instance = (Database) Serializator.deserialize(databaseSaveFile);
 			} catch (Exception e) {
 				instance = new Database();
 			}
@@ -48,6 +48,15 @@ public class Database implements Serializable {
 		this.predmetiMock();
 		this.profesoriMock();
 		this.studentiMock();
+	}
+
+	public boolean saveState() {
+		try {
+			Serializator.serialize(databaseSaveFile, this);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	/**
@@ -154,15 +163,15 @@ public class Database implements Serializable {
 	}
 
 	private void predmetiMock() {
-		predmeti.add(new Predmet("E227A", "LPRS 1", 2, 1));
+		predmeti.add(new Predmet("E227A", "LPRS 1", 2, 3));
 		predmeti.add(new Predmet("E216", "OET", 1, 2));
-		predmeti.add(new Predmet("E225", "Operativni sistemi", 2, 2));
+		predmeti.add(new Predmet("E225", "Operativni sistemi", 2, 4));
 		predmeti.add(new Predmet("E217", "Arhitektura racunara", 1, 2));
 		predmeti.add(new Predmet("E214", "PJiSP", 1, 1));
 		predmeti.add(new Predmet("EJ1Z", "Engleski jezik - osnovni", 1, 1));
 		predmeti.add(new Predmet("E212", "Matematicka analiza 1", 1, 1));
 		predmeti.add(new Predmet("E213A", "Algebra", 1, 1));
-		predmeti.add(new Predmet("E223A", "Objektno programiranje", 2, 1));
+		predmeti.add(new Predmet("E223A", "Objektno programiranje", 2, 3));
 	}
 
 	private void profesoriMock() {
@@ -175,7 +184,7 @@ public class Database implements Serializable {
 		profesori.add(new Profesor("Marko", "Maksimovic", LocalDate.of(1988, 2, 29), "Kisacka 7", "066/437-227",
 				"marko@uns.ac.rs", "Trg Dositeja Obradovica 6", "669555011", "titula", "zvanje"));
 		profesori.add(new Profesor("Milica", "Todorovic", LocalDate.of(1988, 2, 29), "Marka Miljanova 7", "066/437-227",
-				"milicatodorovic@uns.ac.rs", "Trg Dositeja Obradovica 6", "066/437-227", "titula", "zvanje"));
+				"milicatodorovic@uns.ac.rs", "Trg Dositeja Obradovica 6", "666666666", "titula", "zvanje"));
 		ArrayList<Predmet> pred1 = new ArrayList<Predmet>();
 		pred1.add(this.predmeti.get(1));
 		this.profesori.get(0).setPredmeti(pred1);
