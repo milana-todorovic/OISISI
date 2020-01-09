@@ -114,7 +114,7 @@ public class MainController {
 			MainFrame.getInstance().getDialogHandler().launchPredmetiEdit(predmetiController.getPredmet(selected));
 			break;
 		case PROFESORI:
-			// TODO
+			MainFrame.getInstance().getDialogHandler().launchProfesoriEdit(profesoriController.getProfesor(selected));
 			break;
 		case STUDENTI:
 			MainFrame.getInstance().getDialogHandler().launchStudentiEdit(studentiController.getStudent(selected));

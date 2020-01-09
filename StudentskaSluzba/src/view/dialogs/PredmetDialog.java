@@ -209,7 +209,7 @@ public class PredmetDialog extends JDialog {
 	}
 
 	private void makeGodinaComboBox() {
-		String[] godine = { "I (prva)", "II (druga)", "III (treca)", "IV (cetvrta)" };
+		String[] godine = { "I (prva)", "II (druga)", "III (tre\u0107a)", "IV (\u010Detvrta)" };
 		this.godina = new JComboBox<String>(godine);
 		this.godinaWarning = new ErrorLabel(this.getBackground(), Color.ORANGE);
 
@@ -221,7 +221,7 @@ public class PredmetDialog extends JDialog {
 					if (currentlyEditing != null && !currentlyEditing.getStudenti().isEmpty()
 							&& currentlyEditing.getGodina() != (godina.getSelectedIndex() + 1)) {
 						godinaWarning.invalid("Ovom izmenom se gube veze sa studentima " + currentlyEditing.getGodina()
-								+ ". godine koji trenutno slusaju predmet.");
+								+ ". godine koji trenutno slu\u0161aju predmet.");
 					} else
 						godinaWarning.valid();
 				}

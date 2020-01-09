@@ -259,4 +259,28 @@ public class Database implements Serializable {
 		return (index == -1) ? null : studenti.get(index);
 	}
 
+	public boolean addProfesor(Map<String, Object> values) {
+		for (String key : Profesor.keys) {
+			if (!values.containsKey(key))
+				return false;
+		}
+		profesori.add(new Profesor(values));
+		return true;
+	}
+
+	public Profesor findProfesorByLicna(String brLicneKarte) {
+		int index = -1;
+		for (int i = 0; i < profesori.size(); i++) {
+			if (profesori.get(i).getBrojLicneKarte().equals(brLicneKarte)) {
+				index = i;
+				break;
+			}
+		}
+		return (index == -1) ? null : profesori.get(index);
+	}
+
+	public void updateProfesor(int index, Map<String, Object> values) {
+		profesori.get(index).set(values);
+	}
+
 }
