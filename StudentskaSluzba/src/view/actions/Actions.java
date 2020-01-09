@@ -4,12 +4,14 @@
 package view.actions;
 
 /**
+ * Klasa koja cuva instance akcija koje dele traka sa alatima i traka sa
+ * menijima.
+ * 
  * @author Milana Todorovic ra3-2017
  *
  */
 public class Actions {
 
-	// Instance akcija koje koriste i toolbar i meni
 	private NewAction newAction;
 	private EditAction editAction;
 	private DeleteAction deleteAction;

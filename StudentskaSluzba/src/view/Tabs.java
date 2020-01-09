@@ -27,7 +27,7 @@ public class Tabs extends JTabbedPane {
 
 		/**
 		 * @param i - indeks taba
-		 * @return - logicka vrijednost taba na zadatom indeksu
+		 * @return - logicka vrednost taba na zadatom indeksu
 		 */
 		private static TabNames get(int i) {
 			switch (i) {
@@ -65,16 +65,25 @@ public class Tabs extends JTabbedPane {
 		return selected.getSelectedRow();
 	}
 
+	/**
+	 * @return model tabele u trenutno selektovanom tabu
+	 */
 	public AbstractTableModel getTableModel() {
 		Tab selected = (Tab) this.getSelectedComponent();
 		return selected.getModel();
 	}
-	
+
+	/**
+	 * @return sorter tabele u trenutno selektovanom tabu
+	 */
 	public TableRowSorter<?> getRowSorter() {
 		Tab selected = (Tab) this.getSelectedComponent();
 		return selected.getRowSorter();
 	}
 
+	/**
+	 * @param index - indeks reda u tabeli koji treba selektovati
+	 */
 	public void setSelectedRow(int index) {
 		((Tab) this.getSelectedComponent()).setSelectedRow(index);
 	}

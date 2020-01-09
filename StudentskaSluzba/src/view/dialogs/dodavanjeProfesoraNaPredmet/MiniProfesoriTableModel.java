@@ -9,6 +9,8 @@ import controller.MainController;
 import model.Profesor;
 
 /**
+ * Model tabele koja sadrzi String predstave profesora u bazi.
+ * 
  * @author Milana Todorovic ra3-2017
  *
  */
@@ -46,5 +48,5 @@ public class MiniProfesoriTableModel extends AbstractTableModel {
 		Profesor profesor = MainController.getInstance().getProfesoriController().getProfesor(rowIndex);
 		return profesor.toString();
 	}
-	
+
 }

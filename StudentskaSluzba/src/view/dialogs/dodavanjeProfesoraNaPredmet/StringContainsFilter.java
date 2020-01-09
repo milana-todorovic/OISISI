@@ -10,7 +10,7 @@ import javax.swing.RowFilter;
  *
  */
 public class StringContainsFilter extends RowFilter<MiniProfesoriTableModel, Integer> {
-	
+
 	private String s;
 
 	/**
@@ -25,6 +25,5 @@ public class StringContainsFilter extends RowFilter<MiniProfesoriTableModel, Int
 	public boolean include(Entry<? extends MiniProfesoriTableModel, ? extends Integer> entry) {
 		return entry.getStringValue(0).toLowerCase().contains(s.toLowerCase());
 	}
-
 
 }

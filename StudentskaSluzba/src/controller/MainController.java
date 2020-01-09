@@ -85,6 +85,10 @@ public class MainController {
 	}
 
 	/**
+	 * Metoda koja u zavisnosti izabranog taba poziva brisanje veza izmedju predmeta
+	 * i studenta ili predmeta i profesora. Brisanje se pokrece iz dijaloga koji
+	 * prikazuje postojece veze.
+	 * 
 	 * @param index
 	 */
 	public void removeXfromX(int innerIndex) {
@@ -93,6 +97,7 @@ public class MainController {
 		switch (MainFrame.getInstance().getSelectedTab()) {
 		case PREDMETI:
 			Database.getInstance().removePredmetStudent(outerIndex, innerIndex);
+			// zbog kolone broj studenta u tabeli predmeta
 			MainFrame.getInstance().cancelSearch();
 			MainFrame.getInstance().getTableModel().fireTableDataChanged();
 			MainFrame.getInstance().setSelectedRow(outerIndex);
@@ -108,22 +113,33 @@ public class MainController {
 		}
 	}
 
-	public void launchEdit(int selected) {
+	/**
+	 * Metoda koja dijalogu za izmenu prosledjuje objekat koji treba izmeniti. U
+	 * zavisnosti od izabranog taba poziva odgovarajuci dijalog.
+	 * 
+	 * @param selected - indeks stavke koju treba izmeniti
+	 */
+	public void launchEdit(int index) {
 		switch (MainFrame.getInstance().getSelectedTab()) {
 		case PREDMETI:
-			MainFrame.getInstance().getDialogHandler().launchPredmetiEdit(predmetiController.getPredmet(selected));
+			MainFrame.getInstance().getDialogHandler().launchPredmetiEdit(predmetiController.getPredmet(index));
 			break;
 		case PROFESORI:
 			// TODO
 			break;
 		case STUDENTI:
-			MainFrame.getInstance().getDialogHandler().launchStudentiEdit(studentiController.getStudent(selected));
+			MainFrame.getInstance().getDialogHandler().launchStudentiEdit(studentiController.getStudent(index));
 			break;
 		default:
 			break;
 		}
 	}
 
+	/**
+	 * Metoda koja u zavisnosti od izabranog taba pokrece pretragu tacne tabele.
+	 * 
+	 * @param searchParam - parametri kombinovane pretrage
+	 */
 	public void startSearch(String searchParam) {
 		if (searchParam.isEmpty()) {
 			MainFrame.getInstance().getRowSorter().setRowFilter(null);
@@ -142,10 +158,13 @@ public class MainController {
 			break;
 		default:
 			break;
-
 		}
 	}
 
+	/**
+	 * Metoda koja vraca tabelu u pocetno stanje kada korisnik zavrsi pretragu.
+	 * 
+	 */
 	public void cancelSearch() {
 		MainFrame.getInstance().getRowSorter().setRowFilter(null);
 	}

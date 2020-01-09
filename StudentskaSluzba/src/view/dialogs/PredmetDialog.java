@@ -79,6 +79,11 @@ public class PredmetDialog extends JDialog {
 		this.setMinimumSize(new Dimension(minwidth, 0));
 	}
 
+	/**
+	 * Metoda koja rasporedjuje komponente unutar prozora.
+	 * 
+	 * @return minimalna sirina prozora
+	 */
 	private int makeItems() {
 		this.makeTextFields();
 		this.makeGodinaComboBox();
@@ -129,6 +134,9 @@ public class PredmetDialog extends JDialog {
 		return buttons.getMinimumSize().width + 70;
 	}
 
+	/**
+	 * Metoda koja inicijalizuje polja za unos teksta i validaciju.
+	 */
 	private void makeTextFields() {
 		this.sifra = new JTextField();
 		this.sifraError = new ErrorLabel(this.getBackground(), Color.RED);
@@ -169,6 +177,7 @@ public class PredmetDialog extends JDialog {
 			}
 
 		});
+
 		this.naziv = new JTextField();
 		this.nazivError = new ErrorLabel(this.getBackground(), Color.RED,
 				"reci ili brojevi razdvojeni razmacima ili crticom");
@@ -208,6 +217,10 @@ public class PredmetDialog extends JDialog {
 		});
 	}
 
+	/**
+	 * Metoda koja inicijalizuje combo box za izbor godine i upozorenje za korisnika
+	 * ako ce izmena dovesti do brisanja veza.
+	 */
 	private void makeGodinaComboBox() {
 		String[] godine = { "I (prva)", "II (druga)", "III (treca)", "IV (cetvrta)" };
 		this.godina = new JComboBox<String>(godine);
@@ -230,6 +243,9 @@ public class PredmetDialog extends JDialog {
 		});
 	}
 
+	/**
+	 * @return dugme za dodavanje predmeta
+	 */
 	private JButton makeAddButton() {
 		dodaj = new JButton("Dodaj");
 		dodaj.addActionListener(new ActionListener() {
@@ -254,6 +270,9 @@ public class PredmetDialog extends JDialog {
 		return dodaj;
 	}
 
+	/**
+	 * @return dugme za cuvanje izmena na postojecem predmetu
+	 */
 	private JButton makeSaveChangesButton() {
 		izmeni = new JButton("Sa\u010Duvaj izmene");
 		izmeni.addActionListener(new ActionListener() {
@@ -274,6 +293,9 @@ public class PredmetDialog extends JDialog {
 		return izmeni;
 	}
 
+	/**
+	 * @return dugme za zatvaranje prozora
+	 */
 	private JButton makeReturnButton() {
 		JButton nazad = new JButton("Odustani");
 
@@ -289,6 +311,11 @@ public class PredmetDialog extends JDialog {
 		return nazad;
 	}
 
+	/**
+	 * Metoda koja priprema prozor za izmenu postojeceg predmeta i prikazuje ga.
+	 * 
+	 * @param predmet
+	 */
 	public void editMode(Predmet predmet) {
 		this.setTitle("Izmena predmeta");
 
@@ -311,6 +338,9 @@ public class PredmetDialog extends JDialog {
 		this.setVisible(true);
 	}
 
+	/**
+	 * Metoda koja priprema prozor za dodavanje novog predmeta i prikazuje ga.
+	 */
 	public void addMode() {
 		this.setTitle("Dodavanje predmeta");
 

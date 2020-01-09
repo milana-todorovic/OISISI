@@ -25,6 +25,10 @@ import javax.swing.ListSelectionModel;
 import controller.MainController;
 
 /**
+ * Dijalog za prikaz listi. Koristi se za prikaz liste predmeta koje student
+ * slusa, liste predmeta koje profesor predaje, i liste studenata koji slusaju
+ * predmet.
+ * 
  * @author Milana Todorovic ra3-2017
  *
  */
@@ -106,6 +110,9 @@ public class ListDialog extends JDialog {
 		this.setVisible(true);
 	}
 
+	/**
+	 * @return dugme za brisanje elementa prikzane liste
+	 */
 	private JButton makeDeleteButton() {
 		JButton obrisi = new JButton("Obri\u0161i");
 
@@ -141,6 +148,9 @@ public class ListDialog extends JDialog {
 		return obrisi;
 	}
 
+	/**
+	 * @return dugme za zatvaranje dijaloga
+	 */
 	private JButton makeReturnButton() {
 		JButton nazad = new JButton("Nazad");
 

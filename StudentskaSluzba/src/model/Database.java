@@ -37,7 +37,6 @@ public class Database implements Serializable {
 	}
 
 	private Database() {
-
 		this.profesori = new ArrayList<Profesor>();
 		this.predmeti = new ArrayList<Predmet>();
 		this.studenti = new ArrayList<Student>();
@@ -46,19 +45,36 @@ public class Database implements Serializable {
 		this.studentiMock();
 	}
 
+	/**
+	 * @return broj predmeta u bazi
+	 */
 	public int getBrojPredmeta() {
 		return predmeti.size();
 	}
 
+	/**
+	 * @param index
+	 * @return predmet na prosledjenom indeksu
+	 */
 	public Predmet getPredmet(int index) {
 		return predmeti.get(index);
 	}
 
+	/**
+	 * @param sifra
+	 * @return predmet sa prosledjenom sifrom
+	 */
 	public Predmet findPredmetById(String sifra) {
 		int index = predmeti.indexOf(new Predmet(sifra, "", 0, 0));
 		return (index == -1) ? null : predmeti.get(index);
 	}
 
+	/**
+	 * Metoda koja brise predmet na prosledjenom indeksu i sve njegove veze sa
+	 * drugim etitetima u bazi.
+	 * 
+	 * @param index
+	 */
 	public void removePredmet(int index) {
 		Predmet predmet = this.predmeti.get(index);
 		for (Student student : predmet.getStudenti()) {
@@ -71,14 +87,27 @@ public class Database implements Serializable {
 		this.predmeti.remove(index);
 	}
 
+	/**
+	 * @return broj profesora u bazi
+	 */
 	public int getBrojProfesora() {
 		return profesori.size();
 	}
 
+	/**
+	 * @param index
+	 * @return profesor na prosledjenom indeksu
+	 */
 	public Profesor getProfesor(int index) {
 		return profesori.get(index);
 	}
 
+	/**
+	 * Metoda koja brise profesora na prosledjenom indeksu i sve njegove veze sa
+	 * drugim etitetima u bazi.
+	 * 
+	 * @param index
+	 */
 	public void removeProfesor(int index) {
 		Profesor profesor = this.profesori.get(index);
 		for (Predmet predmet : profesor.getPredmeti()) {
@@ -109,7 +138,6 @@ public class Database implements Serializable {
 
 		student.getPredmeti().remove(predmet);
 		predmet.getStudenti().remove(student);
-
 	}
 
 	public void removePredmetStudent(int predmetIndex, int studentIndex) {
@@ -118,7 +146,6 @@ public class Database implements Serializable {
 
 		predmet.getStudenti().remove(student);
 		student.getPredmeti().remove(predmet);
-
 	}
 
 	private void predmetiMock() {
@@ -191,6 +218,12 @@ public class Database implements Serializable {
 		}
 	}
 
+	/**
+	 * Metoda koja brise vezu izmedju profesora i predmeta.
+	 * 
+	 * @param profesorIndex - indeks profesora u bazi
+	 * @param predmetIndex  - indeks predmeta u listi predmeta zadatog profesora
+	 */
 	public void removeProfesorPredmet(int profesorIndex, int predmetIndex) {
 		Profesor profesor = this.profesori.get(profesorIndex);
 		Predmet predmet = profesor.getPredmeti().get(predmetIndex);
@@ -198,12 +231,21 @@ public class Database implements Serializable {
 		profesor.getPredmeti().remove(predmetIndex);
 	}
 
-	public void ukloniProfesoraSaPredmeta(int predmetIndex) {
+	/**
+	 * Metoda koja brise vezu izmedju profesora i predmeta.
+	 * 
+	 * @param predmetIndex - indeks predmeta u bazi
+	 */
+	public void removePredmetProfesor(int predmetIndex) {
 		Predmet predmet = this.predmeti.get(predmetIndex);
 		predmet.getProfesor().getPredmeti().remove(predmet);
 		predmet.setProfesor(null);
 	}
 
+	/**
+	 * @param indeksPredmeta
+	 * @return indeks u bazi profesora koji predaje zadati predmet
+	 */
 	public int indeksProfesoraNaPredmetu(int indeksPredmeta) {
 		Predmet predmet = this.predmeti.get(indeksPredmeta);
 		if (predmet.getProfesor() == null)
@@ -212,6 +254,12 @@ public class Database implements Serializable {
 			return this.profesori.indexOf(predmet.getProfesor());
 	}
 
+	/**
+	 * Metoda koja dodaje predmet u bazu.
+	 * 
+	 * @param values
+	 * @return indikator uspesnosti
+	 */
 	public boolean addPredmet(Map<String, Object> values) {
 		for (String key : Predmet.keys) {
 			if (!values.containsKey(key))
@@ -221,10 +269,22 @@ public class Database implements Serializable {
 		return true;
 	}
 
+	/**
+	 * Metoda koja azurira predmet na prosledjenom indeksu.
+	 * 
+	 * @param index
+	 * @param values
+	 */
 	public void updatePredmet(int index, Map<String, Object> values) {
 		predmeti.get(index).set(values);
 	}
 
+	/**
+	 * Metoda koja kreira vezu izmedju zadatog profesora i predmeta.
+	 * 
+	 * @param profesorIndex - indeks profesora u bazi
+	 * @param predmetIndex  - indeks predmeta u bazi
+	 */
 	public void izmeniProfesoraNaPredmetu(int profesorIndex, int predmetIndex) {
 		Predmet predmet = predmeti.get(predmetIndex);
 		Profesor profesor = profesori.get(profesorIndex);

@@ -15,7 +15,6 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
-import javax.swing.event.DocumentListener;
 
 import view.actions.Actions;
 import view.actions.CancelSearchAction;
@@ -53,7 +52,6 @@ public class Toolbar extends JToolBar {
 	private CancelSearchAction cancelSearch;
 
 	private JTextField search;
-	private DocumentListener searchTextListener;
 	private ErrorLabel searchError;
 
 	private int[] searchState;
@@ -111,7 +109,7 @@ public class Toolbar extends JToolBar {
 			searchText[i] = "";
 		}
 		// tekst u polju ce se cuvati pri promjeni taba i kad nije aktivna pretraga
-		this.searchTextListener = new ValidityListener() {
+		this.search.getDocument().addDocumentListener(new ValidityListener() {
 			@Override
 			public void checkValidity(String s) {
 				Tabs.TabNames tab = MainFrame.getInstance().getSelectedTab();
@@ -175,9 +173,7 @@ public class Toolbar extends JToolBar {
 
 			}
 
-		};
-
-		this.search.getDocument().addDocumentListener(searchTextListener);
+		});
 
 	}
 
@@ -240,7 +236,7 @@ public class Toolbar extends JToolBar {
 	}
 
 	/**
-	 * Postavlja prikaz trake sa alatima u ispravno stanje pri promjeni taba.
+	 * Postavlja prikaz trake sa alatima u ispravno stanje pri promeni taba.
 	 * 
 	 * @param state - trenutno selektovani tab
 	 * 
@@ -299,7 +295,10 @@ public class Toolbar extends JToolBar {
 			break;
 		}
 	}
-	
+
+	/**
+	 * Programski pritisak dugmeta za zaustavljanje pretrage.
+	 */
 	public void cancelSearch() {
 		((AbstractButton) this.getComponentAtIndex(CANCEL_SEARCH_INDEX)).doClick();
 	}

@@ -31,7 +31,7 @@ public class CancelSearchAction extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		MainController.getInstance().cancelSearch();
-		
+
 		tb.searchCancelled();
 	}
 
