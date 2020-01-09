@@ -45,6 +45,12 @@ public class DialogHandler {
 
 	}
 
+	/**
+	 * Metoda koja otvara dijalog za prikaz listi.
+	 * 
+	 * @param title - naslov prozora
+	 * @param value - lista koju treba prikazati
+	 */
 	public void showListDialog(String title, List<?> value) {
 		listDialog.show(title, value);
 	}
@@ -71,12 +77,22 @@ public class DialogHandler {
 		}
 	}
 
+	/**
+	 * Metoda koja otvara prozor za izmenu predmeta.
+	 * 
+	 * @param predmet
+	 */
 	public void launchPredmetiEdit(Predmet predmet) {
 		predmetDialog.editMode(predmet);
 	}
 
-	public void launchProfesorNaPredmetuEdit(int index) {
-		profesorPredmetDialog.show(index);
+	/**
+	 * Metoda koja otvara prozor za dodavanje/imzenu profesora na predmetu.
+	 * 
+	 * @param profesorIndex
+	 */
+	public void launchProfesorNaPredmetuEdit(int profesorIndex) {
+		profesorPredmetDialog.show(profesorIndex);
 	}
 
 	public void launchStudentiEdit(Student student) {

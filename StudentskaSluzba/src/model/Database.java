@@ -37,7 +37,6 @@ public class Database implements Serializable {
 	}
 
 	private Database() {
-
 		this.profesori = new ArrayList<Profesor>();
 		this.predmeti = new ArrayList<Predmet>();
 		this.studenti = new ArrayList<Student>();
@@ -46,19 +45,36 @@ public class Database implements Serializable {
 		this.studentiMock();
 	}
 
+	/**
+	 * @return broj predmeta u bazi
+	 */
 	public int getBrojPredmeta() {
 		return predmeti.size();
 	}
 
+	/**
+	 * @param index
+	 * @return predmet na prosledjenom indeksu
+	 */
 	public Predmet getPredmet(int index) {
 		return predmeti.get(index);
 	}
 
+	/**
+	 * @param sifra
+	 * @return predmet sa prosledjenom sifrom
+	 */
 	public Predmet findPredmetById(String sifra) {
 		int index = predmeti.indexOf(new Predmet(sifra, "", 0, 0));
 		return (index == -1) ? null : predmeti.get(index);
 	}
 
+	/**
+	 * Metoda koja brise predmet na prosledjenom indeksu i sve njegove veze sa
+	 * drugim etitetima u bazi.
+	 * 
+	 * @param index
+	 */
 	public void removePredmet(int index) {
 		Predmet predmet = this.predmeti.get(index);
 		for (Student student : predmet.getStudenti()) {
@@ -71,14 +87,27 @@ public class Database implements Serializable {
 		this.predmeti.remove(index);
 	}
 
+	/**
+	 * @return broj profesora u bazi
+	 */
 	public int getBrojProfesora() {
 		return profesori.size();
 	}
 
+	/**
+	 * @param index
+	 * @return profesor na prosledjenom indeksu
+	 */
 	public Profesor getProfesor(int index) {
 		return profesori.get(index);
 	}
 
+	/**
+	 * Metoda koja brise profesora na prosledjenom indeksu i sve njegove veze sa
+	 * drugim etitetima u bazi.
+	 * 
+	 * @param index
+	 */
 	public void removeProfesor(int index) {
 		Profesor profesor = this.profesori.get(index);
 		for (Predmet predmet : profesor.getPredmeti()) {
@@ -109,7 +138,6 @@ public class Database implements Serializable {
 
 		student.getPredmeti().remove(predmet);
 		predmet.getStudenti().remove(student);
-
 	}
 
 	public void removePredmetStudent(int predmetIndex, int studentIndex) {
@@ -118,7 +146,6 @@ public class Database implements Serializable {
 
 		predmet.getStudenti().remove(student);
 		student.getPredmeti().remove(predmet);
-
 	}
 
 	private void predmetiMock() {
@@ -134,16 +161,16 @@ public class Database implements Serializable {
 	}
 
 	private void profesoriMock() {
-		profesori.add(new Profesor("Dragan", "Kasikovic", LocalDate.of(1971, 5, 1), "Milosa Obilica 14", "066437227",
-				"kasikovic@uns.ac.rs", "Trg Dositeja Obradovica 6", "4960945", "titula", "zvanje"));
-		profesori.add(new Profesor("Ljubica", "Pantelic", LocalDate.of(1980, 10, 14), "Cara Lazara 37", "0614311227",
-				"ljubica@uns.ac.rs", "Trg Dositeja Obradovica 6", "1190000", "titula", "zvanje"));
-		profesori.add(new Profesor("Mihajlo", "Golub", LocalDate.of(1988, 2, 29), "Kosovska 7", "0631111227",
-				"golub@uns.ac.rs", "Trg Dositeja Obradovica 6", "1195550", "titula", "zvanje"));
-		profesori.add(new Profesor("Marko", "Maksimovic", LocalDate.of(1988, 2, 29), "Kisacka 7", "0631555227",
-				"marko@uns.ac.rs", "Trg Dositeja Obradovica 6", "6695550", "titula", "zvanje"));
-		profesori.add(new Profesor("Milica", "Todorovic", LocalDate.of(1988, 2, 29), "Marka Miljanova 7", "0601322175",
-				"milicatodorovic@uns.ac.rs", "Trg Dositeja Obradovica 6", "6666666", "titula", "zvanje"));
+		profesori.add(new Profesor("Dragan", "Kasikovic", LocalDate.of(1971, 5, 1), "Milosa Obilica 14", "066/437-227",
+				"kasikovic@uns.ac.rs", "Trg Dositeja Obradovica 6", "496094511", "titula", "zvanje"));
+		profesori.add(new Profesor("Ljubica", "Pantelic", LocalDate.of(1980, 10, 14), "Cara Lazara 37", "066/437-227",
+				"ljubica@uns.ac.rs", "Trg Dositeja Obradovica 6", "119000011", "titula", "zvanje"));
+		profesori.add(new Profesor("Mihajlo", "Golub", LocalDate.of(1988, 2, 29), "Kosovska 7", "066/437-227",
+				"golub@uns.ac.rs", "Trg Dositeja Obradovica 6", "119555011", "titula", "zvanje"));
+		profesori.add(new Profesor("Marko", "Maksimovic", LocalDate.of(1988, 2, 29), "Kisacka 7", "066/437-227",
+				"marko@uns.ac.rs", "Trg Dositeja Obradovica 6", "669555011", "titula", "zvanje"));
+		profesori.add(new Profesor("Milica", "Todorovic", LocalDate.of(1988, 2, 29), "Marka Miljanova 7", "066/437-227",
+				"milicatodorovic@uns.ac.rs", "Trg Dositeja Obradovica 6", "066/437-227", "titula", "zvanje"));
 		ArrayList<Predmet> pred1 = new ArrayList<Predmet>();
 		pred1.add(this.predmeti.get(1));
 		this.profesori.get(0).setPredmeti(pred1);
@@ -162,19 +189,19 @@ public class Database implements Serializable {
 	}
 
 	private void studentiMock() {
-		studenti.add(new Student("Marko", "Petrovic", LocalDate.of(1998, 3, 16), "Jovana Ducica 16", "0664125861",
-				"markopetrovic@uns.ac.rs", "ra16-2017", LocalDate.of(2017, 7, 3), 1, Student.Status.B, 9.06));
+		studenti.add(new Student("Marko", "Petrovic", LocalDate.of(1998, 3, 16), "Jovana Ducica 16", "066/437-227",
+				"markopetrovic@uns.ac.rs", "ra 16/2017", LocalDate.of(2017, 7, 3), 1, Student.Status.B, 9.06));
 		studenti.add(new Student("Vasilije", "Butulija", LocalDate.of(1997, 4, 2), "Salvadora Aljendea 10",
-				"0654443322", "vasilijebutulija@uns.ac.rs", "ra140-2016", LocalDate.of(2016, 7, 5), 1, Student.Status.S,
+				"066/437-227", "vasilijebutulija@uns.ac.rs", "ra 140/2016", LocalDate.of(2016, 7, 5), 1, Student.Status.S,
 				7.55));
-		studenti.add(new Student("Viktorija", "Radojcic", LocalDate.of(1998, 3, 18), "Mihajla Pupina 21", "0661112202",
-				"vikiradojcic@uns.ac.rs", "ra12-2017", LocalDate.of(2017, 7, 1), 1, Student.Status.B, 10.00));
-		studenti.add(new Student("Iva", "Aleksic", LocalDate.of(1995, 7, 24), "Milutina Milankovica 18", "0656561221",
-				"ivaaleksic@uns.ac.rs", "ra186-2016", LocalDate.of(2016, 7, 2), 1, Student.Status.S, 8.88));
-		studenti.add(new Student("Milan", "Jovic", LocalDate.of(1997, 5, 5), "Desanke Maksimovic 14", "0654478998",
-				"milanjovic@uns.ac.rs", "ee200-2016", LocalDate.of(2016, 7, 5), 1, Student.Status.B, 6.67));
-		studenti.add(new Student("Helena", "Govedarica", LocalDate.of(1994, 10, 28), "Jovana Ducica 25", "0654011100",
-				"helenagov@uns.ac.rs", "ee14-2015", LocalDate.of(2015, 7, 1), 1, Student.Status.S, 8.04));
+		studenti.add(new Student("Viktorija", "Radojcic", LocalDate.of(1998, 3, 18), "Mihajla Pupina 21", "066/437-227",
+				"vikiradojcic@uns.ac.rs", "ra 12/2017", LocalDate.of(2017, 7, 1), 1, Student.Status.B, 10.00));
+		studenti.add(new Student("Iva", "Aleksic", LocalDate.of(1995, 7, 24), "Milutina Milankovica 18", "066/437-227",
+				"ivaaleksic@uns.ac.rs", "ra 186/2016", LocalDate.of(2016, 7, 2), 1, Student.Status.S, 8.88));
+		studenti.add(new Student("Milan", "Jovic", LocalDate.of(1997, 5, 5), "Desanke Maksimovic 14", "066/437-227",
+				"milanjovic@uns.ac.rs", "ee 200/2016", LocalDate.of(2016, 7, 5), 1, Student.Status.B, 6.67));
+		studenti.add(new Student("Helena", "Govedarica", LocalDate.of(1994, 10, 28), "Jovana Ducica 25", "066/437-227",
+				"helenagov@uns.ac.rs", "ee 14/2015", LocalDate.of(2015, 7, 1), 1, Student.Status.S, 8.04));
 		ArrayList<Student> studenti1 = new ArrayList<Student>();
 		studenti1.add(studenti.get(1));
 		studenti1.add(studenti.get(3));
@@ -191,6 +218,12 @@ public class Database implements Serializable {
 		}
 	}
 
+	/**
+	 * Metoda koja brise vezu izmedju profesora i predmeta.
+	 * 
+	 * @param profesorIndex - indeks profesora u bazi
+	 * @param predmetIndex  - indeks predmeta u listi predmeta zadatog profesora
+	 */
 	public void removeProfesorPredmet(int profesorIndex, int predmetIndex) {
 		Profesor profesor = this.profesori.get(profesorIndex);
 		Predmet predmet = profesor.getPredmeti().get(predmetIndex);
@@ -198,12 +231,21 @@ public class Database implements Serializable {
 		profesor.getPredmeti().remove(predmetIndex);
 	}
 
-	public void ukloniProfesoraSaPredmeta(int predmetIndex) {
+	/**
+	 * Metoda koja brise vezu izmedju profesora i predmeta.
+	 * 
+	 * @param predmetIndex - indeks predmeta u bazi
+	 */
+	public void removePredmetProfesor(int predmetIndex) {
 		Predmet predmet = this.predmeti.get(predmetIndex);
 		predmet.getProfesor().getPredmeti().remove(predmet);
 		predmet.setProfesor(null);
 	}
 
+	/**
+	 * @param indeksPredmeta
+	 * @return indeks u bazi profesora koji predaje zadati predmet
+	 */
 	public int indeksProfesoraNaPredmetu(int indeksPredmeta) {
 		Predmet predmet = this.predmeti.get(indeksPredmeta);
 		if (predmet.getProfesor() == null)
@@ -212,6 +254,12 @@ public class Database implements Serializable {
 			return this.profesori.indexOf(predmet.getProfesor());
 	}
 
+	/**
+	 * Metoda koja dodaje predmet u bazu.
+	 * 
+	 * @param values
+	 * @return indikator uspesnosti
+	 */
 	public boolean addPredmet(Map<String, Object> values) {
 		for (String key : Predmet.keys) {
 			if (!values.containsKey(key))
@@ -221,10 +269,22 @@ public class Database implements Serializable {
 		return true;
 	}
 
+	/**
+	 * Metoda koja azurira predmet na prosledjenom indeksu.
+	 * 
+	 * @param index
+	 * @param values
+	 */
 	public void updatePredmet(int index, Map<String, Object> values) {
 		predmeti.get(index).set(values);
 	}
 
+	/**
+	 * Metoda koja kreira vezu izmedju zadatog profesora i predmeta.
+	 * 
+	 * @param profesorIndex - indeks profesora u bazi
+	 * @param predmetIndex  - indeks predmeta u bazi
+	 */
 	public void izmeniProfesoraNaPredmetu(int profesorIndex, int predmetIndex) {
 		Predmet predmet = predmeti.get(predmetIndex);
 		Profesor profesor = profesori.get(profesorIndex);

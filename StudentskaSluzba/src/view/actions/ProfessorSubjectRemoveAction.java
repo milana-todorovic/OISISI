@@ -46,7 +46,6 @@ public class ProfessorSubjectRemoveAction extends AbstractAction {
 		if (choice == JOptionPane.YES_OPTION) {
 			MainController.getInstance().getPredmetiController().ukloniProfesoraSaPredmeta(predmet);
 		}
-
 	}
 
 }

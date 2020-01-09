@@ -91,31 +91,31 @@ public class ProfesorDialog extends JDialog {
 		this.add(content, BorderLayout.CENTER);
 
 		this.ime = new JTextField();
-		this.imeError = new ErrorLabel(this.getBackground(), Color.RED, "reci razdvojene razmacima ili crticom");
+		this.imeError = new ErrorLabel(this.getBackground(), Color.RED, "re\u010di razdvojene razmacima ili crticom");
 		this.prezime = new JTextField();
-		this.prezimeError = new ErrorLabel(this.getBackground(), Color.RED, "reci razdvojene razmacima ili crticom");
+		this.prezimeError = new ErrorLabel(this.getBackground(), Color.RED, "re\u010di razdvojene razmacima ili crticom");
 		this.datumRodjenja = new JTextField();
 		this.datumRodjenjaError = new ErrorLabel(this.getBackground(), Color.RED, "yyyy-MM-dd");
 		this.adresa = new JTextField();
 		this.adresaError = new ErrorLabel(this.getBackground(), Color.RED,
-				"reci ili brojevi razdvojeni razmacima ili crticom");
+				"re\u010di ili brojevi razdvojeni razmacima, crticom, zarezom, ili ta\u010dkom");
 		this.brojTel = new JTextField();
-		this.brojTelError = new ErrorLabel(this.getBackground(), Color.RED, "broj cifara izmedju 9 i 20");
+		this.brojTelError = new ErrorLabel(this.getBackground(), Color.RED, "xxx/xxx-xxx");
 
 		this.emailAdresa = new JTextField();
 		this.emailAdresaError = new ErrorLabel(this.getBackground(), Color.RED,
-				"slova i brojevi bez razmaka,moguc separator _ ili tacka,@domen");
+				"[slova, brojevi, donja crta, ta\u010dka]\"@\"domen");
 		this.titula = new JTextField();
 		this.titulaError = new ErrorLabel(this.getBackground(), Color.RED,
-				"reci razdvojene razmacima,crticom ili tackom");
+				"re\u010di razdvojene razmacima, crticom ili ta\u010dkom");
 		this.zvanje = new JTextField();
 		this.zvanjeError = new ErrorLabel(this.getBackground(), Color.RED,
-				"reci razdvojene razmacima,crticom ili tackom");
+				"re\u010di razdvojene razmacima, crticom ili ta\u010dkom");
 		this.brojLicneKarte = new JTextField();
 		this.brojLicneError = new ErrorLabel(this.getBackground(), Color.RED, "9 cifara");
 		this.adresaKancelarije = new JTextField();
 		this.adresaKancelarijeError = new ErrorLabel(this.getBackground(), Color.RED,
-				"reci ili brojevi razdvojeni razmacima ili crticom");
+				"re\u010di ili brojevi razdvojeni razmacima, crticom, zarezom, ili ta\u010dkom");
 
 		this.validacija();
 
@@ -355,7 +355,7 @@ public class ProfesorDialog extends JDialog {
 				if (s1.isEmpty()) {
 					adresaError.invalidNotNull();
 					valid = false;
-				} else if (!Validator.isAlphanumericWithSeparators(s1)) {
+				} else if (!Validator.isAlphanumericWithCommaDashDotSpace(s1)) {
 					adresaError.invalidCharacter();
 					valid = false;
 				} else if (!Validator.isAdresa(s1)) {
@@ -387,7 +387,7 @@ public class ProfesorDialog extends JDialog {
 				if (s1.isEmpty()) {
 					adresaKancelarijeError.invalidNotNull();
 					valid = false;
-				} else if (!Validator.isAlphanumericWithSeparators(s1)) {
+				} else if (!Validator.isAlphanumericWithCommaDashDotSpace(s1)) {
 					adresaKancelarijeError.invalidCharacter();
 					valid = false;
 				} else if (!Validator.isAdresa(s1)) {
@@ -457,7 +457,7 @@ public class ProfesorDialog extends JDialog {
 				if (s1.isEmpty()) {
 					brojTelError.invalidNotNull();
 					valid = false;
-				} else if (!Validator.isNumeric(s1)) {
+				} else if (!Validator.isNumericWithSlashDash(s1)) {
 					brojTelError.invalidCharacter();
 					valid = false;
 				} else if (!Validator.isBrojTel(s1)) {

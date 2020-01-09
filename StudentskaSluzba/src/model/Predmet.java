@@ -16,6 +16,10 @@ public class Predmet implements Serializable {
 
 	private static final long serialVersionUID = 6746715361256232383L;
 
+	/**
+	 * Validne vrednosti kljuceva za parametar metode public void set(Map<String,
+	 * Object> values) i konstruktora public Predmet(Map<String, Object> values).
+	 */
 	public static final String[] keys = { "Sifra", "Naziv", "Godina", "Semestar" };
 
 	private String sifraPredmeta;
@@ -42,7 +46,7 @@ public class Predmet implements Serializable {
 	}
 
 	/**
-	 * Konstruise objekat klase Predmet od vrijednosti sadržanih u parametru values,
+	 * Konstruise objekat klase Predmet od vrednosti sadržanih u parametru values,
 	 * uz pretpostavku da values sadrzi sve kljuceve iz niza stringova keys.
 	 * 
 	 * @param values
@@ -155,8 +159,8 @@ public class Predmet implements Serializable {
 	}
 
 	/**
-	 * Postavlja polje na vrijednost iz parametra values, ako values sadrzi kljuc
-	 * koji odgovara tom polju.
+	 * Postavlja polje na vrednost iz parametra values, ako values sadrzi kljuc koji
+	 * odgovara tom polju.
 	 * 
 	 * @param values
 	 */
@@ -190,6 +194,7 @@ public class Predmet implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
+		// smatra se da su predmeti jednaki ako imaju istu sifru
 		if (this == obj)
 			return true;
 		if (obj == null)

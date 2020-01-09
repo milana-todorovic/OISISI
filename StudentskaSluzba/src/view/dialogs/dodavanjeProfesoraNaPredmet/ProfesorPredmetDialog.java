@@ -30,6 +30,9 @@ import javax.swing.table.TableRowSorter;
 import controller.MainController;
 
 /**
+ * Dijalog za dodavanje profesora na predmet. Sadrzi listu svih profesora i
+ * polje za pretragu. Izbor profesora se vrsi selekcijom u listi.
+ * 
  * @author Milana Todorovic ra3-2017
  *
  */
@@ -55,6 +58,11 @@ public class ProfesorPredmetDialog extends JDialog {
 		this.setMinimumSize(new Dimension(minwidth, 0));
 	}
 
+	/**
+	 * Metoda koja rasporedjuje komponente unutar prozora.
+	 * 
+	 * @return minimalna sirina prozora
+	 */
 	private int makeItems() {
 		this.makeTable();
 		JScrollPane scroll = new JScrollPane(table);
@@ -79,12 +87,17 @@ public class ProfesorPredmetDialog extends JDialog {
 		return content.getMinimumSize().width + 18;
 	}
 
+	/**
+	 * Metoda koja inicijalizuje tabelu.
+	 */
 	private void makeTable() {
 		MiniProfesoriTableModel model = new MiniProfesoriTableModel();
 		TableRowSorter<MiniProfesoriTableModel> rowSorter = new TableRowSorter<>(model);
 
 		this.table = new JTable(model);
 
+		// tabela je postavljena tako da izgleda kao JList (koristi se tabela zbog
+		// pretrage)
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setShowHorizontalLines(false);
 		table.setShowVerticalLines(false);
@@ -94,10 +107,16 @@ public class ProfesorPredmetDialog extends JDialog {
 		table.setRowSorter(rowSorter);
 	}
 
+	/**
+	 * Inicijalizuje polje za pretragu.
+	 * 
+	 * @return panel sa poljem za pretragu i labelom
+	 */
 	private JPanel makeTextField() {
 		JLabel searchLabel = new JLabel("Pretra\u017Ei:");
 		this.search = new JTextField();
 
+		// prikaz u tabeli se filtrira cim korisnik unese nesto u polje
 		this.search.getDocument().addDocumentListener(new DocumentListener() {
 
 			@Override
@@ -127,10 +146,17 @@ public class ProfesorPredmetDialog extends JDialog {
 
 	@SuppressWarnings("unchecked")
 	private void filterTable(String s) {
+		/*
+		 * koristi se jednostavniji custom filter umjesto ugradjenog regexFiltera da bi
+		 * se izbegla validacija polja za unos
+		 */
 		RowFilter<MiniProfesoriTableModel, Integer> filter = new StringContainsFilter(s);
 		((TableRowSorter<MiniProfesoriTableModel>) table.getRowSorter()).setRowFilter(filter);
 	}
 
+	/**
+	 * @return dugme za zatvaranje prozora
+	 */
 	private JButton makeReturnButton() {
 		JButton nazad = new JButton("Odustani");
 
@@ -146,6 +172,9 @@ public class ProfesorPredmetDialog extends JDialog {
 		return nazad;
 	}
 
+	/**
+	 * @return dugme za cuvanje izmena
+	 */
 	private JButton makeSaveChangesButton() {
 		JButton izmeni = new JButton("Sa\u010Duvaj");
 		izmeni.addActionListener(new ActionListener() {
@@ -168,6 +197,12 @@ public class ProfesorPredmetDialog extends JDialog {
 		return izmeni;
 	}
 
+	/**
+	 * Metoda koja prikazuje prozor, pri cemu se u tabeli selektuje profesor koji
+	 * trenutno predaje predmet.
+	 * 
+	 * @param index - indeks profesora na predmetu
+	 */
 	public void show(int index) {
 		this.search.setText("");
 

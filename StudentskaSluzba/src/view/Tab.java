@@ -63,10 +63,16 @@ public class Tab extends JPanel {
 		}
 	}
 
+	/**
+	 * @return model tabele
+	 */
 	public AbstractTableModel getModel() {
 		return (AbstractTableModel) table.getModel();
 	}
 
+	/**
+	 * @return sorter tabele
+	 */
 	public TableRowSorter<?> getRowSorter() {
 		return (TableRowSorter<?>) table.getRowSorter();
 	}

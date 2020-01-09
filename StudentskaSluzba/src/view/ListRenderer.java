@@ -17,6 +17,9 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
 /**
+ * Renderer namenjen za prikaz listi. Unutar celije se iscrtava dugme, a
+ * pritiskom na njega sadrzaj liste se prikazuje u ListDialog-u.
+ * 
  * @author Milana Todorovic ra3-2017
  *
  */

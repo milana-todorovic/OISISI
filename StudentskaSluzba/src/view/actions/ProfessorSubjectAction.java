@@ -37,7 +37,6 @@ public class ProfessorSubjectAction extends AbstractAction {
 		}
 
 		MainController.getInstance().getPredmetiController().launchProfesorNaPredmetuEdit(predmet);
-
 	}
 
 }
