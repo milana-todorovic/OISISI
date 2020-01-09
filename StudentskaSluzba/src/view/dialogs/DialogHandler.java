@@ -12,9 +12,11 @@ import model.Profesor;
 import model.Student;
 import view.Tabs;
 import view.dialogs.dodavanjeProfesoraNaPredmet.ProfesorPredmetDialog;
+import view.dialogs.dodavanjeStudentaNaPredmet.StudentiPredmetDialog;
 
 /**
  * @author Milana Todorovic ra3-2017
+ * @author Ana Perisic ra1-2017
  *
  */
 public class DialogHandler {
@@ -24,6 +26,7 @@ public class DialogHandler {
 	private ProfesorPredmetDialog profesorPredmetDialog;
 	private StudentDialog studentDialog;
 	private ProfesorDialog profesorDialog;
+	private StudentiPredmetDialog studentPredmetDialog;
 
 	/**
 	 * Konstruktor koji instancira sve cesto koristene dijaloge.
@@ -38,6 +41,8 @@ public class DialogHandler {
 		this.profesorPredmetDialog = new ProfesorPredmetDialog(parent);
 		this.studentDialog = new StudentDialog(parent);
 		this.profesorDialog = new ProfesorDialog(parent);
+		this.studentPredmetDialog = new StudentiPredmetDialog(parent);
+
 	}
 
 	public void showListDialog(String title, List<?> value) {
@@ -80,6 +85,10 @@ public class DialogHandler {
 
 	public void launchProfesoriEdit(Profesor profesor) {
 		profesorDialog.editMode(profesor);
+	}
+
+	public void launchDodavanjeStudentaNaPredmet(Predmet predmet) {
+		studentPredmetDialog.show(predmet);
 	}
 
 }

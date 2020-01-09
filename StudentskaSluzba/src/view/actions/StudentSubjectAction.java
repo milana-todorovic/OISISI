@@ -6,8 +6,14 @@ import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+import controller.MainController;
 import view.MainFrame;
 
+/**
+ * 
+ * @author Ana Perisic ra1-2017
+ *
+ */
 public class StudentSubjectAction extends AbstractAction {
 
 	private static final long serialVersionUID = 5664642698304087503L;
@@ -20,16 +26,14 @@ public class StudentSubjectAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (MainFrame.getInstance().getSelectedRow() == -1) {
+		int predmet = MainFrame.getInstance().getSelectedRow();
+		if (predmet == -1) {
 			JOptionPane.showMessageDialog(MainFrame.getInstance(),
 					"Nije izabran predmet na koji treba dodati studenta!", "Gre\u0161ka!", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
+		MainController.getInstance().getPredmetiController().launchDodavanjeStudentaNaPredmet(predmet);
 
-		/*
-		 * TODO dodati tijelo kada bude implementirana funkcionalnost
-		 * #dodavanje_studenta_na_predmet
-		 */
 	}
 
 }

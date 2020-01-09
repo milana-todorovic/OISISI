@@ -16,7 +16,7 @@ import view.PredmetiTableModel;
 
 /**
  * @author Milana Todorovic ra3-2017
- *
+ * @author Ana Perisic ra1-2017
  */
 public class PredmetiController {
 
@@ -86,12 +86,25 @@ public class PredmetiController {
 		MainFrame.getInstance().getTableModel().fireTableDataChanged();
 		MainFrame.getInstance().setSelectedRow(predmet);
 	}
-	
+
 	public void ukloniProfesoraSaPredmeta(int predmet) {
 		Database.getInstance().ukloniProfesoraSaPredmeta(predmet);
 		MainFrame.getInstance().cancelSearch();
 		MainFrame.getInstance().getTableModel().fireTableDataChanged();
 		MainFrame.getInstance().setSelectedRow(predmet);
+	}
+
+	public void dodajStudentaNaPredmet(int studentIndex) {
+		int predmetIndex = MainFrame.getInstance().getSelectedRow();
+		Database.getInstance().dodajStudentaNaPredmet(studentIndex, predmetIndex);
+		MainFrame.getInstance().cancelSearch();
+		MainFrame.getInstance().getTableModel().fireTableDataChanged();
+		MainFrame.getInstance().setSelectedRow(predmetIndex);
+	}
+
+	public void launchDodavanjeStudentaNaPredmet(int predmetIndex) {
+		Predmet predmet = this.getPredmet(predmetIndex);
+		MainFrame.getInstance().getDialogHandler().launchDodavanjeStudentaNaPredmet(predmet);
 	}
 
 }

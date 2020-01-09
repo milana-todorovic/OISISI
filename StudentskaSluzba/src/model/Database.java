@@ -180,7 +180,7 @@ public class Database implements Serializable {
 		studenti1.add(studenti.get(3));
 		studenti1.add(studenti.get(4));
 		predmeti.get(3).setStudenti(studenti1);
-		predmeti.get(1).setStudenti(studenti1);
+		predmeti.get(1).setStudenti(new ArrayList<Student>(studenti1));
 		for (Student student : studenti1) {
 			student.addPredmet(predmeti.get(3));
 			student.addPredmet(predmeti.get(1));
@@ -281,6 +281,14 @@ public class Database implements Serializable {
 
 	public void updateProfesor(int index, Map<String, Object> values) {
 		profesori.get(index).set(values);
+	}
+
+	public void dodajStudentaNaPredmet(int studentIndex, int predmetIndex) {
+		Predmet predmet = predmeti.get(predmetIndex);
+		Student student = studenti.get(studentIndex);
+
+		predmet.getStudenti().add(student);
+		student.getPredmeti().add(predmet);
 	}
 
 }
