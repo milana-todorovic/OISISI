@@ -18,17 +18,13 @@ import java.util.regex.PatternSyntaxException;
  *
  */
 public class Validator {
-	
-	public static Boolean isNumericWithSlashDash(String s) {
-		return s.matches("[0-9/\\-]*");
-	}
 
 	public static Boolean isAlphanumeric(String s) {
 		return s.matches("[\\p{IsAlphabetic}0-9]*");
 	}
 
 	public static Boolean isAlphanumericWithSeparators(String s) {
-		return s.matches("[\\p{IsAlphabetic}0-9 \\-]*");
+		return s.matches("[\\p{IsAlphabetic}0-9 -]*");
 	}
 
 	public static Boolean isAlphanumericWithSpaceSlash(String s) {
@@ -38,7 +34,7 @@ public class Validator {
 	public static Boolean isAlphanumericWithDotUnderscore(String s) {
 		return s.matches("[\\p{IsAlphabetic}0-9.@_]*");
 	}
-	
+
 	public static Boolean isAlphanumericWithCommaDashDotSpace(String s) {
 		return s.matches("[\\p{IsAlphabetic}0-9 ,-.]*");
 	}
@@ -52,27 +48,31 @@ public class Validator {
 	}
 
 	public static Boolean isNumericWithDash(String s) {
-		return s.matches("[0-9\\-]*");
+		return s.matches("[0-9-]*");
+	}
+
+	public static Boolean isNumericWithSlashDash(String s) {
+		return s.matches("[0-9/-]*");
 	}
 
 	public static Boolean isAlphabeticWithSeparators(String s) {
-		return s.matches("[\\p{IsAlphabetic} \\-]*");
+		return s.matches("[\\p{IsAlphabetic} -]*");
 	}
 
 	public static Boolean isAlphabeticWithSeparatorsDot(String s) {
-		return s.matches("[\\p{IsAlphabetic} .\\-]*");
+		return s.matches("[\\p{IsAlphabetic} .-]*");
 	}
 
 	public static Boolean isNazivPredmeta(String s) {
-		return s.matches("[\\p{IsAlphabetic}0-9]+([ ]*-?[ ]*[\\p{IsAlphabetic}0-9]+)*");
+		return s.matches("[\\p{IsAlphabetic}0-9]+([ ]*[ -][ ]*[\\p{IsAlphabetic}0-9]+)*");
 	}
 
 	public static Boolean isImePrezime(String s) {
-		return s.matches("[\\p{IsAlphabetic}]+([ ]*-?[ ]*[\\p{IsAlphabetic}]+)*");
+		return s.matches("[\\p{IsAlphabetic}]+([ -][\\p{IsAlphabetic}]+)*");
 	}
 
 	public static Boolean isAdresa(String s) {
-		return s.matches("([\\p{IsAlphabetic}0-9]([ ]*[.,-]?[ ]*)?)+");
+		return s.matches("[\\p{IsAlphabetic}0-9]+(([ ]*[\\., -][ ]*)[\\p{IsAlphabetic}0-9]+)*");
 	}
 
 	public static Boolean isEmailAdresa(String s) {
@@ -93,7 +93,7 @@ public class Validator {
 	}
 
 	public static Boolean isTitulaZvanje(String s) {
-		return s.matches("[\\p{IsAlphabetic}]+([ ]*[\\-.]?[ ]*[\\p{IsAlphabetic}]+)*");
+		return s.matches("[\\p{IsAlphabetic}]+([ ]*[ \\.-]?[ ]*[\\p{IsAlphabetic}]+)*");
 	}
 
 	public static Boolean isBrojLicne(String s) {

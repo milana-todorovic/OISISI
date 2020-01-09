@@ -29,10 +29,6 @@ public class Tab extends JPanel {
 		this.setLayout(new BorderLayout());
 
 		this.table = table;
-		/*
-		 * TODO Ako je potrebno pozvati neke metode iz JTable za sve tri tabele, staviti
-		 * ovde
-		 */
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		JScrollPane scroll = new JScrollPane();

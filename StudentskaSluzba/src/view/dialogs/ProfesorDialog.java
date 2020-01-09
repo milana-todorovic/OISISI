@@ -91,10 +91,10 @@ public class ProfesorDialog extends JDialog {
 		this.add(content, BorderLayout.CENTER);
 
 		this.ime = new JTextField();
-		this.imeError = new ErrorLabel(this.getBackground(), Color.RED, "re\u010di razdvojene razmacima ili crticom");
+		this.imeError = new ErrorLabel(this.getBackground(), Color.RED, "re\u010di razdvojene razmakom ili crticom");
 		this.prezime = new JTextField();
 		this.prezimeError = new ErrorLabel(this.getBackground(), Color.RED,
-				"re\u010di razdvojene razmacima ili crticom");
+				"re\u010di razdvojene razmakom ili crticom");
 		this.datumRodjenja = new JTextField();
 		this.datumRodjenjaError = new ErrorLabel(this.getBackground(), Color.RED, "yyyy-MM-dd");
 		this.adresa = new JTextField();
