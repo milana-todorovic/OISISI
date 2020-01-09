@@ -51,15 +51,19 @@ public class Validator {
 		return s.matches("[\\p{IsAlphabetic} -]*");
 	}
 
+	public static Boolean isAlphabeticWithSeparatorsDot(String s) {
+		return s.matches("[\\p{IsAlphabetic} \\.-]*");
+	}
+
 	public static Boolean isNazivPredmeta(String s) {
 		return s.matches("[\\p{IsAlphabetic}0-9]+([ ]*-?[ ]*[\\p{IsAlphabetic}0-9]+)*");
 	}
 
-	public static Boolean isImePrezimeStudenta(String s) {
+	public static Boolean isImePrezime(String s) {
 		return s.matches("[\\p{IsAlphabetic}]+([ ]*-?[ ]*[\\p{IsAlphabetic}]+)*");
 	}
 
-	public static Boolean isAdresaStudenta(String s) {
+	public static Boolean isAdresa(String s) {
 		return s.matches("([\\p{IsAlphabetic}]+[ ]*-*)+[0-9]*[a-zA-Z]*(-[0-9]+)*");
 	}
 
@@ -78,6 +82,14 @@ public class Validator {
 	public static Boolean isProsek(String s) {
 		return s.matches("([6-9](\\.[0-9]+)?)|(10(\\.0+)?)");
 
+	}
+
+	public static Boolean isTitulaZvanje(String s) {
+		return s.matches("[\\p{IsAlphabetic}]+([ ]*-?\\.*[ ]*[\\p{IsAlphabetic}]+)*");
+	}
+
+	public static Boolean isBrojLicne(String s) {
+		return s.matches("[0-9]{9}");
 	}
 
 	public static Boolean matchesSearchFormat(String s) {

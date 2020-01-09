@@ -44,6 +44,26 @@ public class ProfesoriController {
 		Database.getInstance().removeProfesor(index);
 	}
 
+	public boolean addProfesor(Map<String, Object> values) {
+		if (Database.getInstance().addProfesor(values)) {
+			int index = getBrojProfesora() - 1;
+			MainFrame.getInstance().cancelSearch();
+			MainFrame.getInstance().getTableModel().fireTableRowsInserted(index, index);
+			MainFrame.getInstance().setSelectedRow(index);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void updateProfesor(Map<String, Object> values) {
+		int index = MainFrame.getInstance().getSelectedRow();
+		Database.getInstance().updateProfesor(index, values);
+		MainFrame.getInstance().cancelSearch();
+		MainFrame.getInstance().getTableModel().fireTableDataChanged();
+		MainFrame.getInstance().setSelectedRow(index);
+	}
+
 	/**
 	 * Metoda koja pretrazuje tabelu profesora po zadatim parametrima.
 	 * 
@@ -66,6 +86,10 @@ public class ProfesoriController {
 		TableRowSorter<ProfesoriTableModel> sorter = ((TableRowSorter<ProfesoriTableModel>) MainFrame.getInstance()
 				.getRowSorter());
 		sorter.setRowFilter(filter);
+	}
+
+	public Profesor findByLicna(String brLicneKarte) {
+		return Database.getInstance().findProfesorByLicna(brLicneKarte);
 	}
 
 }

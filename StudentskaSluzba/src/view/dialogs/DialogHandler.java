@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import model.Predmet;
+import model.Profesor;
 import model.Student;
 import view.Tabs;
 import view.dialogs.dodavanjeProfesoraNaPredmet.ProfesorPredmetDialog;
@@ -22,6 +23,7 @@ public class DialogHandler {
 	private PredmetDialog predmetDialog;
 	private ProfesorPredmetDialog profesorPredmetDialog;
 	private StudentDialog studentDialog;
+	private ProfesorDialog profesorDialog;
 
 	/**
 	 * Konstruktor koji instancira sve cesto koristene dijaloge.
@@ -35,6 +37,7 @@ public class DialogHandler {
 		this.predmetDialog = new PredmetDialog(parent);
 		this.profesorPredmetDialog = new ProfesorPredmetDialog(parent);
 		this.studentDialog = new StudentDialog(parent);
+		this.profesorDialog = new ProfesorDialog(parent);
 	}
 
 	/**
@@ -59,7 +62,7 @@ public class DialogHandler {
 			predmetDialog.addMode();
 			break;
 		case PROFESORI:
-			// TODO dodati kada bude implementirana funkcionalnost #dodavanje_profesora
+			profesorDialog.addMode();
 			break;
 		case STUDENTI:
 			studentDialog.addMode();
@@ -89,6 +92,10 @@ public class DialogHandler {
 
 	public void launchStudentiEdit(Student student) {
 		studentDialog.editMode(student);
+	}
+
+	public void launchProfesoriEdit(Profesor profesor) {
+		profesorDialog.editMode(profesor);
 	}
 
 }

@@ -272,10 +272,17 @@ public class Student implements Serializable {
 		this.emailAdresa = (values.containsKey(keys[5])) ? (String) values.get(keys[5]) : emailAdresa;
 		this.brIndeksa = (values.containsKey(keys[6])) ? (String) values.get(keys[6]) : brIndeksa;
 		this.datumUpisa = (values.containsKey(keys[7])) ? (LocalDate) values.get(keys[7]) : datumUpisa;
-		this.trenutnaGodStudija = (values.containsKey(keys[8])) ? (Integer) values.get(keys[8]): trenutnaGodStudija;
 		this.status = (values.containsKey(keys[9])) ? (Status) values.get(keys[9]) : status;
 		this.prosecnaOcena = (values.containsKey(keys[10])) ? (Double) values.get(keys[10]) : prosecnaOcena;
-		this.predmeti = new ArrayList<Predmet>();
+
+		int godinaNewValue = (values.containsKey(keys[8])) ? (Integer) values.get(keys[8]) : trenutnaGodStudija;
+		if (godinaNewValue != this.trenutnaGodStudija) {
+			for (Predmet predmet : predmeti) {
+				predmet.getStudenti().remove(this);
+			}
+			this.predmeti = new ArrayList<Predmet>();
+			this.trenutnaGodStudija = godinaNewValue;
+		}
 	}
 
 	@Override
