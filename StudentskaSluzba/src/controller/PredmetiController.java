@@ -12,7 +12,7 @@ import javax.swing.table.TableRowSorter;
 import model.Database;
 import model.Predmet;
 import view.MainFrame;
-import view.PredmetiTableModel;
+import view.tables.predmeti.PredmetiTableModel;
 
 /**
  * @author Milana Todorovic ra3-2017

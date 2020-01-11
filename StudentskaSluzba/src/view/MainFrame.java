@@ -21,6 +21,9 @@ import javax.swing.table.TableRowSorter;
 import controller.MainController;
 import view.actions.Actions;
 import view.dialogs.DialogHandler;
+import view.tables.predmeti.PredmetiTable;
+import view.tables.profesori.ProfesoriTable;
+import view.tables.studenti.StudentiTable;
 
 /**
  * @author Milana Todorovic ra3-2017
@@ -67,7 +70,7 @@ public class MainFrame extends JFrame {
 						JOptionPane.YES_NO_OPTION);
 				if (choice == JOptionPane.YES_OPTION) {
 					if (!MainController.getInstance().saveDatabase())
-						JOptionPane.showMessageDialog(e.getComponent(), "Doslo je do greske pri cuvanju podataka!",
+						JOptionPane.showMessageDialog(e.getComponent(), "Doslo je do gre\u0161ke pri \u010duvanju podataka!",
 								"Zatvaranje aplikacije", JOptionPane.INFORMATION_MESSAGE);
 					setDefaultCloseOperation(EXIT_ON_CLOSE);
 				}

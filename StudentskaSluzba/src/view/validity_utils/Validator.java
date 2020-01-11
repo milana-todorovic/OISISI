@@ -93,7 +93,7 @@ public class Validator {
 	}
 
 	public static Boolean isTitulaZvanje(String s) {
-		return s.matches("[\\p{IsAlphabetic}]+([ ]*[ \\.-]?[ ]*[\\p{IsAlphabetic}]+)*");
+		return s.matches("[\\p{IsAlphabetic}]+([ ]*[ \\.-]?[ ]*[\\p{IsAlphabetic}]+)*\\.?");
 	}
 
 	public static Boolean isBrojLicne(String s) {

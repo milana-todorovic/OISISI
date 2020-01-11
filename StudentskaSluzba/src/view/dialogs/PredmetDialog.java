@@ -326,7 +326,7 @@ public class PredmetDialog extends JDialog {
 		sifra.setText(predmet.getSifraPredmeta());
 		naziv.setText(predmet.getNazivPredmeta());
 		godina.setSelectedIndex(predmet.getGodina() - 1);
-		semestar.setSelectedIndex(predmet.getSemestar() - 1);
+		semestar.setSelectedIndex((predmet.getSemestar() - 1) % 2);
 
 		dodaj.setVisible(false);
 		izmeni.setEnabled(true);

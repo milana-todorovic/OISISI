@@ -1,12 +1,14 @@
 /**
  * 
  */
-package view;
+package view.tables.predmeti;
 
 import java.util.ArrayList;
 
 import javax.swing.JTable;
 import javax.swing.table.TableRowSorter;
+
+import view.tables.ListRenderer;
 
 /**
  * @author Milana Todorovic ra3-2017

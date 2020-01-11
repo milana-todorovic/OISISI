@@ -12,7 +12,7 @@ import javax.swing.table.TableRowSorter;
 import model.Database;
 import model.Student;
 import view.MainFrame;
-import view.StudentiTableModel;
+import view.tables.studenti.StudentiTableModel;
 
 /**
  * @author Ana Perisic ra1-2017

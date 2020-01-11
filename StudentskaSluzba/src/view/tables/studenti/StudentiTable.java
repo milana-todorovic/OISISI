@@ -1,13 +1,15 @@
 /**
  * 
  */
-package view;
+package view.tables.studenti;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 
 import javax.swing.JTable;
 import javax.swing.table.TableRowSorter;
+
+import view.tables.ListRenderer;
 
 /**
  * @author Ana Perisic ra1-2017

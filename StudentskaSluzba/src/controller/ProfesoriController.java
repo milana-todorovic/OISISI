@@ -12,7 +12,7 @@ import javax.swing.table.TableRowSorter;
 import model.Database;
 import model.Profesor;
 import view.MainFrame;
-import view.ProfesoriTableModel;
+import view.tables.profesori.ProfesoriTableModel;
 
 /**
  * @author Milana Todorovic ra3-2017

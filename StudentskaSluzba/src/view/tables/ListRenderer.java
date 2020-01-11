@@ -1,7 +1,7 @@
 /**
  * 
  */
-package view;
+package view.tables;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -15,6 +15,8 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
+
+import view.MainFrame;
 
 /**
  * Renderer namenjen za prikaz listi. Unutar celije se iscrtava dugme, a

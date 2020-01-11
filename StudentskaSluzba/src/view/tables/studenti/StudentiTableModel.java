@@ -1,7 +1,7 @@
 /**
  * 
  */
-package view;
+package view.tables.studenti;
 
 import java.util.Arrays;
 import java.util.Map;
