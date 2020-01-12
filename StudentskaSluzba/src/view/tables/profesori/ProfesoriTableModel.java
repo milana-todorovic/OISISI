@@ -79,11 +79,11 @@ public class ProfesoriTableModel extends AbstractTableModel {
 		case 2:
 			return profesor.getDatumRodjenja();
 		case 3:
-			return profesor.getAdresa();
+			return profesor.getAdresaStanovanja();
 		case 4:
-			return profesor.getKontaktTelefon();
+			return profesor.getBrTelefona();
 		case 5:
-			return profesor.getEmail();
+			return profesor.getEmailAdresa();
 		case 6:
 			return profesor.getAdresaKancelarije();
 		case 7:

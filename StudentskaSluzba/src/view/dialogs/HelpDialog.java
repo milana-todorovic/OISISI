@@ -238,7 +238,6 @@ public class HelpDialog extends JDialog {
 		tabs.addTab("Predmeti", content2);
 
 		helpDialog.add(tabs);
-		helpDialog.pack();
 		helpDialog.setSize(800, 600);
 		helpDialog.setLocationRelativeTo(MainFrame.getInstance());
 		helpDialog.setVisible(true);

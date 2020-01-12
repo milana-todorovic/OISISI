@@ -13,19 +13,13 @@ import java.util.Map;
  * @author Milana Todorovic ra3-2017
  *
  */
-public class Profesor implements Serializable {
+public class Profesor extends Osoba implements Serializable {
 
 	private static final long serialVersionUID = -3025873770799257742L;
 
 	public static final String[] keys = { "Ime", "Prezime", "Datum rodjenja", "Adresa stanovanja", "Broj telefona",
 			"Email adresa", "Adresa kancelarije", "Broj licne karte", "Titula", "Zvanje" };
 
-	private String ime;
-	private String prezime;
-	private LocalDate datumRodjenja;
-	private String adresa;
-	private String kontaktTelefon;
-	private String email;
 	private String adresaKancelarije;
 	private String brojLicneKarte;
 	private String titula;
@@ -46,13 +40,7 @@ public class Profesor implements Serializable {
 	 */
 	public Profesor(String ime, String prezime, LocalDate datumRodjenja, String adresa, String kontaktTelefon,
 			String email, String adresaKancelarije, String brojLicneKarte, String titula, String zvanje) {
-		super();
-		this.ime = ime;
-		this.prezime = prezime;
-		this.datumRodjenja = datumRodjenja;
-		this.adresa = adresa;
-		this.kontaktTelefon = kontaktTelefon;
-		this.email = email;
+		super(ime, prezime, datumRodjenja, adresa, kontaktTelefon, email);
 		this.adresaKancelarije = adresaKancelarije;
 		this.brojLicneKarte = brojLicneKarte;
 		this.titula = titula;
@@ -61,101 +49,18 @@ public class Profesor implements Serializable {
 	}
 
 	public Profesor(Map<String, Object> values) {
+		super();
 		this.ime = (String) values.get(keys[0]);
 		this.prezime = (String) values.get(keys[1]);
 		this.datumRodjenja = (LocalDate) values.get(keys[2]);
-		this.adresa = (String) values.get(keys[3]);
-		this.kontaktTelefon = (String) values.get(keys[4]);
-		this.email = (String) values.get(keys[5]);
+		this.adresaStanovanja = (String) values.get(keys[3]);
+		this.brTelefona = (String) values.get(keys[4]);
+		this.emailAdresa = (String) values.get(keys[5]);
 		this.adresaKancelarije = (String) values.get(keys[6]);
 		this.brojLicneKarte = (String) values.get(keys[7]);
 		this.titula = (String) values.get(keys[8]);
 		this.zvanje = (String) values.get(keys[9]);
 		this.predmeti = new ArrayList<Predmet>();
-	}
-
-	/**
-	 * @return the ime
-	 */
-	public String getIme() {
-		return ime;
-	}
-
-	/**
-	 * @param ime the ime to set
-	 */
-	public void setIme(String ime) {
-		this.ime = ime;
-	}
-
-	/**
-	 * @return the prezime
-	 */
-	public String getPrezime() {
-		return prezime;
-	}
-
-	/**
-	 * @param prezime the prezime to set
-	 */
-	public void setPrezime(String prezime) {
-		this.prezime = prezime;
-	}
-
-	/**
-	 * @return the datumRodjenja
-	 */
-	public LocalDate getDatumRodjenja() {
-		return datumRodjenja;
-	}
-
-	/**
-	 * @param datumRodjenja the datumRodjenja to set
-	 */
-	public void setDatumRodjenja(LocalDate datumRodjenja) {
-		this.datumRodjenja = datumRodjenja;
-	}
-
-	/**
-	 * @return the adresa
-	 */
-	public String getAdresa() {
-		return adresa;
-	}
-
-	/**
-	 * @param adresa the adresa to set
-	 */
-	public void setAdresa(String adresa) {
-		this.adresa = adresa;
-	}
-
-	/**
-	 * @return the kontaktTelefon
-	 */
-	public String getKontaktTelefon() {
-		return kontaktTelefon;
-	}
-
-	/**
-	 * @param kontaktTelefon the kontaktTelefon to set
-	 */
-	public void setKontaktTelefon(String kontaktTelefon) {
-		this.kontaktTelefon = kontaktTelefon;
-	}
-
-	/**
-	 * @return the email
-	 */
-	public String getEmail() {
-		return email;
-	}
-
-	/**
-	 * @param email the email to set
-	 */
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	/**
@@ -246,9 +151,9 @@ public class Profesor implements Serializable {
 		this.ime = (values.containsKey(keys[0])) ? (String) values.get(keys[0]) : ime;
 		this.prezime = (values.containsKey(keys[1])) ? (String) values.get(keys[1]) : prezime;
 		this.datumRodjenja = (values.containsKey(keys[2])) ? (LocalDate) values.get(keys[2]) : datumRodjenja;
-		this.adresa = (values.containsKey(keys[3])) ? (String) values.get(keys[3]) : adresa;
-		this.kontaktTelefon = (values.containsKey(keys[4])) ? (String) values.get(keys[4]) : kontaktTelefon;
-		this.email = (values.containsKey(keys[5])) ? (String) values.get(keys[5]) : email;
+		this.adresaStanovanja = (values.containsKey(keys[3])) ? (String) values.get(keys[3]) : adresaStanovanja;
+		this.brTelefona = (values.containsKey(keys[4])) ? (String) values.get(keys[4]) : brTelefona;
+		this.emailAdresa = (values.containsKey(keys[5])) ? (String) values.get(keys[5]) : emailAdresa;
 		this.adresaKancelarije = (values.containsKey(keys[6])) ? (String) values.get(keys[6]) : adresaKancelarije;
 		this.brojLicneKarte = (values.containsKey(keys[7])) ? (String) values.get(keys[7]) : brojLicneKarte;
 		this.titula = (values.containsKey(keys[8])) ? (String) values.get(keys[8]) : titula;

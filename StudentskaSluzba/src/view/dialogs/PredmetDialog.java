@@ -232,7 +232,7 @@ public class PredmetDialog extends JDialog {
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == ItemEvent.SELECTED) {
 					if (currentlyEditing != null && !currentlyEditing.getStudenti().isEmpty()
-							&& currentlyEditing.getGodina() != (godina.getSelectedIndex() + 1)) {
+							&& !currentlyEditing.getGodina().equals(godina.getSelectedIndex() + 1)) {
 						godinaWarning.invalid("Ovom izmenom se gube veze sa studentima " + currentlyEditing.getGodina()
 								+ ". godine koji trenutno slu\u0161aju predmet.");
 					} else

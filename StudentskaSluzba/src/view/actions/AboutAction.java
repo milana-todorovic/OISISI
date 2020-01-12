@@ -29,9 +29,7 @@ public class AboutAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		@SuppressWarnings("unused")
-		AboutDialog aboutDialog = new AboutDialog();
-
+		new AboutDialog();
 	}
 
 }

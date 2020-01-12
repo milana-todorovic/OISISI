@@ -13,7 +13,7 @@ import java.util.Map;
  * @author Ana Perisic ra1-2017
  *
  */
-public class Student implements Serializable {
+public class Student extends Osoba implements Serializable {
 
 	public static enum Status {
 		B, S;
@@ -32,12 +32,6 @@ public class Student implements Serializable {
 	public static final String[] keys = { "Ime", "Prezime", "Datum rodjenja", "Adresa stanovanja", "Broj telefona",
 			"Email adresa", "Broj indeksa", "Datum upisa", "Godina studija", "Status", "Prosek" };
 
-	private String ime;
-	private String prezime;
-	private LocalDate datumRodjenja;
-	private String adresaStanovanja;
-	private String brTelefona;
-	private String emailAdresa;
 	private String brIndeksa;
 	private LocalDate datumUpisa;
 	private Integer trenutnaGodStudija;
@@ -48,13 +42,7 @@ public class Student implements Serializable {
 	public Student(String ime, String prezime, LocalDate datumRodjenja, String adresaStanovanja, String brTelefona,
 			String emailAdresa, String brIndeksa, LocalDate datumUpisa, Integer trenutnaGodStudija, Status status,
 			Double prosecnaOcena) {
-		super();
-		this.ime = ime;
-		this.prezime = prezime;
-		this.datumRodjenja = datumRodjenja;
-		this.adresaStanovanja = adresaStanovanja;
-		this.brTelefona = brTelefona;
-		this.emailAdresa = emailAdresa;
+		super(ime, prezime, datumRodjenja, adresaStanovanja, brTelefona, emailAdresa);
 		this.brIndeksa = brIndeksa;
 		this.datumUpisa = datumUpisa;
 		this.trenutnaGodStudija = trenutnaGodStudija;
@@ -64,6 +52,7 @@ public class Student implements Serializable {
 	}
 
 	public Student(Map<String, Object> values) {
+		super();
 		this.ime = (String) values.get(keys[0]);
 		this.prezime = (String) values.get(keys[1]);
 		this.datumRodjenja = (LocalDate) values.get(keys[2]);
@@ -76,90 +65,6 @@ public class Student implements Serializable {
 		this.status = (Status) values.get(keys[9]);
 		this.prosecnaOcena = (Double) values.get(keys[10]);
 		this.predmeti = new ArrayList<Predmet>();
-	}
-
-	/**
-	 * @return the ime
-	 */
-	public String getIme() {
-		return ime;
-	}
-
-	/**
-	 * @param ime the ime to set
-	 */
-	public void setIme(String ime) {
-		this.ime = ime;
-	}
-
-	/**
-	 * @return the prezime
-	 */
-	public String getPrezime() {
-		return prezime;
-	}
-
-	/**
-	 * @param prezime the prezime to set
-	 */
-	public void setPrezime(String prezime) {
-		this.prezime = prezime;
-	}
-
-	/**
-	 * @return the datumRodjenja
-	 */
-	public LocalDate getDatumRodjenja() {
-		return datumRodjenja;
-	}
-
-	/**
-	 * @param datumRodjenja the datumRodjenja to set
-	 */
-	public void setDatumRodjenja(LocalDate datumRodjenja) {
-		this.datumRodjenja = datumRodjenja;
-	}
-
-	/**
-	 * @return the adresaStanovanja
-	 */
-	public String getAdresaStanovanja() {
-		return adresaStanovanja;
-	}
-
-	/**
-	 * @param adresaStanovanja the adresaStanovanja to set
-	 */
-	public void setAdresaStanovanja(String adresaStanovanja) {
-		this.adresaStanovanja = adresaStanovanja;
-	}
-
-	/**
-	 * @return the brTelefona
-	 */
-	public String getBrTelefona() {
-		return brTelefona;
-	}
-
-	/**
-	 * @param brTelefona the brTelefona to set
-	 */
-	public void setBrTelefona(String brTelefona) {
-		this.brTelefona = brTelefona;
-	}
-
-	/**
-	 * @return the emailAdresa
-	 */
-	public String getEmailAdresa() {
-		return emailAdresa;
-	}
-
-	/**
-	 * @param emailAdresa the emailAdresa to set
-	 */
-	public void setEmailAdresa(String emailAdresa) {
-		this.emailAdresa = emailAdresa;
 	}
 
 	/**
@@ -275,8 +180,8 @@ public class Student implements Serializable {
 		this.status = (values.containsKey(keys[9])) ? (Status) values.get(keys[9]) : status;
 		this.prosecnaOcena = (values.containsKey(keys[10])) ? (Double) values.get(keys[10]) : prosecnaOcena;
 
-		int godinaNewValue = (values.containsKey(keys[8])) ? (Integer) values.get(keys[8]) : trenutnaGodStudija;
-		if (godinaNewValue != this.trenutnaGodStudija) {
+		Integer godinaNewValue = (values.containsKey(keys[8])) ? (Integer) values.get(keys[8]) : trenutnaGodStudija;
+		if (!godinaNewValue.equals(this.trenutnaGodStudija)) {
 			for (Predmet predmet : predmeti) {
 				predmet.getStudenti().remove(this);
 			}

@@ -231,7 +231,7 @@ public class StudentDialog extends JDialog {
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == ItemEvent.SELECTED) {
 					if (currentlyEditing != null && !currentlyEditing.getPredmeti().isEmpty()
-							&& currentlyEditing.getTrenutnaGodStudija() != (godina.getSelectedIndex() + 1)) {
+							&& !currentlyEditing.getTrenutnaGodStudija().equals(godina.getSelectedIndex() + 1)) {
 						godinaWarning.invalid("Ovom izmenom se gube veze sa predmetima "
 								+ currentlyEditing.getTrenutnaGodStudija() + ". godine koje ovaj student slu\u0161a.");
 					} else

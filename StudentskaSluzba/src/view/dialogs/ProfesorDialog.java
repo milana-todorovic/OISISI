@@ -627,9 +627,9 @@ public class ProfesorDialog extends JDialog {
 
 		ime.setText(profesor.getIme());
 		prezime.setText(profesor.getPrezime());
-		adresa.setText(profesor.getAdresa());
-		emailAdresa.setText(profesor.getEmail());
-		brojTel.setText(profesor.getKontaktTelefon());
+		adresa.setText(profesor.getAdresaStanovanja());
+		emailAdresa.setText(profesor.getEmailAdresa());
+		brojTel.setText(profesor.getBrTelefona());
 		adresaKancelarije.setText(profesor.getAdresaKancelarije());
 		titula.setText(profesor.getTitula());
 		zvanje.setText(profesor.getZvanje());

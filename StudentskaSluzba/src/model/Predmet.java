@@ -169,8 +169,8 @@ public class Predmet implements Serializable {
 		this.nazivPredmeta = (values.containsKey(keys[1])) ? (String) values.get(keys[1]) : nazivPredmeta;
 		this.semestar = (values.containsKey(keys[3])) ? (Integer) values.get(keys[3]) : semestar;
 
-		int godinaNewValue = (values.containsKey(keys[2])) ? (Integer) values.get(keys[2]) : godina;
-		if (godinaNewValue != this.godina) {
+		Integer godinaNewValue = (values.containsKey(keys[2])) ? (Integer) values.get(keys[2]) : godina;
+		if (!godinaNewValue.equals(this.godina)) {
 			for (Student student : studenti) {
 				student.getPredmeti().remove(this);
 			}

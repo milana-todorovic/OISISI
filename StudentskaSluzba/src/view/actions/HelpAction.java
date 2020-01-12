@@ -29,10 +29,7 @@ public class HelpAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-		@SuppressWarnings("unused")
-		HelpDialog helpDialog = new HelpDialog();
-
+		new HelpDialog();
 	}
 
 }

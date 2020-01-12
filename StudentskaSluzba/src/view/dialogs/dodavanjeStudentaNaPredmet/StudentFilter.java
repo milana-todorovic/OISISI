@@ -27,7 +27,8 @@ public class StudentFilter extends RowFilter<MiniStudentiTableModel, Integer> {
 	@Override
 	public boolean include(Entry<? extends MiniStudentiTableModel, ? extends Integer> entry) {
 		Student student = (Student) entry.getValue(0);
-		if (student.getTrenutnaGodStudija() != predmet.getGodina())
+		
+		if (!student.getTrenutnaGodStudija().equals(predmet.getGodina()))
 			return false;
 		else if (student.getPredmeti().contains(predmet))
 			return false;
