@@ -10,6 +10,7 @@ import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -94,7 +95,7 @@ public class MainFrame extends JFrame {
 
 	private void setAesthetic() {
 		this.setTitle(title);
-		// TODO Postaviti ikonicu?
+		this.setIconImage(new ImageIcon("resource/ftn.jpg").getImage());
 
 		// Postavljanje teksta za dijaloge
 		UIManager.put("OptionPane.yesButtonText", "Da");
