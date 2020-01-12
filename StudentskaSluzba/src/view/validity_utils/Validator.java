@@ -106,8 +106,11 @@ public class Validator {
 
 	public static boolean isLocalDate(String s) {
 		try {
-			LocalDate.parse(s);
-			return true;
+			LocalDate parsed = LocalDate.parse(s);
+			if (parsed.compareTo(LocalDate.now()) > 0)
+				return false;
+			else
+				return true;
 		} catch (DateTimeParseException e) {
 			return false;
 		}

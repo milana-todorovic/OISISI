@@ -96,7 +96,7 @@ public class ProfesorDialog extends JDialog {
 		this.prezimeError = new ErrorLabel(this.getBackground(), Color.RED,
 				"re\u010di razdvojene razmakom ili crticom");
 		this.datumRodjenja = new JTextField();
-		this.datumRodjenjaError = new ErrorLabel(this.getBackground(), Color.RED, "yyyy-MM-dd");
+		this.datumRodjenjaError = new ErrorLabel(this.getBackground(), Color.RED, "datum manji ili jednak dana\u0161njem, u formatu yyyy-MM-dd");
 		this.adresa = new JTextField();
 		this.adresaError = new ErrorLabel(this.getBackground(), Color.RED,
 				"re\u010di ili brojevi razdvojeni razmacima, crticom, zarezom, ili ta\u010dkom");

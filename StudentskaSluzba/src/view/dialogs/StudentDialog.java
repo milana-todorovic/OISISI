@@ -15,6 +15,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.time.LocalDate;
 import java.util.HashMap;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -28,6 +29,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+
 import controller.MainController;
 import model.Student;
 import model.Student.Status;
@@ -104,7 +106,7 @@ public class StudentDialog extends JDialog {
 		this.prezimeError = new ErrorLabel(this.getBackground(), Color.RED,
 				"re\u010di razdvojene razmakom ili crticom");
 		this.datumRodjenja = new JTextField();
-		this.datumRodjenjaError = new ErrorLabel(this.getBackground(), Color.RED, "yyyy-MM-dd");
+		this.datumRodjenjaError = new ErrorLabel(this.getBackground(), Color.RED, "datum manji ili jednak dana\u0161njem, u formatu yyyy-MM-dd");
 		this.adresa = new JTextField();
 		this.adresaError = new ErrorLabel(this.getBackground(), Color.RED,
 				"re\u010di ili brojevi razdvojeni razmacima, crticom, zarezom, ili ta\u010dkom");
@@ -119,7 +121,7 @@ public class StudentDialog extends JDialog {
 		this.prosek = new JTextField();
 		this.prosekError = new ErrorLabel(this.getBackground(), Color.RED, "realan broj izme\u0111u 6 i 10");
 		this.datumUpisa = new JTextField();
-		this.datumUpisaError = new ErrorLabel(this.getBackground(), Color.RED, "yyyy-MM-dd");
+		this.datumUpisaError = new ErrorLabel(this.getBackground(), Color.RED, "datum manji ili jednak dana\u0161njem, u formatu yyyy-MM-dd");
 		this.budzetRB = new JRadioButton("Bu\u01C6et");
 		this.samofinansiranjeRB = new JRadioButton("Samofinansiranje");
 		budzetRB.setSelected(true);
@@ -248,18 +250,27 @@ public class StudentDialog extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				LocalDate rodjenje = LocalDate.parse(datumRodjenja.getText().trim());
+				LocalDate upis = LocalDate.parse(datumUpisa.getText().trim());
+				
+				if (rodjenje.compareTo(upis) > 0) {
+					JOptionPane.showMessageDialog(StudentDialog.this, "Datum ro\u0111enja mora biti manji od datuma upisa!", "Gre\u0161ka!",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				
 				HashMap<String, Object> values = new HashMap<String, Object>();
 				values.put(Student.keys[0], ime.getText().trim());
 				values.put(Student.keys[1], prezime.getText().trim());
 
-				values.put(Student.keys[2], LocalDate.parse(datumRodjenja.getText().trim()));
+				values.put(Student.keys[2], rodjenje);
 
 				values.put(Student.keys[3], adresa.getText().trim());
 				values.put(Student.keys[4], brojTel.getText().trim());
 				values.put(Student.keys[5], emailAdresa.getText().trim());
 				values.put(Student.keys[6], brojInd.getText().trim().toUpperCase());
 
-				values.put(Student.keys[7], LocalDate.parse(datumUpisa.getText().trim()));
+				values.put(Student.keys[7], upis);
 
 				values.put(Student.keys[8], godina.getSelectedIndex() + 1);
 				if (budzetRB.isSelected()) {
@@ -289,18 +300,27 @@ public class StudentDialog extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				LocalDate rodjenje = LocalDate.parse(datumRodjenja.getText().trim());
+				LocalDate upis = LocalDate.parse(datumUpisa.getText().trim());
+				
+				if (rodjenje.compareTo(upis) > 0) {
+					JOptionPane.showMessageDialog(StudentDialog.this, "Datum ro\u0111enja mora biti manji od datuma upisa!", "Gre\u0161ka!",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				
 				HashMap<String, Object> values = new HashMap<String, Object>();
 				values.put(Student.keys[0], ime.getText().trim());
 				values.put(Student.keys[1], prezime.getText().trim());
 
-				values.put(Student.keys[2], LocalDate.parse(datumRodjenja.getText().trim()));
+				values.put(Student.keys[2], rodjenje);
 
 				values.put(Student.keys[3], adresa.getText().trim());
 				values.put(Student.keys[4], brojTel.getText().trim());
 				values.put(Student.keys[5], emailAdresa.getText().trim());
 				values.put(Student.keys[6], brojInd.getText().trim().toUpperCase());
 
-				values.put(Student.keys[7], LocalDate.parse(datumUpisa.getText().trim()));
+				values.put(Student.keys[7], upis);
 
 				values.put(Student.keys[8], godina.getSelectedIndex() + 1);
 				if (budzetRB.isSelected()) {
@@ -312,7 +332,6 @@ public class StudentDialog extends JDialog {
 
 				MainController.getInstance().getStudentiController().updateStudent(values);
 				dispose();
-
 			}
 		});
 
