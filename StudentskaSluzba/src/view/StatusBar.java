@@ -37,7 +37,7 @@ public class StatusBar extends JPanel {
 
 		this.add(Box.createGlue());
 
-		JLabel vreme = new JLabel(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
+		JLabel vreme = new JLabel(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
 		this.add(vreme);
 		this.add(Box.createHorizontalStrut(10));
 		JLabel datum = new JLabel(LocalDate.now().toString());
@@ -47,7 +47,7 @@ public class StatusBar extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				vreme.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
+				vreme.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
 				datum.setText(LocalDate.now().toString());
 			}
 

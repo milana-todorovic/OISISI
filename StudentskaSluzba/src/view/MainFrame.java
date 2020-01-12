@@ -70,8 +70,9 @@ public class MainFrame extends JFrame {
 						JOptionPane.YES_NO_OPTION);
 				if (choice == JOptionPane.YES_OPTION) {
 					if (!MainController.getInstance().saveDatabase())
-						JOptionPane.showMessageDialog(e.getComponent(), "Doslo je do gre\u0161ke pri \u010duvanju podataka!",
-								"Zatvaranje aplikacije", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(e.getComponent(),
+								"Doslo je do gre\u0161ke pri \u010duvanju podataka!", "Zatvaranje aplikacije",
+								JOptionPane.INFORMATION_MESSAGE);
 					setDefaultCloseOperation(EXIT_ON_CLOSE);
 				}
 			}

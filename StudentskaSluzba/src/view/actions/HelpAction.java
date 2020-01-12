@@ -10,6 +10,8 @@ import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
 
+import view.dialogs.HelpDialog;
+
 /**
  * @author Ana Perisic ra1-2017
  *
@@ -17,7 +19,7 @@ import javax.swing.KeyStroke;
 public class HelpAction extends AbstractAction {
 
 	private static final long serialVersionUID = -5972506427913665080L;
-	
+
 	public HelpAction() {
 		putValue(NAME, "Pomo\u0107");
 		putValue(MNEMONIC_KEY, KeyEvent.VK_P);
@@ -27,7 +29,9 @@ public class HelpAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO dodati prozor za pomoc
+
+		@SuppressWarnings("unused")
+		HelpDialog helpDialog = new HelpDialog();
 
 	}
 

@@ -10,6 +10,8 @@ import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
 
+import view.dialogs.AboutDialog;
+
 /**
  * @author Ana Perisic ra1-2017
  *
@@ -27,7 +29,8 @@ public class AboutAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO dodati prozor sa opisom
+		@SuppressWarnings("unused")
+		AboutDialog aboutDialog = new AboutDialog();
 
 	}
 
