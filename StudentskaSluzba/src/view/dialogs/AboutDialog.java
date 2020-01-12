@@ -24,9 +24,9 @@ public class AboutDialog extends JDialog {
 	private static final long serialVersionUID = -3323967826780567463L;
 
 	public AboutDialog() {
-		JDialog aboutDialog = new JDialog();
+		super(MainFrame.getInstance());
 
-		aboutDialog.setTitle("Opis");
+		this.setTitle("Opis");
 
 		ImageIcon imgIc = new ImageIcon("resource/ana.png");
 		JLabel jlep1 = new JLabel(imgIc);
@@ -41,6 +41,7 @@ public class AboutDialog extends JDialog {
 				+ "<div align = \"center\"> <br> <i>O aplikaciji</i> <hr> </div>\r\n" + "\r\n"
 				+ "<div align = \"center\"> <p> Aktuelna aplikacija koju koristite je trenutno <b>verzije v1.0</b>. Namena aplikacije je da omogu\u0107i efektivniji rad zaposlenima na studentskoj slu\u017Ebi.</p> </div>\r\n"
 				+ "\r\n" + "</body>\r\n" + "</html>");
+		jep.setCaretPosition(0);
 
 		ImageIcon imgIc1 = new ImageIcon("resource/lana.png");
 		JLabel jlep2 = new JLabel(imgIc1);
@@ -55,6 +56,7 @@ public class AboutDialog extends JDialog {
 				+ "<div align = \"center\"> <br> <i>O aplikaciji</i> <hr> </div>\r\n" + "\r\n"
 				+ "<div align = \"center\"> <p> Aktuelna aplikacija koju koristite je trenutno <b>verzije v1.0</b>. Namena aplikacije je da omogu\u0107i efektivniji rad zaposlenima na studentskoj slu\u017Ebi. <br><br><br> </p> </div>\r\n"
 				+ "\r\n" + "</body>\r\n" + "</html>");
+		jep1.setCaretPosition(0);
 
 		JScrollPane scroll = new JScrollPane(jep);
 		JPanel content = new JPanel(new BorderLayout());
@@ -71,10 +73,10 @@ public class AboutDialog extends JDialog {
 		tabs.addTab("Student 1", content);
 		tabs.addTab("Student 2", content1);
 
-		aboutDialog.add(tabs);
-		aboutDialog.setSize(800, 600);
-		aboutDialog.setLocationRelativeTo(MainFrame.getInstance());
-		aboutDialog.setVisible(true);
+		this.add(tabs);
+		this.setSize(800, 600);
+		this.setLocationRelativeTo(MainFrame.getInstance());
+		this.setVisible(true);
 	}
 
 }

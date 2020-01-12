@@ -19,14 +19,14 @@ public class HelpDialog extends JDialog {
 	private static final long serialVersionUID = 4302591299861839774L;
 
 	public HelpDialog() {
-		JDialog helpDialog = new JDialog();
+		super(MainFrame.getInstance());
 
-		helpDialog.setTitle("Pomo\u0107");
+		this.setTitle("Pomo\u0107");
 
 		JEditorPane jep = new JEditorPane();
 		jep.setEditable(false);
 		jep.setContentType("text/html");
-		jep.setText("<html>" + "<ol>" + "<li>" + "<b>Dodavanje novog studenta</b><br>"
+		jep.setText("<html><align = \"justify\">" + "<ol>" + "<li>" + "<b>Dodavanje novog studenta</b><br>"
 				+ "Dijalog za dodavanje novog studenta je mogu\u0107e otvoriti:" + "<ol>"
 				+ "<li>pritiskom na prvi dugmi\u0107 u traci sa alatima,</li>"
 				+ "<li>odabirom menija <i>Fajl</i> (mnemonik <i>F</i>) u traci sa menijima, pa zatim opcije <i>Dodaj</i> (mnemonik <i>D</i>),</li>"
@@ -62,8 +62,10 @@ public class HelpDialog extends JDialog {
 				+ "\"status studenta\", \"prosek\", \"prosecna ocena\", \"prose\u010Dna ocena\", \"datum ro\u0111enja\", \"datum rodjenja\", "
 				+ "\"adresa\", \"adresa stanovanja\", \"telefon\", \"broj telefona\", \"kontakt telefon\", \"kontakt\", \"email\", \"e-mail\", "
 				+ "\"email adresa\", \"e-mail adresa\", \"datum upisa\". " + "<br> "
-				+ "Kada su parametri pravilno uneseni, pretragu je mogu\u0107e pokrenuti:" + "<ol>"
-				+ "<li>pritiskom na posledji dugmi\u0107 u traci sa alatima (ikonica lupe),</li>"
+				+ "Unesene vrednosti se posmatraju kao regularni izrazi."
+				+ " Prikazuju se samo rezultati koji se poklapaju sa \u010ditavim regularnim izrazom." + "<br> "
+				+ "<br> " + "Kada su parametri pravilno uneseni, pretragu je mogu\u0107e pokrenuti:" + "<ol>"
+				+ "<li>pritiskom na poslednji dugmi\u0107 u traci sa alatima (ikonica lupe),</li>"
 				+ "<li>pre\u010dicom <i>Ctrl</i>+<i>F</i>.</li>" + "</ol>"
 				+ "Dok je pretraga aktivna, umesto dugmi\u0107a za pokretanje pretrage bi\u0107e prikazan dugmi\u0107 za zaustavljanje pretrage. "
 				+ "Pretragu je mogu\u0107e zaustaviti:" + "<ol>"
@@ -84,11 +86,12 @@ public class HelpDialog extends JDialog {
 				+ "Pritiskom na dugmi\u0107 <i>Prika\u017ei</i> u tabeli studenata, "
 				+ "otvara se dijalog koji sadr\u017ei listu predmeta koje odabrani student slu\u0161a. "
 				+ "Brisanje veze izme\u0111u studenta i predmeta je mogu\u0107e odabirom \u017eeljenog predmeta iz prikazane liste, "
-				+ "a zatim pritiskom na dugme <i>Obri\u0161i</i>.</li>" + "</ol>" + "</html>");
+				+ "a zatim pritiskom na dugme <i>Obri\u0161i</i>. Na sli\u010dan na\u010din je mogu\u0107e izvr\u0161iti brisanje i iz kartice <i>Predmeti</i>.</li>" + "</ol>" + "</align></html>");
+		jep.setCaretPosition(0);
 		JEditorPane jep1 = new JEditorPane();
 		jep1.setEditable(false);
 		jep1.setContentType("text/html");
-		jep1.setText("<html>" + "<ol>" + "<li>" + "<b>Dodavanje novog profesora</b><br>"
+		jep1.setText("<html><align = \"justify\">" + "<ol>" + "<li>" + "<b>Dodavanje novog profesora</b><br>"
 				+ "Dijalog za dodavanje novog profesora je mogu\u0107e otvoriti:" + "<ol>"
 				+ "<li>pritiskom na prvi dugmi\u0107 u traci sa alatima,</li>"
 				+ "<li>odabirom menija <i>Fajl</i> (mnemonik <i>F</i>) u traci sa menijima, pa zatim opcije <i>Dodaj</i> (mnemonik <i>D</i>),</li>"
@@ -123,7 +126,9 @@ public class HelpDialog extends JDialog {
 				+ "\"adresa stanovanja\", \"telefon\", \"broj telefona\", \"kontakt\", \"kontakt telefon\", \"email\", \"e-mail\", \"email adresa\", \"e-mail adresa\",  "
 				+ "\"adresa kancelarije\", \"kancelarija\", \"broj li\u010Dne karte\", \"broj licne karte\", \"licna\", \"li\u010Dna\", \"broj li\u010Dne\",  "
 				+ "\"broj licne\", \"li\u010Dna karta\", \"licna karta\", \"titula\", \"zvanje\"." + "<br> "
-				+ "Kada su parametri pravilno uneseni, pretragu je mogu\u0107e pokrenuti:" + "<ol>"
+				+ "Unesene vrednosti se posmatraju kao regularni izrazi."
+				+ " Prikazuju se samo rezultati koji se poklapaju sa \u010ditavim regularnim izrazom." + "<br> "
+				+ "<br> " + "Kada su parametri pravilno uneseni, pretragu je mogu\u0107e pokrenuti:" + "<ol>"
 				+ "<li>pritiskom na posledji dugmi\u0107 u traci sa alatima (ikonica lupe),</li>"
 				+ "<li>pre\u010dicom <i>Ctrl</i>+<i>F</i>.</li>" + "</ol>"
 				+ "Dok je pretraga aktivna, umesto dugmi\u0107a za pokretanje pretrage bi\u0107e prikazan dugmi\u0107 za zaustavljanje pretrage. "
@@ -145,11 +150,12 @@ public class HelpDialog extends JDialog {
 				+ "Brisanje veze izme\u0111u profesora i predmeta je mogu\u0107e odabirom \u017eeljenog predmeta iz prikazane liste, "
 				+ "a zatim pritiskom na dugme <i>Obri\u0161i</i>."
 				+ "Profesora je mogu\u0107e obrisati i iz kartice <i>Predmeti</i>, pritiskom na \u0161esti dugmi\u0107 u traci sa alatima ili pre\u010dicom <i>Ctrl</i>+<i>R</i>."
-				+ "</li>" + "</ol>" + "</html>");
+				+ "</li>" + "</ol>" + "</align></html>");
+		jep1.setCaretPosition(0);
 		JEditorPane jep2 = new JEditorPane();
 		jep2.setEditable(false);
 		jep2.setContentType("text/html");
-		jep2.setText("<html>" + "<ol>" + "<li>" + "<b>Dodavanje novog predmeta</b><br>"
+		jep2.setText("<html><align = \"justify\">" + "<ol>" + "<li>" + "<b>Dodavanje novog predmeta</b><br>"
 				+ "Dijalog za dodavanje novog predmeta je mogu\u0107e otvoriti:" + "<ol>"
 				+ "<li>pritiskom na prvi dugmi\u0107 u traci sa alatima,</li>"
 				+ "<li>odabirom menija <i>Fajl</i> (mnemonik <i>F</i>) u traci sa menijima, pa zatim opcije <i>Dodaj</i> (mnemonik <i>D</i>),</li>"
@@ -182,7 +188,9 @@ public class HelpDialog extends JDialog {
 				+ "Bi\u0107e prikazani samo oni entiteti koji zadovoljavaju sve unete parametre pretrage. " + "<br> "
 				+ "Dozvoljene klju\u010dne re\u010di su: \"sifra\", \"sifra predmeta\", \"\u0161ifra\", \"\u0161ifra predmeta\", \"naziv\", \"naziv predmeta\", \"godina\", "
 				+ "\"semestar\", \"profesor\", \"ime profesora\", \"broj studenata\", \"br studenata\", \"br. studenata\"."
-				+ "<br> " + "Kada su parametri pravilno uneseni, pretragu je mogu\u0107e pokrenuti:" + "<ol>"
+				+ "<br> " + "Unesene vrednosti se posmatraju kao regularni izrazi."
+				+ " Prikazuju se samo rezultati koji se poklapaju sa \u010ditavim regularnim izrazom." + "<br> "
+				+ "Kada su parametri pravilno uneseni, pretragu je mogu\u0107e pokrenuti:" + "<ol>"
 				+ "<li>pritiskom na posledji dugmi\u0107 u traci sa alatima (ikonica lupe),</li>"
 				+ "<li>pre\u010dicom <i>Ctrl</i>+<i>F</i>.</li>" + "</ol>"
 				+ "Dok je pretraga aktivna, umesto dugmi\u0107a za pokretanje pretrage bi\u0107e prikazan dugmi\u0107 za zaustavljanje pretrage. "
@@ -217,7 +225,8 @@ public class HelpDialog extends JDialog {
 				+ "Brisanje veze izme\u0111u profesora i predmeta je mogu\u0107e odabirom \u017eeljenog predmeta iz prikazane liste, "
 				+ "a zatim pritiskom na dugme <i>Obri\u0161i</i>."
 				+ "Profesora je mogu\u0107e obrisati i iz kartice <i>Predmeti</i>, pritiskom na \u0161esti dugmi\u0107 u traci sa alatima ili pre\u010dicom <i>Ctrl</i>+<i>R</i>."
-				+ "</li>" + "</ol>" + "</html>");
+				+ "</li>" + "</ol>" + "</align></html>");
+		jep2.setCaretPosition(0);
 
 		JScrollPane scroll = new JScrollPane(jep);
 		JPanel content = new JPanel(new BorderLayout());
@@ -237,10 +246,10 @@ public class HelpDialog extends JDialog {
 		tabs.addTab("Profesori", content1);
 		tabs.addTab("Predmeti", content2);
 
-		helpDialog.add(tabs);
-		helpDialog.setSize(800, 600);
-		helpDialog.setLocationRelativeTo(MainFrame.getInstance());
-		helpDialog.setVisible(true);
+		this.add(tabs);
+		this.setSize(800, 600);
+		this.setLocationRelativeTo(MainFrame.getInstance());
+		this.setVisible(true);
 	}
 
 }
